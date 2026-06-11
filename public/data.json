@@ -436,7 +436,103 @@
       "icon": "",
       "bannerUrl": "/covers/cat-github-projects-1781194281505.png",
       "contributeUrl": "",
-      "items": []
+      "items": [
+        {
+          "id": "pravilna-by",
+          "name": "Праект «Правільна!»",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209015/pravilnaby_ykq4cj.webp",
+          "iconUrl": "",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209134/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_fkntxm.webp",
+          "category": "Github",
+          "tags": [
+            "Github"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Belarusian language rules for daily usage ",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Github Pages",
+                  "url": "https://pravilna.by/",
+                  "type": "website"
+                },
+                {
+                  "label": "Github",
+                  "url": "https://github.com/alroniks/pravilnaby",
+                  "type": "website"
+                },
+                {
+                  "label": "Падтрымаць (Patreon)",
+                  "url": "https://www.patreon.com/ivanklimchuk",
+                  "type": "other"
+                },
+                {
+                  "label": "Падтрымаць (buymeacoffee)",
+                  "url": "https://buymeacoffee.com/ivanklimchuk",
+                  "type": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bel-it",
+          "name": "Беларускія IT суполкі",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209633/IT_%D1%81%D1%83%D0%BF%D0%BE%D0%BB%D0%BA%D1%96_nfhn1p.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209547/15192983_cjn5pg.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209662/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_p8ty9f.webp",
+          "category": "Суполка",
+          "tags": [
+            "Github"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Беларускія IT суполкі",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://hleb.dev/bel-it/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "spell-be-tarask",
+          "name": "Belarusian hunspel dictionary",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209813/spell-be-tarask_w7qotv.webp",
+          "iconUrl": "",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781209817/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_fq7zyg.webp",
+          "category": "Github",
+          "tags": [
+            "Github"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Belarusian hunspel dictionary for taraškievica (classic orthography)",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Github",
+                  "url": "https://github.com/375gnu/spell-be-tarask",
+                  "type": "website"
+                },
+                {
+                  "label": "Mastodon",
+                  "url": "https://vkl.world/@375gnu",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
