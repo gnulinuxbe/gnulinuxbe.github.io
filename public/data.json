@@ -16,7 +16,8 @@
           "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781197989/mastodo1n_k26xb0.webp",
           "category": "",
           "tags": [
-            "Сацыяльныя сеткі / месэнджэры"
+            "Сацыяльныя сеткі / месэнджэры",
+            "crowdin"
           ],
           "updatedAt": "2026-06-11",
           "description": "Перакладаем Mastodon на беларускую мову.",
@@ -87,7 +88,8 @@
           "category": "",
           "tags": [
             "Медыя",
-            "Бяспека"
+            "Бяспека",
+            "crowdin"
           ],
           "updatedAt": "2026-06-11",
           "description": "",
@@ -181,6 +183,37 @@
                       "type": "download"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "antennapod",
+          "name": "AntennaPod",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210213/AntennaPod_yuvjz6.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210335/icon_w44b41PyuNt3pI7Gh8zYHJrWgu__3HT7YSWZtttfenk_1_tzhvz9.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210356/AntennaPod-1_yyzrud.webp",
+          "category": "Падкасты",
+          "tags": [
+            "Медыя",
+            "weblate"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "**Неабходна прайсці аўтарызацыю**",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Weblate",
+                  "url": "https://hosted.weblate.org/projects/antennapod/-/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=de.danoeh.antennapod&hl=be",
+                  "type": "download"
                 }
               ]
             }
