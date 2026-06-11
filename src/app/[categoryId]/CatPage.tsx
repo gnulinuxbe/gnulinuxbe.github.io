@@ -143,8 +143,7 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
           </div>
           <div style={{flex:1,minWidth:0}}>
             <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',display:'flex',alignItems:'center',gap:3,textDecoration:'none',overflow:'hidden'}}>
-              <span style={{color:'var(--pink)',fontWeight:700,flexShrink:0}}>/ </span>
-              <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.id}</span>
+              <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
             </a>
             {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
             {item.updatedAt && <span style={{fontSize:8,color:'var(--t3)',display:'block',marginTop:1,opacity:.7}}>↻ {formatDate(item.updatedAt)}</span>}
