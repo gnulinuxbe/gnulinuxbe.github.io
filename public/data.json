@@ -218,6 +218,62 @@
               ]
             }
           ]
+        },
+        {
+          "id": "fluffychat",
+          "name": "FluffyChat",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210698/%D0%BC%D0%B5%D1%81%D1%8D%D0%BD%D0%B4%D0%B6%D1%8D%D1%80%D1%8B_kaky90.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210730/Fluffychat_Logo_li49ay.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781210735/fluffy_hfq3v5.webp",
+          "category": "Месэнджэры",
+          "tags": [
+            "Сацыяльныя сеткі / месэнджэры",
+            "weblate"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Weblate",
+                  "url": "https://hosted.weblate.org/projects/fluffychat/-/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=chat.fluffy.fluffychat",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Linux",
+              "links": [
+                {
+                  "label": "Weblate",
+                  "url": "https://hosted.weblate.org/projects/fluffychat/-/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "FlatHub",
+                  "url": "https://flathub.org/be/apps/im.fluffychat.Fluffychat",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://fluffy.chat/be/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
