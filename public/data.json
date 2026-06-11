@@ -213,7 +213,7 @@
               "name": "Сайт",
               "links": [
                 {
-                  "label": "",
+                  "label": "Google docs",
                   "url": "https://docs.google.com/spreadsheets/u/0/d/1k3XLX0G50jbHGxWxQge_pVI1U4mzf36IDkUcAUpkIvc/htmlview",
                   "type": "website"
                 }
@@ -246,6 +246,182 @@
                   "label": "Github",
                   "url": "https://github.com/Spidersouris/termic",
                   "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "verbum-by",
+          "name": "verbum.by",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781206792/verbumby_bzjm1p.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781206721/favicon_rbmx3h.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781206825/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_dgmi7h.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Verbum - анлайнавы слоўнік, які дапаможа вам пры перакладзе праектаў.",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://verbum.by/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skarnik-by",
+          "name": "Skarnik.by",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207059/Skarnikby_ewrjid.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207023/unnamed_tejcdh.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207113/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_e2c8ay.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Руска-беларускі слоўнік",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://www.skarnik.by/",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Google play",
+                  "url": "https://play.google.com/store/apps/details?id=by.mazokaleh.skarnik",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/us/app/skarnik/id988334682",
+                  "type": "translate"
+                }
+              ]
+            }
+          ],
+          "apps": []
+        },
+        {
+          "id": "slounik-org",
+          "name": "slounik.org",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207418/slounikorg_vrifv2.webp",
+          "iconUrl": "https://img.notionusercontent.com/s3/prod-files-secure%2F06c802ef-105e-4b23-bc13-5edcfef76f68%2F677f577d-1cac-43d7-ab6c-a621fe0c2e0c%2Ficon.svg/size/?exp=1781283485&sig=iyvs563z4S7wlXqapO5OaZFCNxwu301_UB1wTyVA_4A&imgBuildSrc=presignImageUrl&id=4ea42bd3-bb15-468a-b1b5-220394e4e8ce&table=block&mtd=so",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207448/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_da3bc4.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Slounik.org — беларускія слоўнікі і энцыкляпэдыі",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://slounik.org/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bielaruska-kitajski-slounik",
+          "name": "Беларуска-кітайскі слоўнік",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207696/%D0%91%D0%B5%D0%BB%D0%B0%D1%80%D1%83%D1%81%D0%BA%D0%B0-%D0%BA%D1%96%D1%82%D0%B0%D0%B8%D1%81%D0%BA%D1%96_lflr28.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207941/Frame_11212582_lenprp.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781207722/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_ikjf9n.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Беларуска-кітайскі слоўнік = 汉白白汉词典",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://iml.belcentre.by/kit/index.html",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ivan-nasovic-slounik",
+          "name": "Іван Насовіч. Слоўнік беларускай мовы",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208056/%D0%86%D0%B2%D0%B0%D0%BD_%D0%9D%D0%B0%D1%81%D0%BE%D0%B2%D1%96%D1%87_tk7erp.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208188/Frame_11212582_o2ob4l.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208090/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_ohzxam.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "Словарь бѣлорусскаго нарѣчія, составленный И. И. Носовичемъ",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Github Pages",
+                  "url": "https://belarus.github.io/Slouniki-Nasovic/index.html",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "slounik-novych-zapazycanych-slou",
+          "name": "Слоўнік новых запазычаных слоў беларускай мовы",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208399/Matrix_c1wx8w.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208450/11_ni35rp.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781208474/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_krzfcf.webp",
+          "category": "Слоўнік",
+          "tags": [
+            "Слоўнік"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Google drive",
+                  "url": "https://drive.google.com/file/d/1xxbskAgK9z5BCL4-5wunj-4TKzbdoj0T/view?pli=1",
+                  "type": "download"
+                },
+                {
+                  "label": "Купіць (oz.by)",
+                  "url": "https://oz.by/educationbooks/more101310627.html",
+                  "type": "other"
                 }
               ]
             }
