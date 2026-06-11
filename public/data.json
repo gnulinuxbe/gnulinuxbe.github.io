@@ -77,6 +77,114 @@
               ]
             }
           ]
+        },
+        {
+          "id": "ente",
+          "name": "Ente",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781200099/ente.io_cdfoxl.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781200141/f20ba8b3aa2ba5ee366db74e9245cdde_ente_auth_wtlxa3.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781200171/ente-1_ppnvzt.webp",
+          "category": "",
+          "tags": [
+            "Медыя",
+            "Бяспека"
+          ],
+          "updatedAt": "2026-06-11",
+          "description": "",
+          "platforms": [],
+          "apps": [
+            {
+              "id": "ente-photos",
+              "name": "Ente photos",
+              "iconUrl": "https://play-lh.googleusercontent.com/l4AGolaxeY9fAKWFFh1igSOmYgGA9Qt5U1uRy7NCVhdgrzv5gtm6ZhR8fKtAIvWykN0Y51bVX0TPPxNBmbsn=w480-h960",
+              "description": "Захоўвайце, дзяліцеся і адкрывайце для сябе свае ўспаміны з Ente Photos. З дапамогай скразнога шыфравання толькі вы і тыя, з кім вы дзеліцеся, можаце бачыць вашы фатаграфіі і відэа. Ente Photos з любоўю ахоўвае больш за 165 мільёнаў успамінаў для людзей, якія нам давяраюць, на ўсіх асноўных платформах. Пачніце з 10 ГБ бясплатна.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-photos-app/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=io.ente.photos&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-photos-app/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/by/app/ente-photos/id1542026904",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-photos-web/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://photos.ente.com/",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ente-auth",
+              "name": "Ente Auth",
+              "iconUrl": "https://play-lh.googleusercontent.com/B1h5mcM-Zo76ra3GUehWran2yNGa4Oyd818ZX8lRFI-7FYwtnAOhI_5xxrOLQuKQxGWzQCIWNA1Cjc7H9nKuzw=s720",
+              "description": "Ente Auth - лепшае і адзінае прыкладанне для аўтэнтыфікацыі 2FA, якое вам калі-небудзь спатрэбіцца. Ён забяспечвае бяспечнае рэзервовае капіраванне вашых кодаў са скразным шыфраваннем і працуе на ўсіх прыладах Android, iOS, Mac, Windows, Linux або ў Інтэрнэце. Ён таксама прапануе функцыі якасці жыцця, такія як \"Націсніце, каб скапіяваць\", \"Наступны код\", і нават дазваляе бяспечна дзяліцца сваімі кодамі з іншымі.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-authenticator-app/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=io.ente.auth&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-authenticator-app/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/us/app/ente-auth-2fa-authenticator/id6444121398",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
