@@ -1,0 +1,98 @@
+{
+  "categories": [
+    {
+      "id": "peraklady",
+      "name": "ПЕРАКЛАДЫ",
+      "sub": "ПЕРАКЛАДАЕМ РАЗАМ",
+      "icon": "🌐",
+      "bannerUrl": "",
+      "contributeUrl": "",
+      "items": [
+        {
+          "id": "mastodon",
+          "name": "Mastodon",
+          "bannerUrl": "",
+          "iconUrl": "",
+          "screenshotUrl": "",
+          "category": "Сацыяльныя сеткі",
+          "tags": ["Сацыяльныя сеткі"],
+          "updatedAt": "2026-06-09",
+          "description": "Перакладаем Mastodon на беларускую мову разам з Crowdin.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                { "label": "Перакласці", "url": "https://crowdin.com/project/mastodon-for-android/be", "type": "translate" },
+                { "label": "Google Play", "url": "https://play.google.com/store/apps/details?id=org.joinmastodon.android", "type": "download" }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                { "label": "Перакласці", "url": "https://crowdin.com/project/mastodon-for-ios/be", "type": "translate" },
+                { "label": "App Store", "url": "https://apps.apple.com/app/mastodon-for-iphone/id1571998974", "type": "download" }
+              ]
+            },
+            {
+              "name": "Вэб",
+              "links": [
+                { "label": "Перакласці", "url": "https://crowdin.com/project/mastodon/be", "type": "translate" },
+                { "label": "Адкрыць", "url": "https://joinmastodon.org/be", "type": "website" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ente",
+          "name": "Ente",
+          "bannerUrl": "",
+          "iconUrl": "",
+          "screenshotUrl": "",
+          "category": "Фота / Бяспека",
+          "tags": ["Бяспека"],
+          "updatedAt": "2026-06-09",
+          "description": "",
+          "platforms": [],
+          "apps": [
+            {
+              "id": "ente-photos",
+              "name": "Ente Photos",
+              "iconUrl": "",
+              "description": "Зашыфраванае воблачнае сховішча фота. Перакладаем на Crowdin.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    { "label": "Перакласці", "url": "https://crowdin.com/project/ente-photos", "type": "translate" },
+                    { "label": "Google Play", "url": "https://play.google.com", "type": "download" }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    { "label": "Перакласці", "url": "https://crowdin.com/project/ente-photos", "type": "translate" },
+                    { "label": "App Store", "url": "https://apps.apple.com", "type": "download" }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ente-auth",
+              "name": "Ente Auth",
+              "iconUrl": "",
+              "description": "2FA-кліент з адкрытым кодам.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    { "label": "Перакласці", "url": "https://crowdin.com/project/ente-auth", "type": "translate" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

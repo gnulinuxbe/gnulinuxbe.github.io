@@ -1,0 +1,204 @@
+'use client'
+import { useState, useEffect, useMemo } from 'react'
+import { useParams } from 'next/navigation'
+import type { SiteData, Item } from '@/types'
+import { loadData } from '@/lib/data'
+import { formatDate } from '@/lib/platforms'
+import Header from '@/components/Header'
+
+const ALL = 'Усе'
+
+export default function CatPage() {
+  const { categoryId } = useParams() as { categoryId: string }
+  const [data, setData] = useState<SiteData | null>(null)
+  const [search, setSearch] = useState('')
+  const [fTag, setFTag] = useState(ALL)
+
+  useEffect(() => { loadData().then(setData) }, [])
+  const cat = data?.categories.find(c => c.id === categoryId)
+
+
+  const tags = useMemo(() => {
+    if (!cat) return [ALL]
+    return [ALL, ...Array.from(new Set(cat.items.flatMap(i => i.tags))).sort()]
+  }, [cat])
+
+  const items = useMemo(() => {
+    if (!cat) return []
+    const q = search.toLowerCase()
+    return cat.items
+      .filter(item => {
+        if (fTag !== ALL && !item.tags.includes(fTag)) return false
+        if (q && !item.name.toLowerCase().includes(q) && !item.id.toLowerCase().includes(q) && !item.category.toLowerCase().includes(q) && !item.tags.some(t => t.toLowerCase().includes(q))) return false
+        return true
+      })
+      .sort((a, b) => a.name.localeCompare(b.name, 'be'))
+  }, [cat, search, fTag])
+
+  if (!data) return <Spinner/>
+  if (!cat) return <Msg>Не знойдзена</Msg>
+
+  return (
+    <>
+      <Header cats={data.categories} activeId={categoryId}/>
+      <main>
+        {/* Category banner — show image only, no text overlay */}
+        <div style={{position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)'}}>
+          {cat.bannerUrl
+            ? <img src={cat.bannerUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+            : <div style={{width:'100%',height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:7,padding:'0 20px',textAlign:'center',position:'relative'}}>
+                <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at center,rgba(255,45,107,.1) 0%,transparent 65%)'}}/>
+                <span style={{fontFamily:'var(--fd)',fontSize:'clamp(1.8rem,5vw,4.5rem)',letterSpacing:4,color:'var(--t2)',position:'relative'}}>{cat.name}</span>
+                <span style={{fontSize:'clamp(7px,.8vw,10px)',fontWeight:800,letterSpacing:'2.5px',textTransform:'uppercase',color:'var(--t3)',background:'var(--bg3)',padding:'3px 12px',borderRadius:4,position:'relative',whiteSpace:'nowrap'}}>{cat.sub}</span>
+              </div>
+          }
+        </div>
+
+        <div style={{maxWidth:1280,margin:'0 auto',padding:'0 16px 80px'}}>
+          {/* Head */}
+          <div style={{display:'flex',alignItems:'center',gap:10,padding:'14px 0 16px',flexWrap:'wrap'}}>
+            <div style={{display:'flex',alignItems:'center',gap:6,flex:1,minWidth:0}}>
+              <span style={{color:'var(--pink)',fontWeight:700,fontSize:18,flexShrink:0}}>~/</span>
+              <span style={{fontSize:'clamp(13px,3vw,18px)',fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+                {categoryId}
+              </span>
+            </div>
+            {cat.contributeUrl && (
+              <a href={cat.contributeUrl} target="_blank" rel="noreferrer" style={{
+                background:'var(--pinka)',border:'1px solid var(--pinkb)',color:'var(--pink)',
+                fontSize:11,fontWeight:700,padding:'6px 14px',borderRadius:'var(--r)',
+                letterSpacing:.5,textTransform:'uppercase',whiteSpace:'nowrap',
+              }}>+ Прапанаваць</a>
+            )}
+          </div>
+
+          {/* Filter bar */}
+          <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,padding:'11px 13px',marginBottom:13,display:'flex',flexDirection:'column',gap:8}}>
+            <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+              <div style={{flex:1,minWidth:160,position:'relative',display:'flex',alignItems:'center'}}>
+                <svg style={{position:'absolute',left:9,width:13,height:13,color:'var(--t3)',pointerEvents:'none'}} viewBox="0 0 20 20" fill="none">
+                  <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="m13 13 3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Пошук…" style={{
+                  width:'100%',background:'var(--bg3)',border:'1px solid var(--bd)',color:'var(--text)',
+                  fontSize:12,padding:'7px 10px 7px 28px',borderRadius:'var(--r)',outline:'none',fontWeight:500,
+                }}/>
+              </div>
+            </div>
+            {tags.length > 1 && <Chips items={tags} active={fTag} onSelect={setFTag}/>}
+          </div>
+
+          <p style={{fontSize:10,fontWeight:600,color:'var(--t3)',marginBottom:11}}>{items.length} з {cat.items.length} праектаў</p>
+
+          {/* App Store grid — auto-fill, works on any screen */}
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))',gap:10}}>
+            {items.map(item => <ItemCard key={item.id} item={item} catId={categoryId}/>)}
+            {items.length === 0 && (
+              <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
+            )}
+          </div>
+        </div>
+      </main>
+      <style>{`input:focus{border-color:var(--pinkb)!important}`}</style>
+    </>
+  )
+}
+
+function ItemCard({ item, catId }: { item: Item; catId: string }) {
+  const firstLink = item.apps
+    ? item.apps[0]?.platforms[0]?.links[0]
+    : item.platforms[0]?.links?.[0]
+
+  const platNames = item.apps
+    ? Array.from(new Set(item.apps.flatMap(a => a.platforms.map(p => p.name))))
+    : item.platforms.map(p => p.name)
+
+  return (
+    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:12,overflow:'hidden',transition:'border-color .2s,transform .2s'}}
+      onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--pinkb)';el.style.transform='translateY(-2px)'}}
+      onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--bd)';el.style.transform='none'}}
+    >
+      {/* Banner — fixed 110px, no flex */}
+      <a href={`/${catId}/${item.id}`} style={{display:'block',position:'relative',height:110,background:'var(--bg2)',overflow:'hidden',textDecoration:'none'}}>
+        {item.bannerUrl
+          ? <img src={item.bannerUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+          : <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'linear-gradient(135deg,rgba(255,45,107,.06) 0%,transparent 60%)'}}>
+              <span style={{fontFamily:'var(--fd)',fontSize:'1rem',letterSpacing:2,color:'var(--t3)',textAlign:'center',padding:'0 8px'}}>{item.name}</span>
+            </div>
+        }
+      </a>
+
+      {/* Body — padding only, no flex column, no height tricks */}
+      <div style={{padding:'9px 10px 10px'}}>
+        {/* Icon + name row */}
+        <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:6}}>
+          <div style={{width:28,height:28,borderRadius:6,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+            {item.iconUrl
+              ? <img src={item.iconUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'.6rem',color:'var(--t3)',letterSpacing:.5}}>
+                  {item.name.slice(0,2).toUpperCase()}
+                </span>
+            }
+          </div>
+          <div style={{flex:1,minWidth:0}}>
+            <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',display:'flex',alignItems:'center',gap:3,textDecoration:'none',overflow:'hidden'}}>
+              <span style={{color:'var(--pink)',fontWeight:700,flexShrink:0}}>/ </span>
+              <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.id}</span>
+            </a>
+            {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
+            {item.updatedAt && <span style={{fontSize:8,color:'var(--t3)',display:'block',marginTop:1,opacity:.7}}>↻ {formatDate(item.updatedAt)}</span>}
+          </div>
+        </div>
+
+        {/* Platform chips */}
+        {platNames.length > 0 && (
+          <div style={{display:'flex',flexWrap:'wrap',gap:3,marginBottom:8}}>
+            {platNames.slice(0,3).map(n=>(
+              <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3}}>{n}</span>
+            ))}
+            {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
+          </div>
+        )}
+
+        {/* Open button */}
+        {firstLink && (
+          <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
+            display:'block',textAlign:'center',textDecoration:'none',
+            background:'var(--pink)',color:'#fff',
+            fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',
+            padding:'6px 0',borderRadius:6,
+          }}>{firstLink.label} →</a>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function Chips({ items, active, onSelect }: { items: string[]; active: string; onSelect: (v:string)=>void }) {
+  return (
+    <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
+      {items.map(v=>(
+        <button key={v} onClick={()=>onSelect(v)} style={{
+          background:active===v?'var(--pinka)':'var(--bg3)',
+          border:`1px solid ${active===v?'var(--pinkb)':'var(--bd)'}`,
+          color:active===v?'var(--pink)':'var(--t2)',
+          fontSize:10,fontWeight:700,padding:'4px 10px',borderRadius:99,cursor:'pointer',whiteSpace:'nowrap',transition:'all .15s',
+        }}>{v}</button>
+      ))}
+    </div>
+  )
+}
+
+function Spinner() {
+  return (
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:6,height:'100vh'}}>
+      {[0,.2,.4].map((d,i)=><span key={i} style={{width:6,height:6,borderRadius:'50%',background:'var(--pink)',animation:`sp 1.2s ${d}s ease-in-out infinite`,display:'block'}}/>)}
+      <style>{`@keyframes sp{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}`}</style>
+    </div>
+  )
+}
+
+function Msg({ children }: { children: React.ReactNode }) {
+  return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'var(--t2)',fontSize:14}}>{children}</div>
+}

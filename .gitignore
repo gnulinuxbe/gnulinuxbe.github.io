@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# OS
+.DS_Store
+
+# Admin panel and API routes — keep local only, not deployed to GitHub Pages
+src/app/admin/
+src/app/api/
+
+# Environment
+.env*
