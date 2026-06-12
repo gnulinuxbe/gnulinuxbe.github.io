@@ -41,7 +41,12 @@ export default function CatPage() {
     return cat.items
       .filter(item => {
         if (fTag !== ALL && !item.tags.includes(fTag)) return false
-        if (q && !item.name.toLowerCase().includes(q) && !item.id.toLowerCase().includes(q) && !item.category.toLowerCase().includes(q) && !item.tags.some(t => t.toLowerCase().includes(q))) return false
+        if (q && !item.name.toLowerCase().includes(q)
+              && !item.id.toLowerCase().includes(q)
+              && !item.category.toLowerCase().includes(q)
+              && !(item.description || '').toLowerCase().includes(q)
+              && !item.tags.some(t => t.toLowerCase().includes(q))
+              && !item.apps?.some(a => a.name.toLowerCase().includes(q) || (a.description || '').toLowerCase().includes(q))) return false
         return true
       })
       .sort((a, b) => a.name.localeCompare(b.name, 'be'))
