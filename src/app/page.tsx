@@ -135,14 +135,6 @@ function RecentlyUpdated({ data }: { data: SiteData }) {
 
   const isNew = !item.updatedAt || item.updatedAt === item.createdAt
 
-  const link = item.apps
-    ? item.apps[0]?.platforms[0]?.links.find(l => l.type === 'translate')
-    : item.platforms[0]?.links.find(l => l.type === 'translate')
-
-  const platNames: string[] = item.apps
-    ? Array.from(new Set(item.apps.flatMap(a => a.platforms.map(p => p.name))))
-    : item.platforms.map(p => p.name)
-
   const chipColor = isNew ? 'var(--blue)' : 'var(--pink)'
   const chipBg   = isNew ? 'rgba(96,165,250,.12)' : 'var(--pinka)'
   const chipBd   = isNew ? 'rgba(96,165,250,.3)'  : 'var(--pinkb)'
@@ -169,24 +161,10 @@ function RecentlyUpdated({ data }: { data: SiteData }) {
       )}
 
       <span style={{fontSize:12,fontWeight:600,color:'var(--text)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{item.name}</span>
-      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0}}>
-        {platNames.slice(0,3).join(' · ')}
-      </span>
-      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0}}>
+
+      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0,marginLeft:'auto'}}>
         {formatDate(latestDate(item))}
       </span>
-
-      {link && (
-        <a href={link.url} target="_blank" rel="noreferrer"
-          onClick={e=>e.stopPropagation()}
-          style={{
-            marginLeft:'auto', flexShrink:0,
-            fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',
-            background:'var(--pink)',color:'#fff',
-            padding:'5px 10px',borderRadius:5,textDecoration:'none',whiteSpace:'nowrap',
-          }}
-        >{link.label} →</a>
-      )}
     </a>
   )
 }
