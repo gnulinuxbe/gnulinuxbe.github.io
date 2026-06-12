@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Item } from '@/types'
 import { loadData } from '@/lib/data'
@@ -13,8 +13,20 @@ export default function CatPage() {
   const [data, setData] = useState<SiteData | null>(null)
   const [search, setSearch] = useState('')
   const [fTag, setFTag] = useState(ALL)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => { loadData().then(setData) }, [])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault()
+        searchRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [])
   const cat = data?.categories.find(c => c.id === categoryId)
 
 
@@ -80,7 +92,7 @@ export default function CatPage() {
                   <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.5"/>
                   <path d="m13 13 3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
-                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Пошук…" style={{
+                <input ref={searchRef} value={search} onChange={e=>setSearch(e.target.value)} placeholder="Пошук… ( / )" style={{
                   width:'100%',background:'var(--bg3)',border:'1px solid var(--bd)',color:'var(--text)',
                   fontSize:12,padding:'7px 10px 7px 28px',borderRadius:'var(--r)',outline:'none',fontWeight:500,
                 }}/>

@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Platform, AppEntry } from '@/types'
 import { loadData } from '@/lib/data'
@@ -225,17 +225,19 @@ export default function ItemPage() {
           </div>
         )}
 
-        {/* Back */}
-        <a href={`/${categoryId}`} style={{
-          display:'inline-flex', alignItems:'center', gap:6,
-          fontSize:11, fontWeight:600, color:'var(--t3)',
-          background:'var(--bg2)', border:'1px solid var(--bd)',
-          padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s',
-          marginTop:24,
-        }}
-        onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
-        onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
-        >cd ../{categoryId}</a>
+        {/* Back + Copy */}
+        <div style={{ display:'flex', gap:8, marginTop:24 }}>
+          <a href={`/${categoryId}`} style={{
+            display:'inline-flex', alignItems:'center', gap:6,
+            fontSize:11, fontWeight:600, color:'var(--t3)',
+            background:'var(--bg2)', border:'1px solid var(--bd)',
+            padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s',
+          }}
+          onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
+          onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
+          >cd ../{categoryId}</a>
+          <CopyLink/>
+        </div>
       </div>
 
       <style>{`
@@ -250,6 +252,26 @@ export default function ItemPage() {
         .md code{background:var(--bg3);color:var(--purp);padding:1px 6px;border-radius:4px;font-size:11px}
       `}</style>
     </>
+  )
+}
+
+function CopyLink() {
+  const [copied, setCopied] = useState(false)
+  const copy = useCallback(() => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }, [])
+  return (
+    <button onClick={copy} style={{
+      display:'inline-flex', alignItems:'center', gap:6,
+      fontSize:11, fontWeight:600, color: copied ? 'var(--green)' : 'var(--t3)',
+      background:'var(--bg2)', border:`1px solid ${copied ? 'rgba(34,197,94,.3)' : 'var(--bd)'}`,
+      padding:'7px 14px', borderRadius:8, cursor:'pointer', transition:'all .15s',
+    }}>
+      {copied ? '✓ скапіявана' : '⎘ спасылка'}
+    </button>
   )
 }
 

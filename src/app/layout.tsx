@@ -4,6 +4,14 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Linux па-беларуску',
   description: 'Свабоднае праграмнае забеспячэнне на роднай мове',
+  openGraph: {
+    siteName: 'Linux па-беларуску',
+    title: 'Linux па-беларуску',
+    description: 'Свабоднае праграмнае забеспячэнне на роднай мове',
+    images: ['/banner.png'],
+    locale: 'be',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

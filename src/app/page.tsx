@@ -1,9 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
-import type { SiteData, Item } from '@/types'
+import type { SiteData, Item, Category } from '@/types'
 import { loadData } from '@/lib/data'
 import { formatDate } from '@/lib/platforms'
 import Header from '@/components/Header'
+
+const RECENT_MS = 14 * 24 * 60 * 60 * 1000
+const isRecent = (d: string) => !!d && Date.now() - new Date(d).getTime() < RECENT_MS
+const catHasRecent = (cat: Category) =>
+  cat.items.some(i => isRecent(i.updatedAt || '') || isRecent(i.createdAt || ''))
 
 export default function Home() {
   const [data, setData] = useState<SiteData | null>(null)
@@ -33,6 +38,8 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          <Stats data={data}/>
 
           {/* ls -la style category list */}
           <div style={{
@@ -73,6 +80,7 @@ export default function Home() {
                   <span style={{fontSize:13,fontWeight:600,color:'var(--blue)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
                     {cat.id}
                   </span>
+                  {catHasRecent(cat) && <span style={{width:6,height:6,borderRadius:'50%',background:'var(--pink)',flexShrink:0,display:'inline-block'}}/>}
                   <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',flex:1}}>
                     # {cat.name} — {cat.sub}
                   </span>
@@ -86,40 +94,38 @@ export default function Home() {
           </div>
 
           <RecentlyUpdated data={data}/>
-
-          {/* Visual gallery below ls listing */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:10}}>
-            {data.categories.map(cat => (
-              <a key={cat.id} href={`/${cat.id}`} style={{
-                display:'block',textDecoration:'none',
-                background:'var(--bg1)',border:'1px solid var(--bd)',
-                borderRadius:12,overflow:'hidden',
-                transition:'border-color .2s,transform .2s',
-              }}
-              onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--pinkb)';el.style.transform='translateY(-2px)'}}
-              onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--bd)';el.style.transform='none'}}
-              >
-                <div style={{position:'relative',height:110,overflow:'hidden',background:'var(--bg2)'}}>
-                  {cat.bannerUrl
-                    ? <img src={cat.bannerUrl} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-                    : <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:5,padding:'0 12px',textAlign:'center'}}>
-                        <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg,rgba(255,45,107,.07) 0%,transparent 60%)'}}/>
-                        <span style={{fontFamily:'var(--fd)',fontSize:'clamp(1.1rem,3vw,1.6rem)',letterSpacing:3,color:'var(--t2)',position:'relative'}}>{cat.name}</span>
-                        <span style={{fontSize:7,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'var(--t3)',background:'var(--bg3)',padding:'2px 8px',borderRadius:3,position:'relative',whiteSpace:'nowrap'}}>{cat.sub}</span>
-                      </div>
-                  }
-                </div>
-                <div style={{padding:'8px 12px',display:'flex',alignItems:'center',gap:6,borderTop:'1px solid var(--bd)'}}>
-                  <span style={{fontSize:10,color:'var(--pink)',fontWeight:700,flexShrink:0}}>~/</span>
-                  <span style={{fontSize:11,fontWeight:600,color:'var(--t2)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{cat.id}</span>
-                  <span style={{fontSize:10,color:'var(--t3)',marginLeft:'auto',flexShrink:0}}>{cat.items.length}</span>
-                </div>
-              </a>
-            ))}
-          </div>
         </div>
       </main>
     </>
+  )
+}
+
+function plural(n: number, one: string, few: string, many: string) {
+  const mod10 = n % 10, mod100 = n % 100
+  if (mod10 === 1 && mod100 !== 11) return `${n} ${one}`
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return `${n} ${few}`
+  return `${n} ${many}`
+}
+
+function Stats({ data }: { data: SiteData }) {
+  const allItems = data.categories.flatMap(c => c.items)
+  const thisMonth = new Date().toISOString().slice(0, 7)
+  const updatedThisMonth = allItems.filter(i =>
+    (i.updatedAt || '').startsWith(thisMonth) || (i.createdAt || '').startsWith(thisMonth)
+  ).length
+
+  return (
+    <div style={{
+      fontSize:11, color:'var(--t3)', fontWeight:500,
+      display:'flex', gap:16, flexWrap:'wrap',
+      padding:'0 2px 16px', letterSpacing:.2,
+    }}>
+      <span><span style={{color:'var(--pink)'}}>$</span> <span style={{color:'var(--text)',fontWeight:700}}>{plural(allItems.length, 'праект', 'праекты', 'праектаў')}</span></span>
+      <span>·</span>
+      <span><span style={{color:'var(--text)',fontWeight:700}}>{plural(data.categories.length, 'катэгорыя', 'катэгорыі', 'катэгорый')}</span></span>
+      <span>·</span>
+      <span>у гэтым месяцы <span style={{color:updatedThisMonth>0?'var(--green)':'var(--t3)',fontWeight:700}}>+{updatedThisMonth}</span></span>
+    </div>
   )
 }
 
@@ -128,44 +134,49 @@ function RecentlyUpdated({ data }: { data: SiteData }) {
   if (!peraklady) return null
 
   const latestDate = (i: Item) => (i.updatedAt || '') > (i.createdAt || '') ? (i.updatedAt || '') : (i.createdAt || '')
-  const item = [...peraklady.items]
+  const items = [...peraklady.items]
     .filter(i => i.createdAt || i.updatedAt)
-    .sort((a, b) => latestDate(b).localeCompare(latestDate(a)))[0]
-  if (!item) return null
-
-  const isNew = !item.updatedAt || item.updatedAt === item.createdAt
-
-  const chipColor = isNew ? 'var(--blue)' : 'var(--pink)'
-  const chipBg   = isNew ? 'rgba(96,165,250,.12)' : 'var(--pinka)'
-  const chipBd   = isNew ? 'rgba(96,165,250,.3)'  : 'var(--pinkb)'
-  const chipLabel = isNew ? '✦ новае' : '↻ абноўлена'
+    .sort((a, b) => latestDate(b).localeCompare(latestDate(a)))
+    .slice(0, 3)
+  if (!items.length) return null
 
   return (
-    <a href={`/peraklady/${item.id}`} style={{
-      display:'flex', alignItems:'center', gap:10,
-      background:'var(--bg1)', border:'1px solid var(--bd)',
-      borderRadius:10, padding:'9px 12px', marginBottom:16,
-      textDecoration:'none', transition:'border-color .2s',
-    }}
-    onMouseEnter={e=>(e.currentTarget as HTMLElement).style.borderColor=isNew?'rgba(96,165,250,.4)':'var(--pinkb)'}
-    onMouseLeave={e=>(e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
-    >
-      <span style={{fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',color:chipColor,background:chipBg,border:`1px solid ${chipBd}`,padding:'2px 7px',borderRadius:4,whiteSpace:'nowrap',flexShrink:0}}>
-        {chipLabel}
-      </span>
+    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:10,overflow:'hidden',marginBottom:16}}>
+      {items.map((item, idx) => {
+        const isNew = !item.updatedAt || item.updatedAt === item.createdAt
+        const chipColor = isNew ? 'var(--blue)' : 'var(--pink)'
+        const chipBg    = isNew ? 'rgba(96,165,250,.12)' : 'var(--pinka)'
+        const chipBd    = isNew ? 'rgba(96,165,250,.3)'  : 'var(--pinkb)'
+        const chipLabel = isNew ? '✦ новае' : '↻ абноўлена'
+        return (
+          <a key={item.id} href={`/peraklady/${item.id}`} style={{
+            display:'flex', alignItems:'center', gap:10,
+            padding:'9px 12px',
+            borderBottom: idx < items.length - 1 ? '1px solid var(--bd)' : 'none',
+            textDecoration:'none', transition:'background .15s',
+          }}
+          onMouseEnter={e=>(e.currentTarget as HTMLElement).style.background='var(--bg2)'}
+          onMouseLeave={e=>(e.currentTarget as HTMLElement).style.background='transparent'}
+          >
+            <span style={{fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',color:chipColor,background:chipBg,border:`1px solid ${chipBd}`,padding:'2px 7px',borderRadius:4,whiteSpace:'nowrap',flexShrink:0}}>
+              {chipLabel}
+            </span>
 
-      {item.iconUrl && (
-        <div style={{width:24,height:24,borderRadius:5,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
-          <img src={item.iconUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-        </div>
-      )}
+            {item.iconUrl && (
+              <div style={{width:22,height:22,borderRadius:5,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+                <img src={item.iconUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+              </div>
+            )}
 
-      <span style={{fontSize:12,fontWeight:600,color:'var(--text)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{item.name}</span>
+            <span style={{fontSize:12,fontWeight:600,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
 
-      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0,marginLeft:'auto'}}>
-        {formatDate(latestDate(item))}
-      </span>
-    </a>
+            <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0,marginLeft:'auto'}}>
+              {formatDate(latestDate(item))}
+            </span>
+          </a>
+        )
+      })}
+    </div>
   )
 }
 
