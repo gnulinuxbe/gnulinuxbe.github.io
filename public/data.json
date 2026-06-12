@@ -77,8 +77,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "ente",
@@ -187,8 +186,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "antennapod",
@@ -219,8 +217,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "fluffychat",
@@ -276,8 +273,186 @@
                 }
               ]
             }
+          ]
+        },
+        {
+          "id": "duckduckgo",
+          "name": "duckduckgo.com",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275476/duckduckgo_cyo2sq.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275501/duckduck_cd3bao.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275516/duckduckgo1_qh74g4.webp",
+          "category": "Бяспека",
+          "tags": [
+            "Бяспека"
           ],
-          "createdAt": "2026-06-11"
+          "updatedAt": "2026-06-12",
+          "description": "Перакладаем duckduckgo.com",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Github",
+                  "url": "https://github.com/duckduckgo/duckduckgo-locales",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://duckduckgo.com",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tor-project",
+          "name": "Tor Project",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275799/Tor_Project_z8enh2.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781277406/112233_otrqh1.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275897/Tor_Project1_qoz3rl.webp",
+          "category": "Бяспека",
+          "tags": [
+            "Бяспека",
+            "weblate"
+          ],
+          "updatedAt": "2026-06-12",
+          "description": "🕵️‍♂️ Усе мы хаця б раз карысталіся сеткай Tor.\n\nІ сёння мы прапануем лакалізаваць яго праекты.\n\n1. Пераклад адбываецца на платформе Weblate (https://weblate.org/be/) і каб пачаць пераклад вам неабходна аўтарызавацца ва ўліковым запісе, зручным для вас спосабам.\nhosted.weblate.org/accounts/login/\n2. Пасля чаго выбіраем ўпадабаны вам праект і пачынаем перакладаць.",
+          "platforms": [],
+          "apps": [
+            {
+              "id": "torproject-org",
+              "name": "torproject.org",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781277406/112233_otrqh1.png",
+              "description": "Сайты",
+              "platforms": [
+                {
+                  "name": "Сайт",
+                  "links": [
+                    {
+                      "label": "Weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/tpo-web/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "torproject.org",
+                      "url": "https://www.torproject.org/be/",
+                      "type": "website"
+                    },
+                    {
+                      "label": "Weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/community-portal/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "community.torproject.org",
+                      "url": "https://community.torproject.org/",
+                      "type": "website"
+                    },
+                    {
+                      "label": "Weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/new-support-portal/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "support.torproject.org",
+                      "url": "https://support.torproject.org/",
+                      "type": "website"
+                    },
+                    {
+                      "label": "weblate (усе кампаненты)",
+                      "url": "https://hosted.weblate.org/projects/tor/-/be/#components",
+                      "type": "translate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "tor-vpn",
+              "name": "Tor VPN",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781276505/unnamed_slja7n.png",
+              "description": "Бэта-версія: VPN, якая дае адпор\nTor VPN Beta вяртае кантроль у вашы рукі, калі іншыя спрабуюць адрэзаць вас ад свету. Гэты выпуск з раннім доступам прызначаны для карыстальнікаў, якія жадаюць дапамагчы ў фарміраванні будучыні мабільнай прыватнасці і могуць рабіць гэта бяспечна.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/tor-vpn/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=org.torproject.vpn&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "tor-browser",
+              "name": "Tor Browser",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275880/tor_qbrogn.webp",
+              "description": "Абараніце сябе ад сачэння, назірання і цэнзуры.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/tor-browser/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=org.torproject.torbrowser",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/tor-browser/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "ПК",
+                      "url": "https://www.torproject.org/be/download/",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "tails-os",
+              "name": "Tails OS",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781277330/1122_f49xgy.png",
+              "description": "Tails — гэта партатыўная аперацыйная сістэма, якая абараняе ад сачэння і цэнзуры.",
+              "platforms": [
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "weblate",
+                      "url": "https://hosted.weblate.org/projects/tor/tails-gui/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://tails.net/",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -312,8 +487,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "termicme",
@@ -343,8 +517,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "verbum-by",
@@ -369,8 +542,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "skarnik-by",
@@ -416,8 +588,7 @@
               ]
             }
           ],
-          "apps": [],
-          "createdAt": "2026-06-11"
+          "apps": []
         },
         {
           "id": "slounik-org",
@@ -442,8 +613,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "bielaruska-kitajski-slounik",
@@ -468,8 +638,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "ivan-nasovic-slounik",
@@ -494,8 +663,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "slounik-novych-zapazycanych-slou",
@@ -525,8 +693,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         }
       ]
     },
@@ -576,8 +743,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "bel-it",
@@ -602,8 +768,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         },
         {
           "id": "spell-be-tarask",
@@ -633,8 +798,7 @@
                 }
               ]
             }
-          ],
-          "createdAt": "2026-06-11"
+          ]
         }
       ]
     }

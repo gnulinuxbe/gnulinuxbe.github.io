@@ -127,7 +127,7 @@ function RecentlyUpdated({ data }: { data: SiteData }) {
   const peraklady = data.categories.find(c => c.id === 'peraklady')
   if (!peraklady) return null
 
-  const latestDate = (i: Item) => i.updatedAt > i.createdAt ? i.updatedAt : i.createdAt
+  const latestDate = (i: Item) => (i.updatedAt || '') > (i.createdAt || '') ? (i.updatedAt || '') : (i.createdAt || '')
   const item = [...peraklady.items]
     .filter(i => i.createdAt || i.updatedAt)
     .sort((a, b) => latestDate(b).localeCompare(latestDate(a)))[0]
