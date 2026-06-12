@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
-import type { SiteData } from '@/types'
+import type { SiteData, Item } from '@/types'
 import { loadData } from '@/lib/data'
+import { formatDate } from '@/lib/platforms'
 import Header from '@/components/Header'
 
 export default function Home() {
@@ -84,6 +85,8 @@ export default function Home() {
             ))}
           </div>
 
+          <RecentlyUpdated data={data}/>
+
           {/* Visual gallery below ls listing */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:10}}>
             {data.categories.map(cat => (
@@ -117,6 +120,74 @@ export default function Home() {
         </div>
       </main>
     </>
+  )
+}
+
+function RecentlyUpdated({ data }: { data: SiteData }) {
+  const peraklady = data.categories.find(c => c.id === 'peraklady')
+  if (!peraklady) return null
+
+  const latestDate = (i: Item) => i.updatedAt > i.createdAt ? i.updatedAt : i.createdAt
+  const item = [...peraklady.items]
+    .filter(i => i.createdAt || i.updatedAt)
+    .sort((a, b) => latestDate(b).localeCompare(latestDate(a)))[0]
+  if (!item) return null
+
+  const isNew = !item.updatedAt || item.updatedAt === item.createdAt
+
+  const link = item.apps
+    ? item.apps[0]?.platforms[0]?.links.find(l => l.type === 'translate')
+    : item.platforms[0]?.links.find(l => l.type === 'translate')
+
+  const platNames: string[] = item.apps
+    ? Array.from(new Set(item.apps.flatMap(a => a.platforms.map(p => p.name))))
+    : item.platforms.map(p => p.name)
+
+  const chipColor = isNew ? 'var(--blue)' : 'var(--pink)'
+  const chipBg   = isNew ? 'rgba(96,165,250,.12)' : 'var(--pinka)'
+  const chipBd   = isNew ? 'rgba(96,165,250,.3)'  : 'var(--pinkb)'
+  const chipLabel = isNew ? '✦ новае' : '↻ абноўлена'
+
+  return (
+    <a href={`/peraklady/${item.id}`} style={{
+      display:'flex', alignItems:'center', gap:10,
+      background:'var(--bg1)', border:'1px solid var(--bd)',
+      borderRadius:10, padding:'9px 12px', marginBottom:16,
+      textDecoration:'none', transition:'border-color .2s',
+    }}
+    onMouseEnter={e=>(e.currentTarget as HTMLElement).style.borderColor=isNew?'rgba(96,165,250,.4)':'var(--pinkb)'}
+    onMouseLeave={e=>(e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
+    >
+      <span style={{fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',color:chipColor,background:chipBg,border:`1px solid ${chipBd}`,padding:'2px 7px',borderRadius:4,whiteSpace:'nowrap',flexShrink:0}}>
+        {chipLabel}
+      </span>
+
+      {item.iconUrl && (
+        <div style={{width:24,height:24,borderRadius:5,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+          <img src={item.iconUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+        </div>
+      )}
+
+      <span style={{fontSize:12,fontWeight:600,color:'var(--text)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{item.name}</span>
+      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0}}>
+        {platNames.slice(0,3).join(' · ')}
+      </span>
+      <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',flexShrink:0}}>
+        {formatDate(latestDate(item))}
+      </span>
+
+      {link && (
+        <a href={link.url} target="_blank" rel="noreferrer"
+          onClick={e=>e.stopPropagation()}
+          style={{
+            marginLeft:'auto', flexShrink:0,
+            fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',
+            background:'var(--pink)',color:'#fff',
+            padding:'5px 10px',borderRadius:5,textDecoration:'none',whiteSpace:'nowrap',
+          }}
+        >{link.label} →</a>
+      )}
+    </a>
   )
 }
 

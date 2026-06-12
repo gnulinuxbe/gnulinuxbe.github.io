@@ -115,7 +115,7 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
     : item.platforms.map(p => p.name)
 
   return (
-    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:12,overflow:'hidden',transition:'border-color .2s,transform .2s'}}
+    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:12,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--pinkb)';el.style.transform='translateY(-2px)'}}
       onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--bd)';el.style.transform='none'}}
     >
@@ -129,8 +129,8 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
         }
       </a>
 
-      {/* Body — padding only, no flex column, no height tricks */}
-      <div style={{padding:'9px 10px 10px'}}>
+      {/* Body */}
+      <div style={{padding:'9px 10px 10px',flex:1,display:'flex',flexDirection:'column'}}>
         {/* Icon + name row */}
         <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:6}}>
           <div style={{width:28,height:28,borderRadius:6,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
@@ -162,7 +162,7 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
 
         {/* Open button */}
         {firstLink && (
-          <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
+          <a href={firstLink.url} target="_blank" rel="noreferrer" style={{marginTop:'auto',
             display:'block',textAlign:'center',textDecoration:'none',
             background:'var(--pink)',color:'#fff',
             fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',

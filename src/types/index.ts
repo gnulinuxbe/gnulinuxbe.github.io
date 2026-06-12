@@ -31,6 +31,7 @@ export interface Item {
   screenshotUrl: string
   category: string
   tags: string[]
+  createdAt: string
   updatedAt: string
 
   // SIMPLE mode: one description + platforms with links
