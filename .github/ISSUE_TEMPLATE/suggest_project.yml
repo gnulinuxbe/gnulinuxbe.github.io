@@ -1,0 +1,63 @@
+name: Прапанаваць праект
+description: Прапануйце праект для дадання ў каталог перакладаў
+title: "[Прапанова] "
+labels: ["прапанова"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Дзякуй за прапанову! Запоўніце форму ніжэй — гэта дапаможа нам хутчэй разгледзець і дадаць праект.
+
+  - type: input
+    id: name
+    attributes:
+      label: Назва праекта
+      placeholder: Напрыклад, Signal
+    validations:
+      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Сайт або GitHub праекта
+      placeholder: https://…
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform_translate
+    attributes:
+      label: Платформа для перакладу
+      options:
+        - Crowdin
+        - Weblate
+        - Transifex
+        - Іншае
+    validations:
+      required: true
+
+  - type: input
+    id: translate_url
+    attributes:
+      label: Спасылка на старонку беларускага перакладу
+      placeholder: https://crowdin.com/project/…/be
+      description: Пакіньце пустым калі не ведаеце
+
+  - type: checkboxes
+    id: platforms
+    attributes:
+      label: Даступныя платформы
+      options:
+        - label: Android
+        - label: iOS
+        - label: Вэб
+        - label: Linux
+        - label: Windows / Mac
+
+  - type: textarea
+    id: comment
+    attributes:
+      label: Дадатковы каментар
+      placeholder: Чаму гэты праект важны, які бягучы стан перакладу…
+      rows: 3

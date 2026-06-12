@@ -6,7 +6,7 @@
       "sub": "ПЕРАКЛАДАЕМ РАЗАМ",
       "icon": "",
       "bannerUrl": "/covers/cat-peraklady-1781193592177.png",
-      "contributeUrl": "",
+      "contributeUrl": "https://github.com/gnulinuxbe/gnulinuxbe.github.io/issues/new?template=suggest_project.yml",
       "items": [
         {
           "id": "mastodon",

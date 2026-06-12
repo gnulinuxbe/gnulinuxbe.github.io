@@ -4,7 +4,8 @@
       "Bash(npx next *)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); cat=next\\(c for c in d['categories'] if c['id']=='peraklady'\\); items=sorted\\(cat['items'],key=lambda x:x.get\\('updatedAt',''\\),reverse=True\\); [print\\(json.dumps\\({k:v for k,v in i.items\\(\\) if k!='description'},indent=2\\)\\) for i in items[:2]]\")",
       "Bash(node -e ' *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(c['id'], '->', c.get\\('contributeUrl',''\\)\\) for c in d['categories']]\")"
     ]
   }
 }
