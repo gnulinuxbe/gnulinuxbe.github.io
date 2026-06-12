@@ -55,15 +55,17 @@ export default function Header({ cats, activeId, crumb }: Props) {
 
         {/* Right side */}
         <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto', flexShrink:0 }}>
-          <a href="/admin" style={{
-            display:'flex', alignItems:'center', justifyContent:'center',
-            width:30, height:30, borderRadius:'var(--r)',
-            border:'1px solid var(--bd)', background:'var(--bg2)',
-            color:'var(--t3)', fontSize:13, transition:'all .15s',
-          }}
-          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--text)'}
-          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='var(--t3)'}
-          >⚙</a>
+          {process.env.NEXT_PUBLIC_ENABLE_ADMIN && (
+            <a href="/admin" style={{
+              display:'flex', alignItems:'center', justifyContent:'center',
+              width:30, height:30, borderRadius:'var(--r)',
+              border:'1px solid var(--bd)', background:'var(--bg2)',
+              color:'var(--t3)', fontSize:13, transition:'all .15s',
+            }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--text)'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='var(--t3)'}
+            >⚙</a>
+          )}
 
           {/* Hamburger — mobile only */}
           <button
