@@ -104,7 +104,7 @@ export default function CatPage() {
           <p style={{fontSize:10,fontWeight:600,color:'var(--t3)',marginBottom:11}}>{items.length} з {cat.items.length} праектаў</p>
 
           {/* App Store grid — auto-fill, works on any screen */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))',gap:10}}>
+          <div style={{display:'grid',gridTemplateColumns:`repeat(auto-fill,minmax(${APP_STORE_CATS.includes(categoryId)?'130px':'200px'},1fr))`,gap:10}}>
             {items.map(item => <ItemCard key={item.id} item={item} catId={categoryId}/>)}
             {items.length === 0 && (
               <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
@@ -117,6 +117,8 @@ export default function CatPage() {
   )
 }
 
+const APP_STORE_CATS = ['peraklady']
+
 function ItemCard({ item, catId }: { item: Item; catId: string }) {
   const firstLink = item.apps
     ? item.apps[0]?.platforms[0]?.links[0]
@@ -126,13 +128,55 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
     ? Array.from(new Set(item.apps.flatMap(a => a.platforms.map(p => p.name))))
     : item.platforms.map(p => p.name)
 
+  const hoverEnter = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.transform='translateY(-2px)' }
+  const hoverLeave = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--bd)'; el.style.transform='none' }
+
+  const Chips = () => (
+    <div style={{display:'flex',gap:3,justifyContent:'center',overflow:'hidden',height:16,flexShrink:0}}>
+      {platNames.slice(0,2).map(n=>(
+        <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3,whiteSpace:'nowrap',flexShrink:0}}>{n}</span>
+      ))}
+      {platNames.length > 2 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3,whiteSpace:'nowrap',flexShrink:0}}>+{platNames.length-2}</span>}
+    </div>
+  )
+
+  const Btn = () => firstLink ? (
+    <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
+      marginTop:'auto', display:'block', textAlign:'center', textDecoration:'none', width:'100%',
+      background:'var(--pinka)', color:'var(--pink)', border:'1px solid var(--pinkb)',
+      fontSize:10, fontWeight:700, letterSpacing:.3, textTransform:'uppercase',
+      padding:'6px 0', borderRadius:8,
+    }}>{firstLink.label}</a>
+  ) : null
+
+  /* ── App Store style (peraklady) ── */
+  if (APP_STORE_CATS.includes(catId)) return (
+    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
+      onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
+      <div style={{padding:'16px 12px 12px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:8}}>
+        <a href={`/${catId}/${item.id}`} style={{textDecoration:'none',flexShrink:0}}>
+          <div style={{width:64,height:64,borderRadius:16,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+            {item.iconUrl
+              ? <img src={item.iconUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{item.name.slice(0,2).toUpperCase()}</span>
+            }
+          </div>
+        </a>
+        <div style={{minWidth:0,width:'100%'}}>
+          <a href={`/${catId}/${item.id}`} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
+          {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
+        </div>
+        <Chips/>
+        <Btn/>
+      </div>
+    </div>
+  )
+
+  /* ── Banner style (slouniki, github-projects, …) ── */
   return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:12,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
-      onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--pinkb)';el.style.transform='translateY(-2px)'}}
-      onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--bd)';el.style.transform='none'}}
-    >
-      {/* Banner — fixed 110px, no flex */}
-      <a href={`/${catId}/${item.id}`} style={{display:'block',position:'relative',height:110,background:'var(--bg2)',overflow:'hidden',textDecoration:'none'}}>
+      onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
+      <a href={`/${catId}/${item.id}`} style={{display:'block',position:'relative',height:90,background:'var(--bg2)',overflow:'hidden',textDecoration:'none',flexShrink:0}}>
         {item.bannerUrl
           ? <img src={item.bannerUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
           : <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'linear-gradient(135deg,rgba(255,45,107,.06) 0%,transparent 60%)'}}>
@@ -140,47 +184,21 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
             </div>
         }
       </a>
-
-      {/* Body */}
       <div style={{padding:'9px 10px 10px',flex:1,display:'flex',flexDirection:'column'}}>
-        {/* Icon + name row */}
         <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:6}}>
           <div style={{width:28,height:28,borderRadius:6,overflow:'hidden',flexShrink:0,background:'var(--bg3)',border:'1px solid var(--bd)'}}>
             {item.iconUrl
               ? <img src={item.iconUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'.6rem',color:'var(--t3)',letterSpacing:.5}}>
-                  {item.name.slice(0,2).toUpperCase()}
-                </span>
+              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'.6rem',color:'var(--t3)'}}>{item.name.slice(0,2).toUpperCase()}</span>
             }
           </div>
           <div style={{flex:1,minWidth:0}}>
-            <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',display:'flex',alignItems:'center',gap:3,textDecoration:'none',overflow:'hidden'}}>
-              <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
-            </a>
+            <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
             {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
-            {item.updatedAt && <span style={{fontSize:8,color:'var(--t3)',display:'block',marginTop:1,opacity:.7}}>↻ {formatDate(item.updatedAt)}</span>}
           </div>
         </div>
-
-        {/* Platform chips */}
-        {platNames.length > 0 && (
-          <div style={{display:'flex',flexWrap:'wrap',gap:3,marginBottom:8}}>
-            {platNames.slice(0,3).map(n=>(
-              <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3}}>{n}</span>
-            ))}
-            {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
-          </div>
-        )}
-
-        {/* Open button */}
-        {firstLink && (
-          <a href={firstLink.url} target="_blank" rel="noreferrer" style={{marginTop:'auto',
-            display:'block',textAlign:'center',textDecoration:'none',
-            background:'var(--pink)',color:'#fff',
-            fontSize:9,fontWeight:700,letterSpacing:.5,textTransform:'uppercase',
-            padding:'6px 0',borderRadius:6,
-          }}>{firstLink.label} →</a>
-        )}
+        <Chips/>
+        <div style={{marginTop:8}}><Btn/></div>
       </div>
     </div>
   )
