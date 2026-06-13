@@ -6,7 +6,11 @@
       "Bash(node -e ' *)",
       "Bash(npx tsc *)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(c['id'], '->', c.get\\('contributeUrl',''\\)\\) for c in d['categories']]\")",
-      "Bash(xargs du -ch)"
+      "Bash(xargs du -ch)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'{c[\\\\\"id\\\\\"]}: {len\\(c[\\\\\"items\\\\\"]\\)} items'\\) for c in d['categories']]\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

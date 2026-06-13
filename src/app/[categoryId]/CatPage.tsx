@@ -50,6 +50,17 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
         return true
       })
       .sort((a, b) => a.name.localeCompare(b.name, 'be'))
+      .map(item => {
+        if (!q) return { item, matchedApp: undefined }
+        const directMatch = item.name.toLowerCase().includes(q)
+          || item.id.toLowerCase().includes(q)
+          || item.category.toLowerCase().includes(q)
+          || (item.description || '').toLowerCase().includes(q)
+          || item.tags.some(t => t.toLowerCase().includes(q))
+        if (directMatch) return { item, matchedApp: undefined }
+        const matched = item.apps?.find(a => a.name.toLowerCase().includes(q) || (a.description || '').toLowerCase().includes(q))
+        return { item, matchedApp: matched?.name }
+      })
   }, [cat, search, fTag])
 
   if (!cat) return <Msg>Не знойдзена</Msg>
@@ -110,7 +121,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
 
           {/* App Store grid — auto-fill, works on any screen */}
           <div style={{display:'grid',gridTemplateColumns:`repeat(auto-fill,minmax(${APP_STORE_CATS.includes(categoryId)?'130px':'200px'},1fr))`,gap:10}}>
-            {items.map(item => <ItemCard key={item.id} item={item} catId={categoryId}/>)}
+            {items.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp}/>)}
             {items.length === 0 && (
               <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
             )}
@@ -124,7 +135,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
 
 const APP_STORE_CATS = ['peraklady']
 
-function ItemCard({ item, catId }: { item: Item; catId: string }) {
+function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matchedApp?: string }) {
   const firstLink = item.apps
     ? item.apps[0]?.platforms[0]?.links[0]
     : item.platforms[0]?.links?.[0]
@@ -173,7 +184,10 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
         </a>
         <div style={{minWidth:0,width:'100%'}}>
           <a href={`/${catId}/${item.id}`} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
-          {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
+          {matchedApp
+            ? <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
+            : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
+          }
         </div>
         <Chips/>
         <Btn/>
@@ -203,7 +217,10 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
           </div>
           <div style={{flex:1,minWidth:0}}>
             <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
-            {item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>}
+            {matchedApp
+              ? <span style={{fontSize:9,color:'var(--pink)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
+              : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
+            }
           </div>
         </div>
         <Chips/>
@@ -228,14 +245,6 @@ function Chips({ items, active, onSelect }: { items: string[]; active: string; o
   )
 }
 
-function Spinner() {
-  return (
-    <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:6,height:'100vh'}}>
-      {[0,.2,.4].map((d,i)=><span key={i} style={{width:6,height:6,borderRadius:'50%',background:'var(--pink)',animation:`sp 1.2s ${d}s ease-in-out infinite`,display:'block'}}/>)}
-      <style>{`@keyframes sp{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}`}</style>
-    </div>
-  )
-}
 
 function Msg({ children }: { children: React.ReactNode }) {
   return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'var(--t2)',fontSize:14}}>{children}</div>
