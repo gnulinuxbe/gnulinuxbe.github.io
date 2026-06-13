@@ -136,6 +136,10 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
 const APP_STORE_CATS = ['peraklady']
 
 function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matchedApp?: string }) {
+  const href = matchedApp
+    ? `/${catId}/${item.id}?app=${encodeURIComponent(matchedApp)}`
+    : `/${catId}/${item.id}`
+
   const firstLink = item.apps
     ? item.apps[0]?.platforms[0]?.links[0]
     : item.platforms[0]?.links?.[0]
@@ -174,7 +178,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
       <div style={{padding:'16px 12px 12px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:8}}>
-        <a href={`/${catId}/${item.id}`} style={{textDecoration:'none',flexShrink:0}}>
+        <a href={href} style={{textDecoration:'none',flexShrink:0}}>
           <div style={{width:64,height:64,borderRadius:16,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
             {item.iconUrl
               ? <img src={item.iconUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
@@ -183,7 +187,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
           </div>
         </a>
         <div style={{minWidth:0,width:'100%'}}>
-          <a href={`/${catId}/${item.id}`} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
+          <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
           {matchedApp
             ? <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
             : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
@@ -199,7 +203,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
   return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:12,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
-      <a href={`/${catId}/${item.id}`} style={{display:'block',position:'relative',height:90,background:'var(--bg2)',overflow:'hidden',textDecoration:'none',flexShrink:0}}>
+      <a href={href} style={{display:'block',position:'relative',height:90,background:'var(--bg2)',overflow:'hidden',textDecoration:'none',flexShrink:0}}>
         {item.bannerUrl
           ? <img src={item.bannerUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
           : <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'linear-gradient(135deg,rgba(255,45,107,.06) 0%,transparent 60%)'}}>
@@ -216,7 +220,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
             }
           </div>
           <div style={{flex:1,minWidth:0}}>
-            <a href={`/${catId}/${item.id}`} style={{fontSize:11,fontWeight:600,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
+            <a href={href} style={{fontSize:11,fontWeight:600,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
             {matchedApp
               ? <span style={{fontSize:9,color:'var(--pink)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
               : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>

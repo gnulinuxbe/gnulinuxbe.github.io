@@ -1,5 +1,5 @@
 'use client'
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Platform, AppEntry } from '@/types'
 import { getLinkStyle, formatDate } from '@/lib/platforms'
@@ -96,6 +96,14 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
 
   const cat  = data.categories.find(c => c.id === categoryId)
   const item = cat?.items.find(i => i.id === itemId)
+
+  useEffect(() => {
+    if (!item?.apps) return
+    const app = new URLSearchParams(window.location.search).get('app')
+    if (!app) return
+    const idx = item.apps.findIndex(a => a.name.toLowerCase() === app.toLowerCase())
+    if (idx >= 0) setAppTab(idx)
+  }, [item])
 
   if (!item || !cat) return <Msg>Не знойдзена</Msg>
 
