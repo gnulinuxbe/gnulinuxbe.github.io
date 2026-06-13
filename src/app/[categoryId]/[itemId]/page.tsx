@@ -29,5 +29,5 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryI
 }
 
 export default function Page() {
-  return <ItemPage />
+  return <ItemPage initialData={dataJson as any}/>
 }

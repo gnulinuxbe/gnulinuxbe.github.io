@@ -9,14 +9,14 @@ import MatrixRain from '@/components/MatrixRain'
 
 const ALL = 'Усе'
 
-export default function CatPage() {
+export default function CatPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId } = useParams() as { categoryId: string }
-  const [data, setData] = useState<SiteData | null>(null)
+  const [data, setData] = useState<SiteData | null>(initialData ?? null)
   const [search, setSearch] = useState('')
   const [fTag, setFTag] = useState(ALL)
   const searchRef = useRef<HTMLInputElement>(null)
 
-  useEffect(() => { loadData().then(setData) }, [])
+  useEffect(() => { if (!initialData) loadData().then(setData) }, [initialData])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {

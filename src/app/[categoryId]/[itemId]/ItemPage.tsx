@@ -87,12 +87,12 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
   )
 }
 
-export default function ItemPage() {
+export default function ItemPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId, itemId } = useParams() as { categoryId: string; itemId: string }
-  const [data, setData] = useState<SiteData | null>(null)
+  const [data, setData] = useState<SiteData | null>(initialData ?? null)
   const [appTab, setAppTab] = useState(0)
 
-  useEffect(() => { loadData().then(setData) }, [])
+  useEffect(() => { if (!initialData) loadData().then(setData) }, [initialData])
 
   const cat  = data?.categories.find(c => c.id === categoryId)
   const item = cat?.items.find(i => i.id === itemId)
