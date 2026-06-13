@@ -283,7 +283,8 @@
           "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275516/duckduckgo1_qh74g4.webp",
           "category": "Бяспека",
           "tags": [
-            "Бяспека"
+            "Бяспека/канфідэнцыяльнасць",
+            "Github"
           ],
           "updatedAt": "2026-06-12",
           "description": "Перакладаем duckduckgo.com",
@@ -313,7 +314,7 @@
           "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275897/Tor_Project1_qoz3rl.webp",
           "category": "Бяспека",
           "tags": [
-            "Бяспека",
+            "Бяспека/канфідэнцыяльнасць",
             "weblate"
           ],
           "updatedAt": "2026-06-12",
@@ -449,6 +450,172 @@
                       "type": "website"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ublock-origin",
+          "name": "uBlock Origin",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350372/uBlock_Origin_srzlwy.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350372/uBO_yuzzcv.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350372/uBlock_Origin1_v9kcz0.webp",
+          "category": "Бяспека",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-13",
+          "updatedAt": "2026-06-13",
+          "description": "Перакладаем uBlock Origin",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/ublock/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://ublockorigin.com/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bitwarden",
+          "name": "Bitwarden",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350679/Bitwarden_qwtp62.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350679/bitwa_w8eksp.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781350679/Bitwarden1_nprafb.webp",
+          "category": "менеджар пароляў",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-13",
+          "updatedAt": "2026-06-13",
+          "description": "🔓 Якім менеджарам пароляў вы карыстаецеся?\n\nСёння прапануем вам дапамагчы з перакладам Bitwarden",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "crowdin",
+                  "url": "https://be.crowdin.com/project/bitwarden-mobile/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=com.x8bit.bitwarden&hl=be",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "crowdin",
+                  "url": "https://be.crowdin.com/project/bitwarden-mobile/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/by/app/bitwarden-password-manager/id1137397744",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Вэб",
+              "links": [
+                {
+                  "label": "crowdin",
+                  "url": "https://be.crowdin.com/project/bitwarden-web/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://vault.bitwarden.com/",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "crowdin",
+                  "url": "https://be.crowdin.com/project/bitwarden-desktop/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Програма",
+                  "url": "https://bitwarden.com/download/",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Пашырэнне",
+              "links": [
+                {
+                  "label": "crowdin",
+                  "url": "https://be.crowdin.com/project/bitwarden-browser/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Пашырэнне",
+                  "url": "https://bitwarden.com/download/#downloads-web-browser-extensions",
+                  "type": "extension"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keepassxc",
+          "name": "KeePassXC",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781351652/KeePassXC2_kaohbz.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781351652/KeePassXC_thueyn.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781351652/KeePassXC1_eztwpy.webp",
+          "category": "менеджар пароляў",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "transifex"
+          ],
+          "createdAt": "2026-06-13",
+          "updatedAt": "2026-06-13",
+          "description": "**Перакладаем KeePassXC на беларускую мову. **\n\n1. Для пачатку перакладу вам неабходна прайсці аўтарызацыю на сайце transifex.\n[app.transifex.com/signup/open-source/](https://app.transifex.com/signup/open-source/)\n2. Пасля чаго праходзім па дадзенай спасылцы [explore.transifex.com/keepassxc/keepassxc/](https://explore.transifex.com/keepassxc/keepassxc/), гартаем уніз старонкі і націскаем кнопку **JOIN THIS PROJECT** (пасля чаго выбіраем у выпадальным спісе беларускую мову і чакаем адабрэння заяўкі)\n3. Пераклад праекта будзе даступны па гэтай старонцы: [app.transifex.com/keepassxc/dashboard/all_projects/be/](https://app.transifex.com/keepassxc/dashboard/all_projects/be/)",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "transifex",
+                  "url": "https://app.transifex.com/keepassxc/keepassxc/language/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Праграму",
+                  "url": "https://keepassxc.org/download/#macos",
+                  "type": "extension"
+                }
+              ]
+            },
+            {
+              "name": "Пашырэнне",
+              "links": [
+                {
+                  "label": "Усталяваць",
+                  "url": "https://keepassxc.org/download/#browser",
+                  "type": "extension"
                 }
               ]
             }

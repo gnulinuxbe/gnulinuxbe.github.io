@@ -11,7 +11,8 @@ export const PLATFORMS: PlatformMeta[] = [
   { name: 'Вэб',     icon: '🌐', color: '#60a5fa', bg: 'rgba(96,165,250,.12)'  },
   { name: 'Linux',   icon: '🐧', color: '#f59e0b', bg: 'rgba(245,158,11,.12)'  },
   { name: 'PC',      icon: '🖥',  color: '#a78bfa', bg: 'rgba(167,139,250,.12)' },
-  { name: 'Сайт',    icon: '🔗', color: '#34d399', bg: 'rgba(52,211,153,.12)'  },
+  { name: 'Сайт',       icon: '🔗', color: '#34d399', bg: 'rgba(52,211,153,.12)'  },
+  { name: 'Пашырэнне', icon: '🧩', color: '#f97316', bg: 'rgba(249,115,22,.12)'  },
 ]
 
 export function getPlatformMeta(name: string): PlatformMeta {
@@ -24,6 +25,7 @@ export const LINK_TYPES = [
   { value: 'download',  label: 'Спампаваць', color: '#22c55e', bg: 'rgba(34,197,94,.13)'  },
   { value: 'website',   label: 'Адкрыць',    color: '#60a5fa', bg: 'rgba(96,165,250,.13)' },
   { value: 'chat',      label: 'Чат',         color: '#a78bfa', bg: 'rgba(167,139,250,.13)'},
+  { value: 'extension', label: 'Усталяваць',  color: '#f97316', bg: 'rgba(249,115,22,.13)' },
   { value: 'other',     label: 'Іншае',       color: '#8892aa', bg: 'rgba(136,146,170,.13)'},
 ] as const
 
