@@ -2,21 +2,20 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Item } from '@/types'
-import { loadData } from '@/lib/data'
 import { getLinkStyle } from '@/lib/platforms'
 import Header from '@/components/Header'
 import MatrixRain from '@/components/MatrixRain'
+import dataJson from '../../../public/data.json'
 
+const STATIC_DATA = dataJson as unknown as SiteData
 const ALL = 'Усе'
 
 export default function CatPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId } = useParams() as { categoryId: string }
-  const [data, setData] = useState<SiteData | null>(initialData ?? null)
+  const data = (initialData ?? STATIC_DATA) as SiteData
   const [search, setSearch] = useState('')
   const [fTag, setFTag] = useState(ALL)
   const searchRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => { if (!initialData) loadData().then(setData) }, [initialData])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -53,7 +52,6 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
       .sort((a, b) => a.name.localeCompare(b.name, 'be'))
   }, [cat, search, fTag])
 
-  if (!data) return <Spinner/>
   if (!cat) return <Msg>Не знойдзена</Msg>
 
   return (

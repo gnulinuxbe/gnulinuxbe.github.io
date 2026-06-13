@@ -1,10 +1,12 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Platform, AppEntry } from '@/types'
-import { loadData } from '@/lib/data'
 import { getLinkStyle, formatDate } from '@/lib/platforms'
 import Header from '@/components/Header'
+import dataJson from '../../../../public/data.json'
+
+const STATIC_DATA = dataJson as unknown as SiteData
 
 function md(text: string): string {
   if (!text) return ''
@@ -89,15 +91,12 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
 
 export default function ItemPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId, itemId } = useParams() as { categoryId: string; itemId: string }
-  const [data, setData] = useState<SiteData | null>(initialData ?? null)
+  const data = (initialData ?? STATIC_DATA) as SiteData
   const [appTab, setAppTab] = useState(0)
 
-  useEffect(() => { if (!initialData) loadData().then(setData) }, [initialData])
-
-  const cat  = data?.categories.find(c => c.id === categoryId)
+  const cat  = data.categories.find(c => c.id === categoryId)
   const item = cat?.items.find(i => i.id === itemId)
 
-  if (!data) return <Spinner/>
   if (!item || !cat) return <Msg>Не знойдзена</Msg>
 
   const isGrouped = !!(item.apps && item.apps.length > 0)
