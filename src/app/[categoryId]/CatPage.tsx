@@ -3,8 +3,9 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Item } from '@/types'
 import { loadData } from '@/lib/data'
-import { formatDate } from '@/lib/platforms'
+import { getLinkStyle } from '@/lib/platforms'
 import Header from '@/components/Header'
+import MatrixRain from '@/components/MatrixRain'
 
 const ALL = 'Усе'
 
@@ -57,8 +58,9 @@ export default function CatPage() {
 
   return (
     <>
+      <MatrixRain opacity={0.12}/>
       <Header cats={data.categories} activeId={categoryId}/>
-      <main>
+      <main style={{position:'relative',zIndex:1}}>
         {/* Category banner — show image only, no text overlay */}
         <div style={{position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)'}}>
           {cat.bannerUrl
@@ -145,14 +147,18 @@ function ItemCard({ item, catId }: { item: Item; catId: string }) {
     </div>
   )
 
-  const Btn = () => firstLink ? (
-    <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
-      marginTop:'auto', display:'block', textAlign:'center', textDecoration:'none', width:'100%',
-      background:'var(--pinka)', color:'var(--pink)', border:'1px solid var(--pinkb)',
-      fontSize:10, fontWeight:700, letterSpacing:.3, textTransform:'uppercase',
-      padding:'6px 0', borderRadius:8,
-    }}>{firstLink.label}</a>
-  ) : null
+  const Btn = () => {
+    if (!firstLink) return null
+    const ls = getLinkStyle(firstLink.type)
+    return (
+      <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
+        marginTop:'auto', display:'block', textAlign:'center', textDecoration:'none', width:'100%',
+        background: ls.bg, color: ls.color, border:`1px solid ${ls.color}40`,
+        fontSize:10, fontWeight:700, letterSpacing:.3, textTransform:'uppercase',
+        padding:'6px 0', borderRadius:8,
+      }}>{ls.label}</a>
+    )
+  }
 
   /* ── App Store style (peraklady) ── */
   if (APP_STORE_CATS.includes(catId)) return (

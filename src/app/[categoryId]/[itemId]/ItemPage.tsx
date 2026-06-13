@@ -106,7 +106,6 @@ export default function ItemPage() {
   return (
     <>
       <Header cats={data.categories} activeId={categoryId} crumb={item.name}/>
-
       {/* ── Banner ── */}
       <div style={{ position:'relative', width:'100%', height:'clamp(150px,22vw,300px)', overflow:'hidden', background:'var(--bg2)' }}>
         {item.bannerUrl
@@ -138,8 +137,8 @@ export default function ItemPage() {
           )}
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:5 }}>
-              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:14, flexShrink:0 }}>~/</span>
-              <h1 style={{ fontSize:17, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.name}</h1>
+              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:14, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
+              <h1 style={{ fontSize:17, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
             </div>
             <div style={{ display:'flex', flexWrap:'wrap', gap:5, alignItems:'center' }}>
               {item.category && <span style={{ fontSize:10, color:'var(--t2)', fontWeight:500 }}>{item.category}</span>}

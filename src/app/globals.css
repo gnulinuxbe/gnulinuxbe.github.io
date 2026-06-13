@@ -46,3 +46,27 @@ input,textarea,select{font-family:var(--fb)}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:99px}
+
+/* Cross-document view transitions — Chrome 126+ */
+@view-transition { navigation: auto; }
+
+@keyframes vt-scan-out {
+  0%   { clip-path: inset(0 0 0%   0); filter: brightness(1)   saturate(1);   transform: none; }
+  20%  { clip-path: inset(0 0 0%   0); filter: brightness(1.4) saturate(0.2); transform: translateX(3px); }
+  38%  { clip-path: inset(0 0 0%   0); filter: brightness(2.8) saturate(0);   transform: translateX(-2px); }
+  55%  { clip-path: inset(0 0 45%  0); filter: brightness(3.5) saturate(0);   transform: translateX(2px); }
+  80%  { clip-path: inset(0 0 80%  0); filter: brightness(1.5) saturate(0);   transform: none; }
+  100% { clip-path: inset(0 0 100% 0); filter: brightness(1)   saturate(1);   transform: none; }
+}
+@keyframes vt-scan-in {
+  0%   { clip-path: inset(0 0 100% 0); filter: brightness(3.5) saturate(0);   transform: translateX(-2px); }
+  18%  { clip-path: inset(0 0 78%  0); filter: brightness(2)   saturate(0.4); transform: translateX(2px); }
+  45%  { clip-path: inset(0 0 42%  0); filter: brightness(1.3) saturate(1);   transform: none; }
+  100% { clip-path: inset(0 0 0%   0); filter: brightness(1)   saturate(1);   transform: none; }
+}
+::view-transition-old(root) {
+  animation: 160ms linear vt-scan-out;
+}
+::view-transition-new(root) {
+  animation: 220ms linear vt-scan-in;
+}
