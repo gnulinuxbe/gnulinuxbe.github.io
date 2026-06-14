@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next'
 import dataJson from '../../public/data.json'
 
+export const dynamic = 'force-static'
+
 const BASE = 'https://gnulinuxbe.github.io'
 
 export default function sitemap(): MetadataRoute.Sitemap {
