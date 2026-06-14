@@ -10,7 +10,8 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'{c[\\\\\"id\\\\\"]}: {len\\(c[\\\\\"items\\\\\"]\\)} items'\\) for c in d['categories']]\")",
       "Skill(run)",
       "Skill(run:*)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\('homepage','no homepage'\\)\\)\")"
     ]
   }
 }
