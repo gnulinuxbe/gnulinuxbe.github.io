@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     images: ['/banner.png'],
   },
   robots: { index: true, follow: true },
+  verification: { google: 'gi7JMtO4urU0HO7XO9lCew7DbmKDpI6vOfYJoo3enP8' },
 }
 
 const jsonLd = {
