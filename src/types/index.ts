@@ -18,6 +18,7 @@ export interface AppEntry {
   id: string
   name: string
   iconUrl: string
+  screenshotUrl?: string
   description: string   // ONE description for this app (shown regardless of platform)
   platforms: Platform[] // Each platform only has links, no separate description
 }

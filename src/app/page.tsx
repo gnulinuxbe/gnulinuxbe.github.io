@@ -270,6 +270,8 @@ export default function Home() {
   const first = isFirst.current
 
   const allItems = data?.categories.flatMap(c => c.items) ?? []
+  const totalPrograms = data?.categories.reduce((acc, c) =>
+    acc + c.items.reduce((a, i) => a + (Array.isArray(i.apps) && i.apps.length > 0 ? i.apps.length : 1), 0), 0) ?? 0
   const thisMonth = new Date().toISOString().slice(0, 7)
   const updatedThisMonth = allItems.filter(i =>
     (i.updatedAt||'').startsWith(thisMonth) || (i.createdAt||'').startsWith(thisMonth)
@@ -305,7 +307,7 @@ export default function Home() {
               </div>
 
               <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8,marginBottom:20}}>
-                <StatCard value={allItems.length}          label="праектаў"    color="var(--pink)"  glitchInterval={5000}/>
+                <StatCard value={totalPrograms}             label="праектаў"    color="var(--pink)"  glitchInterval={5000}/>
                 <StatCard value={data.categories.length}   label="катэгорый"   color="var(--blue)"  glitchInterval={7000}/>
                 <StatCard value={updatedThisMonth}          label="гэты месяц"  color="var(--green)" prefix="+" glitchInterval={6000}/>
               </div>
@@ -434,7 +436,9 @@ function CatRow({ cat, index, total }: { cat: Category; index: number; total: nu
         {catHasRecent(cat) && <span style={{width:6,height:6,borderRadius:'50%',background:'var(--pink)',flexShrink:0,display:'inline-block'}}/>}
         <span style={{fontSize:10,color:'var(--t3)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',flex:1}}># {cat.name} — {cat.sub}</span>
       </div>
-      <span style={{fontSize:11,color:'var(--t3)',whiteSpace:'nowrap',fontWeight:500}}>{cat.items.length} items</span>
+      <span style={{fontSize:11,color:'var(--t3)',whiteSpace:'nowrap',fontWeight:500}}>
+        {cat.items.reduce((acc, i) => acc + (Array.isArray(i.apps) && i.apps.length > 0 ? i.apps.length : 1), 0)} items
+      </span>
     </a>
   )
 }

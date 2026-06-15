@@ -14,7 +14,38 @@
       "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\('homepage','no homepage'\\)\\)\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'{i}: {c[\\\\\"id\\\\\"]} | contributeUrl={c.get\\(\\\\\"contributeUrl\\\\\",\\\\\"None\\\\\"\\)}'\\) for i,c in enumerate\\(d['categories']\\)]\")",
       "Bash(git pull *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(npm run *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/peraklady)",
+      "Bash(curl -sL -o /dev/null -w \"%{http_code}\" http://localhost:3000/peraklady)",
+      "Bash(cat /tmp/nextjs-dev.log | tail -30)",
+      "Read(//private/tmp/**)",
+      "Bash(curl -sL -o /dev/null -w \"%{http_code}\" http://localhost:3001/peraklady)",
+      "Bash(curl -sL http://localhost:3001/peraklady)",
+      "Bash(ls /Applications/ | grep -i \"chrome\\\\|firefox\\\\|safari\\\\|brave\")",
+      "Read(//Applications/**)",
+      "Bash(open -a Safari \"http://localhost:3001/peraklady\")",
+      "Bash(screencapture -x /tmp/peraklady-screenshot.png)",
+      "Bash(npx playwright *)",
+      "Bash(find ~/.npm ~/.cache /usr/local/lib -name \"playwright\" -maxdepth 6 -type d 2>/dev/null | head -5)",
+      "Read(//Users/maks/.npm/**)",
+      "Bash(mkdir -p \"/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]/[appId]\")",
+      "Bash(curl -s -X POST http://localhost:3001/api/save -H 'Content-Type: application/json' -d '{\"test\":true}')",
+      "Bash(curl -v -X POST http://localhost:3001/api/save -H 'Content-Type: application/json' -d '{\"categories\":[]}')",
+      "Bash(curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}' -X POST http://localhost:3001/api/save -H 'Content-Type: application/json' -d '{\"categories\":[]}')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:3001/api/save/ -H 'Content-Type: application/json' -d '{\"categories\":[]}')",
+      "Bash(git checkout *)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('public/data.json'\\)\\); print\\(sum\\(len\\(c['items']\\) for c in d['categories']\\), 'праектаў'\\)\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs ps -p)",
+      "Bash(ps -p 4132 -o pid,command)",
+      "Bash(kill 4132)",
+      "Bash(npm run dev > /tmp/nextjs-dev.log 2>&1 & *)"
+    ],
+    "additionalDirectories": [
+      "/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]",
+      "/private/tmp"
     ]
   }
 }

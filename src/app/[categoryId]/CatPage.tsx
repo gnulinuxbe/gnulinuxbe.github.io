@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams } from 'next/navigation'
-import type { SiteData, Item } from '@/types'
+import type { SiteData, Item, AppEntry } from '@/types'
 import { getLinkStyle } from '@/lib/platforms'
 import Header from '@/components/Header'
 import MatrixRain from '@/components/MatrixRain'
@@ -9,12 +9,34 @@ import dataJson from '../../../public/data.json'
 
 const STATIC_DATA = dataJson as unknown as SiteData
 const ALL = 'Усе'
+const APP_STORE_CATS = ['peraklady']
+
+type GridEntry =
+  | { kind: 'solo';         item: Item }
+  | { kind: 'group-header'; item: Item }
+  | { kind: 'app';          item: Item; app: AppEntry }
+
+function buildEntries(filtered: { item: Item; matchedApp?: string }[]): GridEntry[] {
+  const out: GridEntry[] = []
+  for (const { item, matchedApp } of filtered) {
+    if (item.apps && item.apps.length > 0) {
+      const appsToShow = matchedApp
+        ? item.apps.filter(a => a.name === matchedApp)
+        : item.apps
+      for (const app of appsToShow) out.push({ kind: 'app', item, app })
+    } else {
+      out.push({ kind: 'solo', item })
+    }
+  }
+  return out
+}
 
 export default function CatPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId } = useParams() as { categoryId: string }
   const data = (initialData ?? STATIC_DATA) as SiteData
   const [search, setSearch] = useState('')
   const [fTag, setFTag] = useState(ALL)
+  const [fDev, setFDev] = useState('')
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -27,19 +49,20 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [])
-  const cat = data?.categories.find(c => c.id === categoryId)
 
+  const cat = data?.categories.find(c => c.id === categoryId)
 
   const tags = useMemo(() => {
     if (!cat) return [ALL]
     return [ALL, ...Array.from(new Set(cat.items.flatMap(i => i.tags))).sort()]
   }, [cat])
 
-  const items = useMemo(() => {
+  const filtered = useMemo(() => {
     if (!cat) return []
     const q = search.toLowerCase()
     return cat.items
       .filter(item => {
+        if (fDev && item.id !== fDev) return false
         if (fTag !== ALL && !item.tags.includes(fTag)) return false
         if (q && !item.name.toLowerCase().includes(q)
               && !item.id.toLowerCase().includes(q)
@@ -61,16 +84,24 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
         const matched = item.apps?.find(a => a.name.toLowerCase().includes(q) || (a.description || '').toLowerCase().includes(q))
         return { item, matchedApp: matched?.name }
       })
-  }, [cat, search, fTag])
+  }, [cat, search, fTag, fDev])
 
   if (!cat) return <Msg>Не знойдзена</Msg>
+
+  const isAppStore = APP_STORE_CATS.includes(categoryId)
+  const entries = isAppStore ? buildEntries(filtered) : null
+
+  const totalCards   = isAppStore
+    ? cat.items.reduce((acc, i) => acc + (Array.isArray(i.apps) && i.apps.length > 0 ? i.apps.length : 1), 0)
+    : cat.items.length
+  const currentCards = isAppStore ? (entries?.length ?? 0) : filtered.length
 
   return (
     <>
       <MatrixRain opacity={0.12}/>
       <Header cats={data.categories} activeId={categoryId}/>
       <main style={{position:'relative',zIndex:1}}>
-        {/* Category banner — show image only, no text overlay */}
+        {/* Category banner */}
         <div style={{position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)'}}>
           {cat.bannerUrl
             ? <img src={cat.bannerUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
@@ -117,15 +148,46 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
             {tags.length > 1 && <Chips items={tags} active={fTag} onSelect={setFTag}/>}
           </div>
 
-          <p style={{fontSize:10,fontWeight:600,color:'var(--t3)',marginBottom:11}}>{items.length} з {cat.items.length} праектаў</p>
-
-          {/* App Store grid — auto-fill, works on any screen */}
-          <div style={{display:'grid',gridTemplateColumns:`repeat(auto-fill,minmax(${APP_STORE_CATS.includes(categoryId)?'130px':'200px'},1fr))`,gap:10}}>
-            {items.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp}/>)}
-            {items.length === 0 && (
-              <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
-            )}
+          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:11,flexWrap:'wrap'}}>
+            <p style={{fontSize:10,fontWeight:600,color:'var(--t3)',margin:0}}>
+              {currentCards} з {totalCards} {isAppStore ? 'праграм' : 'праектаў'}
+            </p>
+            {fDev && (() => {
+              const devItem = cat.items.find(i => i.id === fDev)
+              return devItem ? (
+                <button onClick={()=>setFDev('')} style={{
+                  display:'inline-flex',alignItems:'center',gap:5,
+                  background:'var(--pinka)',border:'1px solid var(--pinkb)',
+                  color:'var(--pink)',fontSize:10,fontWeight:700,
+                  padding:'3px 8px 3px 5px',borderRadius:99,cursor:'pointer',
+                }}>
+                  {devItem.iconUrl && <img src={devItem.iconUrl} alt="" style={{width:14,height:14,borderRadius:3,objectFit:'cover',flexShrink:0}}/>}
+                  {devItem.name}
+                  <span style={{opacity:.7}}>✕</span>
+                </button>
+              ) : null
+            })()}
           </div>
+
+          {/* Grid */}
+          {isAppStore && entries ? (
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(130px,1fr))',gap:10}}>
+              {entries.map((entry) => {
+                if (entry.kind === 'app')  return <AppCard  key={`${entry.item.id}-${entry.app.id}`} item={entry.item} app={entry.app} catId={categoryId} onDevClick={setFDev}/>
+                return <ItemCard key={entry.item.id} item={entry.item} catId={categoryId}/>
+              })}
+              {entries.length === 0 && (
+                <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
+              )}
+            </div>
+          ) : (
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:10}}>
+              {filtered.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp}/>)}
+              {filtered.length === 0 && (
+                <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
+              )}
+            </div>
+          )}
         </div>
       </main>
       <style>{`input:focus{border-color:var(--pinkb)!important}`}</style>
@@ -133,8 +195,87 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
   )
 }
 
-const APP_STORE_CATS = ['peraklady']
+// ── Group header (full-width row) ─────────────────────────────────────────────
+function GroupHeader({ item, catId }: { item: Item; catId: string }) {
+  return (
+    <div style={{
+      gridColumn: '1 / -1',
+      display: 'flex', alignItems: 'center', gap: 8,
+      padding: '14px 2px 6px',
+    }}>
+      {item.iconUrl && (
+        <img src={item.iconUrl} alt="" style={{ width:18, height:18, borderRadius:5, objectFit:'cover', flexShrink:0 }}/>
+      )}
+      <a href={`/${catId}/${item.id}`} style={{ fontSize:12, fontWeight:700, color:'var(--text)', textDecoration:'none', flexShrink:0 }}>
+        {item.name}
+      </a>
+      <span style={{ fontSize:10, color:'var(--t3)', flexShrink:0 }}>
+        {item.apps!.length} {item.apps!.length === 1 ? 'дадатак' : 'дадаткі'}
+      </span>
+      <div style={{ flex:1, height:1, background:'var(--bd)' }}/>
+    </div>
+  )
+}
 
+// ── App card (one per AppEntry) — App Store style ────────────────────────────
+function AppCard({ item, app, catId, onDevClick }: { item: Item; app: AppEntry; catId: string; onDevClick: (id: string) => void }) {
+  const href = `/${catId}/${item.id}/${app.id}`
+  const firstLink = app.platforms[0]?.links[0]
+  const platNames = Array.from(new Set(app.platforms.map(p => p.name)))
+
+  const hoverEnter = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.transform='translateY(-2px)' }
+  const hoverLeave = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--bd)'; el.style.transform='none' }
+
+  return (
+    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
+      onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
+      <div style={{padding:'16px 12px 12px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:8}}>
+        <a href={href} style={{textDecoration:'none',flexShrink:0}}>
+          <div style={{width:64,height:64,borderRadius:16,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+            {app.iconUrl
+              ? <img src={app.iconUrl} alt={app.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{app.name.slice(0,2).toUpperCase()}</span>
+            }
+          </div>
+        </a>
+        <div style={{minWidth:0,width:'100%'}}>
+          <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{app.name}</a>
+          {/* Developer badge — clickable, filters by this dev */}
+          <button onClick={e=>{e.stopPropagation();onDevClick(item.id)}} style={{
+            display:'inline-flex',alignItems:'center',gap:3,marginTop:3,
+            background:'none',border:'none',cursor:'pointer',padding:'1px 0',
+          }}>
+            {item.iconUrl && <img src={item.iconUrl} alt="" style={{width:11,height:11,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.7}}/>}
+            <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
+          </button>
+        </div>
+        <div style={{display:'flex',gap:3,justifyContent:'center',flexWrap:'wrap',minHeight:16}}>
+          {platNames.slice(0,3).map(n=>(
+            <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3,whiteSpace:'nowrap'}}>{n}</span>
+          ))}
+          {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
+        </div>
+        {firstLink && <CTA link={firstLink}/>}
+      </div>
+    </div>
+  )
+}
+
+function CTA({ link }: { link: { url: string; type: string; label: string } }) {
+  const ls = getLinkStyle(link.type as 'translate'|'download'|'website'|'chat'|'other')
+  return (
+    <a href={link.url} target="_blank" rel="noreferrer"
+      onClick={e => e.stopPropagation()}
+      style={{
+        marginTop:'auto',display:'block',textAlign:'center',textDecoration:'none',width:'100%',
+        background:ls.bg,color:ls.color,border:`1px solid ${ls.color}40`,
+        fontSize:10,fontWeight:700,letterSpacing:.3,textTransform:'uppercase',
+        padding:'6px 0',borderRadius:8,
+      }}>{ls.label}</a>
+  )
+}
+
+// ── Solo item card (no apps) ─────────────────────────────────────────────────
 function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matchedApp?: string }) {
   const href = matchedApp
     ? `/${catId}/${item.id}?app=${encodeURIComponent(matchedApp)}`
@@ -151,7 +292,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
   const hoverEnter = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.transform='translateY(-2px)' }
   const hoverLeave = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--bd)'; el.style.transform='none' }
 
-  const Chips = () => (
+  const PlatChips = () => (
     <div style={{display:'flex',gap:3,justifyContent:'center',overflow:'hidden',height:16,flexShrink:0}}>
       {platNames.slice(0,2).map(n=>(
         <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3,whiteSpace:'nowrap',flexShrink:0}}>{n}</span>
@@ -160,20 +301,7 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
     </div>
   )
 
-  const Btn = () => {
-    if (!firstLink) return null
-    const ls = getLinkStyle(firstLink.type)
-    return (
-      <a href={firstLink.url} target="_blank" rel="noreferrer" style={{
-        marginTop:'auto', display:'block', textAlign:'center', textDecoration:'none', width:'100%',
-        background: ls.bg, color: ls.color, border:`1px solid ${ls.color}40`,
-        fontSize:10, fontWeight:700, letterSpacing:.3, textTransform:'uppercase',
-        padding:'6px 0', borderRadius:8,
-      }}>{ls.label}</a>
-    )
-  }
-
-  /* ── App Store style (peraklady) ── */
+  /* ── App Store style (peraklady solo) ── */
   if (APP_STORE_CATS.includes(catId)) return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
@@ -193,8 +321,8 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
             : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
           }
         </div>
-        <Chips/>
-        <Btn/>
+        <PlatChips/>
+        {firstLink && <CTA link={firstLink}/>}
       </div>
     </div>
   )
@@ -227,8 +355,8 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
             }
           </div>
         </div>
-        <Chips/>
-        <div style={{marginTop:8}}><Btn/></div>
+        <PlatChips/>
+        {firstLink && <div style={{marginTop:8}}><CTA link={firstLink}/></div>}
       </div>
     </div>
   )
@@ -248,7 +376,6 @@ function Chips({ items, active, onSelect }: { items: string[]; active: string; o
     </div>
   )
 }
-
 
 function Msg({ children }: { children: React.ReactNode }) {
   return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'var(--t2)',fontSize:14}}>{children}</div>

@@ -98,7 +98,7 @@
             {
               "id": "ente-photos",
               "name": "Ente photos",
-              "iconUrl": "https://play-lh.googleusercontent.com/l4AGolaxeY9fAKWFFh1igSOmYgGA9Qt5U1uRy7NCVhdgrzv5gtm6ZhR8fKtAIvWykN0Y51bVX0TPPxNBmbsn=w480-h960",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559118/1212112_awfun8.png",
               "description": "Захоўвайце, дзяліцеся і адкрывайце для сябе свае ўспаміны з Ente Photos. З дапамогай скразнога шыфравання толькі вы і тыя, з кім вы дзеліцеся, можаце бачыць вашы фатаграфіі і відэа. Ente Photos з любоўю ахоўвае больш за 165 мільёнаў успамінаў для людзей, якія нам давяраюць, на ўсіх асноўных платформах. Пачніце з 10 ГБ бясплатна.",
               "platforms": [
                 {
@@ -146,12 +146,13 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781558994/entescr_banabv.png"
             },
             {
               "id": "ente-auth",
               "name": "Ente Auth",
-              "iconUrl": "https://play-lh.googleusercontent.com/B1h5mcM-Zo76ra3GUehWran2yNGa4Oyd818ZX8lRFI-7FYwtnAOhI_5xxrOLQuKQxGWzQCIWNA1Cjc7H9nKuzw=s720",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559119/242422_f8nc46.png",
               "description": "Ente Auth - лепшае і адзінае прыкладанне для аўтэнтыфікацыі 2FA, якое вам калі-небудзь спатрэбіцца. Ён забяспечвае бяспечнае рэзервовае капіраванне вашых кодаў са скразным шыфраваннем і працуе на ўсіх прыладах Android, iOS, Mac, Windows, Linux або ў Інтэрнэце. Ён таксама прапануе функцыі якасці жыцця, такія як \"Націсніце, каб скапіяваць\", \"Наступны код\", і нават дазваляе бяспечна дзяліцца сваімі кодамі з іншымі.",
               "platforms": [
                 {
@@ -180,6 +181,46 @@
                     {
                       "label": "App Store",
                       "url": "https://apps.apple.com/us/app/ente-auth-2fa-authenticator/id6444121398",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781558993/enteautchscr_dvd1b8.png"
+            },
+            {
+              "id": "ente-locker",
+              "name": "Ente Locker",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559278/fojncfs_vd9lny.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559354/entelocker_qmggnh.png",
+              "description": "Ente Locker – гэта надзейнае сховішча для найважнейшых рэчаў – вашых найважнейшых дакументаў і ўліковых даных – абароненае скразным шыфраваннем.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-locker",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=io.ente.locker",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://be.crowdin.com/project/ente-locker",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/us/app/ente-locker/id6747611956",
                       "type": "download"
                     }
                   ]
@@ -367,7 +408,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557806/torproject_bublxm.png"
             },
             {
               "id": "tor-vpn",
@@ -390,12 +432,13 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557730/torvpn_dddouh.png"
             },
             {
               "id": "tor-browser",
               "name": "Tor Browser",
-              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781275880/tor_qbrogn.webp",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557650/torbrowsericon_kiuw8y.png",
               "description": "Абараніце сябе ад сачэння, назірання і цэнзуры.",
               "platforms": [
                 {
@@ -428,7 +471,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557575/TORbrowser_rmvlck.png"
             },
             {
               "id": "tails-os",
@@ -451,7 +495,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557332/tailsos_vvv3yl.png"
             }
           ]
         },
@@ -622,8 +667,8 @@
           ]
         },
         {
-          "id": "element",
-          "name": "Element",
+          "id": "element-io",
+          "name": "Element.io",
           "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543277/%D0%BC%D0%B5%D1%81%D1%8D%D0%BD%D0%B4%D0%B6%D1%8D%D1%80%D1%8B1_v9h35o.webp",
           "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png",
           "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543277/element1_dtq35x.webp",
@@ -635,14 +680,14 @@
           ],
           "createdAt": "2026-06-15",
           "updatedAt": "2026-06-15",
-          "description": "",
+          "description": "Element.io — гэта кампанія і платформа, якая з'яўляецца галоўным распрацоўшчыкам флагманскіх праграм для бяспечнай дэцэнтралізаванай камунікацыі на базе адкрытага пратакола Matrix. Яна прапануе як бясплатныя кліенты з адкрытым зыходным кодам (Element), так і камерцыйныя карпаратыўныя рашэнні (Element Matrix Services) для надзейнага кіравання інфраструктурай і абмену паведамленнямі са скразным шыфраваннем (E2EE).",
           "platforms": [],
           "apps": [
             {
-              "id": "element",
-              "name": "Element",
+              "id": "element-pc-web-",
+              "name": "Element (PC/Web)",
               "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png",
-              "description": "Element Classic — гэта мабільная праграма Element папярэдняга пакалення. Сябры, сям'я і супольнасці павінны выкарыстоўваць бясплатную праграму Element X з адкрытым зыходным кодам, якое хутчэйшае, прасцейшае ў выкарыстанні і больш магутнае. Новыя карыстальнікі арганізацый дзяржаўнага сектара, прадпрыемстваў і прафесійных каманд павінны выкарыстоўваць прыкладанне Element Pro, створанае для працы і арганізацый.",
+              "description": "Element Web / Desktop — гэта асноўны кліент для персанальных камп'ютараў і браўзераў, які забяспечвае зручны доступ да дэцэнтралізаванай сеткі Matrix без неабходнасці прывязкі да мабільнай прылады. Ён прапануе паўнавартасны інструментарый для кіравання скразным шыфраваннем, групавымі чатамі і працоўнымі прасторамі (Spaces), ідэальна падыходзячы для штодзённай сумеснай працы на вялікіх экранах.",
               "platforms": [
                 {
                   "name": "PC",
@@ -673,44 +718,15 @@
                       "type": "website"
                     }
                   ]
-                },
-                {
-                  "name": "Android",
-                  "links": [
-                    {
-                      "label": "translate.element.io",
-                      "url": "https://translate.element.io/projects/element-android/-/be/",
-                      "type": "translate"
-                    },
-                    {
-                      "label": "Google Play",
-                      "url": "https://play.google.com/store/apps/details?id=im.vector.app&hl=be",
-                      "type": "download"
-                    }
-                  ]
-                },
-                {
-                  "name": "iOS",
-                  "links": [
-                    {
-                      "label": "translate.element.io",
-                      "url": "https://translate.element.io/projects/riot-ios/-/be/",
-                      "type": "translate"
-                    },
-                    {
-                      "label": "App Store",
-                      "url": "https://apps.apple.com/be/app/element-classic/id1083446067",
-                      "type": "download"
-                    }
-                  ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559655/element-cl_oy3vkv.png"
             },
             {
               "id": "element-x",
               "name": "Element X",
               "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781544056/elementxlogo_pbbroo.png",
-              "description": "Свабода зносін на ўласных умовах\n\nДля асобных людзей і суполак - прыватныя зносіны паміж сям'ёй, сябрамі, групамі хобі, клубамі і г.д.\n\nElement X дае вам хуткі, бяспечны і прыватны абмен імгненнымі паведамленнямі і відэазванкі, створаныя на аснове Matrix, адкрытага стандарту для зносін у рэжыме рэальнага часу.\n\n**Неабходна прайсці аўтарызацыю на сайце!**",
+              "description": "Element X — гэта новае пакаленне кліента для дэцэнтралізаванай сеткі Matrix, распрацаванае з акцэнтам на максімальную хуткасць, прадукцыйнасць і зручнасць выкарыстання. Дзякуючы цалкам перапрацаванай архітэктуры на базе Rust, ён забяспечвае амаль імгненную сінхранізацыю, эканомнае спажыванне рэсурсаў і нашмат больш плаўны карыстальніцкі інтэрфейс у параўнанні з класічнай версіяй.\n**Неабходна прайсці аўтарызацыю на сайце!**",
               "platforms": [
                 {
                   "name": "Android",
@@ -742,13 +758,14 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559800/element-x_l9tpor.png"
             },
             {
               "id": "element-call",
               "name": "Element Call",
               "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781554641/element-call-icon-filled-256_qk3axe.webp",
-              "description": "",
+              "description": "Element Calls — гэта дэцэнтралізаваны сэрвіс для відэа і аўдыя выклікаў, пабудаваны на аснове адкрытага пратакола Matrix. Ён забяспечвае абароненую камунікацыю дзякуючы скразному шыфраванню (E2EE) і дазваляе праводзіць бяспечныя анлайн-канферэнцыі без залежнасці ад цэнтралізаваных сервераў.",
               "platforms": [
                 {
                   "name": "Сайт",
@@ -765,13 +782,14 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781560035/element0call_tulcod.png"
             },
             {
               "id": "matrix-authentication-service",
               "name": "Matrix authentication service",
               "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781554849/EX-on-Matrix__blog_banner-1_gcxnen.png",
-              "description": "",
+              "description": "Matrix Authentication Service (MAS) — гэта сэрвіс аўтэнтыфікацыі на аснове стандартаў OAuth 2.0 і OpenID Connect, спецыяльна распрацаваны для экасістэмы Matrix. Ён замяняе традыцыйныя механізмы ўваходу, забяспечваючы больш бяспечнае цэнтралізаванае кіраванне ўліковымі запісамі карыстальнікаў і зручную інтэграцыю з сістэмамі адзінага ўваходу (SSO).",
               "platforms": [
                 {
                   "name": "Сайт",
@@ -785,6 +803,46 @@
                       "label": "Github",
                       "url": "https://github.com/element-hq/matrix-authentication-service",
                       "type": "website"
+                    }
+                  ]
+                }
+              ],
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781560123/matrixserver_awlrpp.png"
+            },
+            {
+              "id": "element-classic-",
+              "name": "Element Classic (устарэлае)",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781559655/element-cl_oy3vkv.png",
+              "description": "Element Classic — гэта традыцыйны кліент для дэцэнтралізаванай камунікацыі ў сетцы Matrix, які забяспечвае поўнафункцыянальны інтэрфейс для абмену паведамленнямі і сумеснай працы. У адрозненне ад новага пакалення хуткіх кліентаў Element X, ён змяшчае максімальны набор правераных часам функцый і пашыраных налад для кіравання шыфраванымі чатамі.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "translate.element.io",
+                      "url": "https://translate.element.io/projects/element-android/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=im.vector.app&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "translate.element.io",
+                      "url": "https://translate.element.io/projects/riot-ios/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/element-classic/id1083446067",
+                      "type": "download"
                     }
                   ]
                 }

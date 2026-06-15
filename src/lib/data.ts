@@ -14,7 +14,7 @@ export function bust() { cache = null }
 
 export async function saveData(data: SiteData) {
   bust()
-  const res = await fetch('/api/save', {
+  const res = await fetch('/api/save/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -26,7 +26,7 @@ export async function uploadFile(file: File, name: string): Promise<string> {
   const fd = new FormData()
   fd.append('file', file)
   fd.append('name', name)
-  const res = await fetch('/api/upload', { method: 'POST', body: fd })
+  const res = await fetch('/api/upload/', { method: 'POST', body: fd })
   const json = await res.json()
   if (!json.ok) throw new Error(json.error)
   return json.url
