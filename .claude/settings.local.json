@@ -11,7 +11,8 @@
       "Skill(run)",
       "Skill(run:*)",
       "Bash(python3 -c ' *)",
-      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\('homepage','no homepage'\\)\\)\")"
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\('homepage','no homepage'\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'{i}: {c[\\\\\"id\\\\\"]} | contributeUrl={c.get\\(\\\\\"contributeUrl\\\\\",\\\\\"None\\\\\"\\)}'\\) for i,c in enumerate\\(d['categories']\\)]\")"
     ]
   }
 }
