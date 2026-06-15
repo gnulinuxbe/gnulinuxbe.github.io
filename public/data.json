@@ -743,6 +743,52 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "element-call",
+              "name": "Element Call",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781554641/element-call-icon-filled-256_qk3axe.webp",
+              "description": "",
+              "platforms": [
+                {
+                  "name": "Сайт",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/element-call",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://call.element.io/",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "matrix-authentication-service",
+              "name": "Matrix authentication service",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781554849/EX-on-Matrix__blog_banner-1_gcxnen.png",
+              "description": "",
+              "platforms": [
+                {
+                  "name": "Сайт",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/matrix-authentication-service",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Github",
+                      "url": "https://github.com/element-hq/matrix-authentication-service",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
