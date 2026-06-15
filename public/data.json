@@ -620,6 +620,131 @@
               ]
             }
           ]
+        },
+        {
+          "id": "element",
+          "name": "Element",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543277/%D0%BC%D0%B5%D1%81%D1%8D%D0%BD%D0%B4%D0%B6%D1%8D%D1%80%D1%8B1_v9h35o.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543277/element1_dtq35x.webp",
+          "category": "месэнджэры",
+          "tags": [
+            "Сацыяльныя сеткі / месэнджэры",
+            "translate.element.io",
+            "localazy"
+          ],
+          "createdAt": "2026-06-15",
+          "updatedAt": "2026-06-15",
+          "description": "",
+          "platforms": [],
+          "apps": [
+            {
+              "id": "element",
+              "name": "Element",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png",
+              "description": "Element Classic — гэта мабільная праграма Element папярэдняга пакалення. Сябры, сям'я і супольнасці павінны выкарыстоўваць бясплатную праграму Element X з адкрытым зыходным кодам, якое хутчэйшае, прасцейшае ў выкарыстанні і больш магутнае. Новыя карыстальнікі арганізацый дзяржаўнага сектара, прадпрыемстваў і прафесійных каманд павінны выкарыстоўваць прыкладанне Element Pro, створанае для працы і арганізацый.",
+              "platforms": [
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/element-web",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Праграму",
+                      "url": "https://element.io/download",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/element-web",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://app.element.io/",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "translate.element.io",
+                      "url": "https://translate.element.io/projects/element-android/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=im.vector.app&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "translate.element.io",
+                      "url": "https://translate.element.io/projects/riot-ios/-/be/",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/element-classic/id1083446067",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "element-x",
+              "name": "Element X",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781544056/elementxlogo_pbbroo.png",
+              "description": "Свабода зносін на ўласных умовах\n\nДля асобных людзей і суполак - прыватныя зносіны паміж сям'ёй, сябрамі, групамі хобі, клубамі і г.д.\n\nElement X дае вам хуткі, бяспечны і прыватны абмен імгненнымі паведамленнямі і відэазванкі, створаныя на аснове Matrix, адкрытага стандарту для зносін у рэжыме рэальнага часу.\n\n**Неабходна прайсці аўтарызацыю на сайце!**",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/element",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=io.element.android.x&hl=be",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "localazy",
+                      "url": "https://localazy.com/p/element",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/us/app/element-x-secure-chat-call/id1631335820",
+                      "type": "download"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
