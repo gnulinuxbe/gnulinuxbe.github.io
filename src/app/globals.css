@@ -29,12 +29,109 @@
   --r:  8px;
   --rl: 14px;
 
+  --header-bg: rgba(11,13,18,.92);
+  --drawer-bg: rgba(11,13,18,.97);
+  --banner-area: #0f111a;
+
   /* JetBrains Mono everywhere — terminal feel */
   --fb: 'JetBrains Mono', monospace;
   --fd: 'Bebas Neue', sans-serif; /* kept only for big display titles */
 }
 
-html{color-scheme:dark}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:   #f0f1f6;
+    --bg1:  #e8e9f2;
+    --bg2:  #e0e2ec;
+    --bg3:  #d4d7e4;
+    --bg4:  #c7cbdb;
+
+    --pink:  #d4144f;
+    --pinka: rgba(212,20,79,.10);
+    --pinkb: rgba(212,20,79,.25);
+    --pinkc: rgba(212,20,79,.06);
+
+    --text: #0c0f1e;
+    --t2:   #3d4566;
+    --t3:   #7e87a8;
+
+    --bd:   rgba(0,0,0,.07);
+    --bd2:  rgba(0,0,0,.13);
+
+    --green: #15803d; --greena: rgba(21,128,61,.13);
+    --amber: #b45309;
+    --blue:  #1d4ed8; --bluea: rgba(29,78,216,.11);
+    --purp:  #6d28d9;
+
+    --header-bg: rgba(240,241,246,.92);
+    --drawer-bg: rgba(240,241,246,.98);
+
+    color-scheme: light;
+  }
+}
+
+/* Manual overrides — come after media query, win by source order */
+html[data-theme="light"] {
+  --bg:   #f0f1f6;
+  --bg1:  #e8e9f2;
+  --bg2:  #e0e2ec;
+  --bg3:  #d4d7e4;
+  --bg4:  #c7cbdb;
+
+  --pink:  #d4144f;
+  --pinka: rgba(212,20,79,.10);
+  --pinkb: rgba(212,20,79,.25);
+  --pinkc: rgba(212,20,79,.06);
+
+  --text: #0c0f1e;
+  --t2:   #3d4566;
+  --t3:   #7e87a8;
+
+  --bd:   rgba(0,0,0,.07);
+  --bd2:  rgba(0,0,0,.13);
+
+  --green: #15803d; --greena: rgba(21,128,61,.13);
+  --amber: #b45309;
+  --blue:  #1d4ed8; --bluea: rgba(29,78,216,.11);
+  --purp:  #6d28d9;
+
+  --header-bg: rgba(240,241,246,.92);
+  --drawer-bg: rgba(240,241,246,.98);
+
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --bg:    #0b0d12;
+  --bg1:   #101318;
+  --bg2:   #161a22;
+  --bg3:   #1c2030;
+  --bg4:   #242840;
+
+  --pink:  #ff2d6b;
+  --pinka: rgba(255,45,107,.15);
+  --pinkb: rgba(255,45,107,.35);
+  --pinkc: rgba(255,45,107,.08);
+
+  --text:  #eef0f8;
+  --t2:    #8892aa;
+  --t3:    #4a5168;
+
+  --bd:    rgba(255,255,255,.06);
+  --bd2:   rgba(255,255,255,.11);
+
+  --green: #22c55e; --greena: rgba(34,197,94,.13);
+  --amber: #f59e0b;
+  --blue:  #60a5fa; --bluea: rgba(96,165,250,.13);
+  --purp:  #a78bfa;
+
+  --header-bg: rgba(11,13,18,.92);
+  --drawer-bg: rgba(11,13,18,.97);
+
+  color-scheme: dark;
+}
+
+html { color-scheme: dark light }
 body{
   font-family:var(--fb);
   background:var(--bg);color:var(--text);
@@ -46,6 +143,15 @@ input,textarea,select{font-family:var(--fb)}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:99px}
+
+/* Banner bottom fade */
+.banner-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--banner-area));
+  pointer-events: none;
+}
 
 /* Cross-document view transitions — Chrome 126+ */
 @view-transition { navigation: auto; }

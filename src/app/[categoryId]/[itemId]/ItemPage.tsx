@@ -114,40 +114,39 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
     <>
       <Header cats={data.categories} activeId={categoryId} crumb={item.name}/>
       {/* ── Banner ── */}
-      <div style={{ position:'relative', width:'100%', height:'clamp(150px,22vw,300px)', overflow:'hidden', background:'var(--bg2)' }}>
+      <div style={{ position:'relative', width:'100%', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)' }}>
         {item.bannerUrl
           ? <img src={item.bannerUrl} alt={item.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center center', display:'block' }}/>
           : (
             <div style={{ width:'100%', height:'100%', position:'relative' }}>
               <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center,rgba(255,45,107,.18) 0%,transparent 65%)' }}/>
               <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:8 }}>
-                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5.5rem)', letterSpacing:5, color:'var(--text)', textAlign:'center', padding:'0 16px' }}>{item.name}</span>
+                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5.5rem)', letterSpacing:5, color:'#eef0f8', textAlign:'center', padding:'0 16px' }}>{item.name}</span>
                 {item.category && <span style={{ fontSize:10, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#fff', background:'var(--pink)', padding:'3px 12px', borderRadius:4 }}>{item.category.toUpperCase()}</span>}
               </div>
             </div>
           )
         }
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'50%', background:'linear-gradient(to bottom,transparent,var(--bg))', pointerEvents:'none' }}/>
+        <div className="banner-fade"/>
       </div>
 
       {/* ── Content ── */}
       <div style={{ maxWidth:760, margin:'0 auto', padding:'0 16px 80px' }}>
 
-        {/* ── Icon + title + meta ── */}
-        <div style={{ display:'flex', alignItems:'flex-end', gap:14, padding:'0 0 16px', flexWrap:'wrap' }}>
+        {/* ── Icon + title ── */}
+        <div style={{ display:'flex', alignItems:'center', gap:14, padding:'18px 0 16px', flexWrap:'wrap' }}>
           {item.iconUrl && (
             <img src={item.iconUrl} alt="" style={{
-              width:64, height:64, borderRadius:16, objectFit:'cover', flexShrink:0,
-              background:'var(--bg2)', border:'2px solid var(--bg)',
-              marginTop:-32, position:'relative', zIndex:2,
+              width:56, height:56, borderRadius:14, objectFit:'cover', flexShrink:0,
+              background:'var(--bg2)', border:'1px solid var(--bd)',
             }}/>
           )}
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:5 }}>
-              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:14, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
-              <h1 style={{ fontSize:17, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
+              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:13, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
+              <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
             </div>
-            <div style={{ display:'flex', flexWrap:'wrap', gap:5, alignItems:'center' }}>
+            <div style={{ display:'flex', flexWrap:'wrap', gap:4, alignItems:'center' }}>
               {item.category && <span style={{ fontSize:10, color:'var(--t2)', fontWeight:500 }}>{item.category}</span>}
               {item.tags.map(t => (
                 <span key={t} style={{ fontSize:9, fontWeight:600, background:'var(--bluea)', color:'var(--blue)', padding:'2px 7px', borderRadius:4 }}>{t}</span>

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { Category } from '@/types'
 
 interface Props {
@@ -17,7 +17,7 @@ export default function Header({ cats, activeId, crumb }: Props) {
       <header style={{
         position:'sticky', top:0, zIndex:100,
         height:52,
-        background:'rgba(11,13,18,.94)',
+        background:'var(--header-bg)',
         backdropFilter:'blur(16px)',
         borderBottom:'1px solid var(--bd)',
         display:'flex', alignItems:'center',
@@ -55,6 +55,7 @@ export default function Header({ cats, activeId, crumb }: Props) {
 
         {/* Right side */}
         <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto', flexShrink:0 }}>
+          <ThemeToggle/>
           {process.env.NEXT_PUBLIC_ENABLE_ADMIN && (
             <a href="/admin" style={{
               display:'flex', alignItems:'center', justifyContent:'center',
@@ -88,7 +89,7 @@ export default function Header({ cats, activeId, crumb }: Props) {
       {open && (
         <div style={{
           position:'fixed', top:52, left:0, right:0, bottom:0,
-          background:'rgba(11,13,18,.97)',
+          background:'var(--drawer-bg)',
           backdropFilter:'blur(16px)',
           zIndex:99,
           overflowY:'auto',
@@ -136,6 +137,49 @@ export default function Header({ cats, activeId, crumb }: Props) {
         }
       `}</style>
     </>
+  )
+}
+
+type ThemeMode = 'auto' | 'light' | 'dark'
+
+function ThemeToggle() {
+  const [mode, setMode] = useState<ThemeMode>('auto')
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as ThemeMode | null
+    if (stored === 'light' || stored === 'dark') setMode(stored)
+    else setMode('auto')
+  }, [])
+
+  const toggle = () => {
+    const next: ThemeMode = mode === 'auto' ? 'light' : mode === 'light' ? 'dark' : 'auto'
+    setMode(next)
+    if (next === 'auto') {
+      localStorage.removeItem('theme')
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      localStorage.setItem('theme', next)
+      document.documentElement.setAttribute('data-theme', next)
+    }
+  }
+
+  const icon = mode === 'light' ? '☀' : mode === 'dark' ? '☾' : '⬤'
+  const title = mode === 'auto' ? 'Аўта (сістэма)' : mode === 'light' ? 'Светлая' : 'Цёмная'
+
+  return (
+    <button onClick={toggle} title={title} style={{
+      display:'flex', alignItems:'center', justifyContent:'center',
+      width:30, height:30, borderRadius:'var(--r)',
+      border:'1px solid var(--bd)', background:'var(--bg2)',
+      color: mode === 'auto' ? 'var(--pink)' : 'var(--t2)',
+      fontSize: mode === 'auto' ? 8 : 14,
+      cursor:'pointer', transition:'all .15s',
+    }}
+    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--text)'}
+    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = mode === 'auto' ? 'var(--pink)' : 'var(--t2)'}
+    >
+      {icon}
+    </button>
   )
 }
 

@@ -92,41 +92,39 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
     <>
       <Header cats={data.categories} activeId={categoryId} crumb={app.name}/>
 
-      {/* Banner: app screenshot or item banner */}
-      <div style={{ position:'relative', width:'100%', height:'clamp(150px,22vw,300px)', overflow:'hidden', background:'var(--bg2)' }}>
+      {/* Banner */}
+      <div style={{ position:'relative', width:'100%', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)' }}>
         {item.bannerUrl
           ? <img src={item.bannerUrl} alt={app.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center', display:'block' }}/>
           : (
             <div style={{ width:'100%', height:'100%', position:'relative' }}>
               <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center,rgba(255,45,107,.18) 0%,transparent 65%)' }}/>
               <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5rem)', letterSpacing:5, color:'var(--text)' }}>{app.name}</span>
+                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5rem)', letterSpacing:5, color:'#eef0f8' }}>{app.name}</span>
               </div>
             </div>
           )
         }
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'50%', background:'linear-gradient(to bottom,transparent,var(--bg))', pointerEvents:'none' }}/>
+        <div className="banner-fade"/>
       </div>
 
       <div style={{ maxWidth:760, margin:'0 auto', padding:'0 16px 80px' }}>
 
         {/* Icon + title + developer badge */}
-        <div style={{ display:'flex', alignItems:'flex-end', gap:14, padding:'0 0 16px', flexWrap:'wrap' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:14, padding:'18px 0 16px', flexWrap:'wrap' }}>
           {app.iconUrl && (
             <img src={app.iconUrl} alt="" style={{
-              width:64, height:64, borderRadius:16, objectFit:'cover', flexShrink:0,
-              background:'var(--bg2)', border:'2px solid var(--bg)',
-              marginTop:-32, position:'relative', zIndex:2,
+              width:56, height:56, borderRadius:14, objectFit:'cover', flexShrink:0,
+              background:'var(--bg2)', border:'1px solid var(--bd)',
             }}/>
           )}
           <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:6 }}>
-              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:14, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
-              <h1 style={{ fontSize:17, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{app.name}</h1>
+            <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:5 }}>
+              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:13, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
+              <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{app.name}</h1>
             </div>
-            {/* Developer badge */}
             <a href={`/${categoryId}/${item.id}`} style={{ display:'inline-flex', alignItems:'center', gap:5, textDecoration:'none' }}>
-              {item.iconUrl && <img src={item.iconUrl} alt="" style={{ width:14, height:14, borderRadius:3, objectFit:'cover', flexShrink:0 }}/>}
+              {item.iconUrl && <img src={item.iconUrl} alt="" style={{ width:13, height:13, borderRadius:3, objectFit:'cover', flexShrink:0 }}/>}
               <span style={{ fontSize:10, fontWeight:600, color:'var(--t3)' }}>by</span>
               <span style={{ fontSize:10, fontWeight:700, color:'var(--pink)' }}>{item.name}</span>
             </a>
