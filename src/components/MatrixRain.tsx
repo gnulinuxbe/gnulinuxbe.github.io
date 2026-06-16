@@ -39,7 +39,7 @@ export default function MatrixRain({ opacity = 0.35 }: { opacity?: number }) {
           lastTheme = theme
         }
 
-        ctx.fillStyle = isLight ? 'rgba(240,241,246,0.09)' : 'rgba(10,10,10,0.05)'
+        ctx.fillStyle = isLight ? 'rgba(243,242,240,0.09)' : 'rgba(10,10,10,0.05)'
         ctx.fillRect(0,0,cv.width,cv.height)
         ctx.fillStyle = isLight ? 'rgba(212,20,79,0.14)' : 'rgba(255,45,107,0.18)'
         ctx.font = `${fs}px monospace`

@@ -40,20 +40,20 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg:   #f0f1f6;
-    --bg1:  #e8e9f2;
-    --bg2:  #e0e2ec;
-    --bg3:  #d4d7e4;
-    --bg4:  #c7cbdb;
+    --bg:   #f3f2f0;
+    --bg1:  #eae8e5;
+    --bg2:  #e1deda;
+    --bg3:  #d5d1cc;
+    --bg4:  #c7c3bd;
 
     --pink:  #d4144f;
     --pinka: rgba(212,20,79,.10);
     --pinkb: rgba(212,20,79,.25);
     --pinkc: rgba(212,20,79,.06);
 
-    --text: #0c0f1e;
-    --t2:   #3d4566;
-    --t3:   #7e87a8;
+    --text: #1a1713;
+    --t2:   #50483f;
+    --t3:   #908880;
 
     --bd:   rgba(0,0,0,.07);
     --bd2:  rgba(0,0,0,.13);
@@ -63,8 +63,8 @@
     --blue:  #1d4ed8; --bluea: rgba(29,78,216,.11);
     --purp:  #6d28d9;
 
-    --header-bg: rgba(240,241,246,.92);
-    --drawer-bg: rgba(240,241,246,.98);
+    --header-bg: rgba(243,242,240,.92);
+    --drawer-bg: rgba(243,242,240,.98);
 
     color-scheme: light;
   }
@@ -72,20 +72,20 @@
 
 /* Manual overrides — come after media query, win by source order */
 html[data-theme="light"] {
-  --bg:   #f0f1f6;
-  --bg1:  #e8e9f2;
-  --bg2:  #e0e2ec;
-  --bg3:  #d4d7e4;
-  --bg4:  #c7cbdb;
+  --bg:   #f3f2f0;
+  --bg1:  #eae8e5;
+  --bg2:  #e1deda;
+  --bg3:  #d5d1cc;
+  --bg4:  #c7c3bd;
 
   --pink:  #d4144f;
   --pinka: rgba(212,20,79,.10);
   --pinkb: rgba(212,20,79,.25);
   --pinkc: rgba(212,20,79,.06);
 
-  --text: #0c0f1e;
-  --t2:   #3d4566;
-  --t3:   #7e87a8;
+  --text: #1a1713;
+  --t2:   #50483f;
+  --t3:   #908880;
 
   --bd:   rgba(0,0,0,.07);
   --bd2:  rgba(0,0,0,.13);
@@ -95,8 +95,8 @@ html[data-theme="light"] {
   --blue:  #1d4ed8; --bluea: rgba(29,78,216,.11);
   --purp:  #6d28d9;
 
-  --header-bg: rgba(240,241,246,.92);
-  --drawer-bg: rgba(240,241,246,.98);
+  --header-bg: rgba(243,242,240,.92);
+  --drawer-bg: rgba(243,242,240,.98);
 
   color-scheme: light;
 }
