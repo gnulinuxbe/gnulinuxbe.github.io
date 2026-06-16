@@ -41,7 +41,15 @@
       "Bash(xargs ps -p)",
       "Bash(ps -p 4132 -o pid,command)",
       "Bash(kill 4132)",
-      "Bash(npm run dev > /tmp/nextjs-dev.log 2>&1 & *)"
+      "Bash(npm run dev > /tmp/nextjs-dev.log 2>&1 & *)",
+      "Bash(curl -s \"https://hosted.weblate.org/api/projects/antennapod/statistics/?format=json\")",
+      "Bash(curl -s \"https://hosted.weblate.org/api/projects/fluffychat/statistics/?format=json\")",
+      "Bash(curl -s \"https://hosted.weblate.org/api/projects/tor/statistics/?format=json\")",
+      "Bash(curl -s \"https://hosted.weblate.org/api/projects/antennapod/languages/?format=json\")",
+      "Bash(curl -s \"https://hosted.weblate.org/api/translations/antennapod/antennapod/be/?format=json\")",
+      "Bash(curl -s -A Mozilla/5.0 -w '\\\\n%{http_code}' https://hosted.weblate.org/api/projects/antennapod/languages/)",
+      "Bash(curl -s -A Mozilla/5.0 -w '\\\\n%{http_code}' https://translate.element.io/api/projects/element-android/languages/)",
+      "Bash(python3)"
     ],
     "additionalDirectories": [
       "/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]",

@@ -849,6 +849,106 @@
               ]
             }
           ]
+        },
+        {
+          "id": "gnome",
+          "name": "Gnome",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781604954/GNOMEB_gzcw8j.png",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781604860/327198577_930588351289828_8886057142603245215_n_uylvhw.jpg",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781604976/gnomescr_wkd6sh.png",
+          "category": "Графічны інтэрфейс",
+          "tags": [
+            "Графічны інтэрфейс",
+            "l10n.gnome.org"
+          ],
+          "createdAt": "2026-06-16",
+          "updatedAt": "2026-06-16",
+          "description": "GNOME — гэта папулярнае і цалкам свабоднае асяроддзе працоўнага стала для аперацыйных сістэм на базе Linux і UNIX. Яно вылучаецца сучасным, мінімалістычным інтэрфейсам і акцэнтам на прадуктыўнасць, прапаноўваючы карыстальнікам зручную, інавацыйную і бяспечную прастору без лішніх адцягненняў.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "l10n.gnome.org",
+                  "url": "https://l10n.gnome.org/teams/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://www.gnome.org/",
+                  "type": "website"
+                },
+                {
+                  "label": "Telegram",
+                  "url": "https://t.me/gnome_bel",
+                  "type": "chat"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cosmic-de",
+          "name": "COSMIC DE",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781605786/COSMICB_qpoyxw.png",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781605786/cosmiclogo_kutz8g.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781605786/cosmicscr_xz7en5.png",
+          "category": "Графічны інтэрфейс",
+          "tags": [
+            "Графічны інтэрфейс",
+            "weblate"
+          ],
+          "createdAt": "2026-06-16",
+          "updatedAt": "2026-06-16",
+          "description": "COSMIC DE — гэта новае незалежнае асяроддзе працоўнага стала ад распрацоўшчыкаў System76, цалкам напісанае на мове Rust. Праект лакалізацыі ахоплівае ўсе ключавыя кампаненты сістэмы: ад аконнага менеджара і панэляў да фірмовай крамы і базавых утыліт, якія ўтвараюць хуткі, гнуткі і сучасны карыстальніцкі інтэрфейс для Linux.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "weblate",
+                  "url": "https://hosted.weblate.org/projects/pop-os/-/be/#translation",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://system76.com/cosmic",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "freetube",
+          "name": "FreeTube",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781606095/FreeTube_fiva82.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781606167/freetubelogo_tj63zf.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781606219/FREETUBESCR_tlq66v.png",
+          "category": "Прыватны кліент для YouTube",
+          "tags": [
+            "Медыя"
+          ],
+          "createdAt": "2026-06-16",
+          "updatedAt": "2026-06-16",
+          "description": "FreeTube — гэта прыватны кліент для YouTube з адкрытым зыходным кодам, распрацаваны з акцэнтам на канфідэнцыяльнасць карыстальнікаў. Ён дазваляе глядзець відэа без рэкламы і сачэння, захоўваючы ўсе падпіскі і гісторыю праглядаў выключна лакальна на вашай прыладзе, без неабходнасці ствараць або выкарыстоўваць уліковы запіс Google.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "weblate",
+                  "url": "https://hosted.weblate.org/projects/free-tube/-/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Праграму",
+                  "url": "https://freetubeapp.io/#download",
+                  "type": "download"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
