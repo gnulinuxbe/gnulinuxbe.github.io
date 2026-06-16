@@ -20,11 +20,18 @@ export default function MatrixRain({ opacity = 0.35 }: { opacity?: number }) {
     const init = () => { drops.length=0; for(let i=0;i<Math.floor(cv.width/fs);i++) drops.push(Math.random()*-50) }
     init(); window.addEventListener('resize', init)
 
-    let lastTheme = document.documentElement.getAttribute('data-theme') ?? 'dark'
+    const getTheme = () => {
+      const attr = document.documentElement.getAttribute('data-theme')
+      if (attr === 'light') return 'light'
+      if (attr === 'dark') return 'dark'
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    }
+
+    let lastTheme = getTheme()
 
     const tick = () => {
       if (!paused) {
-        const theme = document.documentElement.getAttribute('data-theme') ?? 'dark'
+        const theme = getTheme()
         const isLight = theme === 'light'
 
         if (theme !== lastTheme) {
@@ -32,7 +39,7 @@ export default function MatrixRain({ opacity = 0.35 }: { opacity?: number }) {
           lastTheme = theme
         }
 
-        ctx.fillStyle = isLight ? 'rgba(238,240,248,0.09)' : 'rgba(10,10,10,0.05)'
+        ctx.fillStyle = isLight ? 'rgba(240,241,246,0.09)' : 'rgba(10,10,10,0.05)'
         ctx.fillRect(0,0,cv.width,cv.height)
         ctx.fillStyle = isLight ? 'rgba(212,20,79,0.14)' : 'rgba(255,45,107,0.18)'
         ctx.font = `${fs}px monospace`
