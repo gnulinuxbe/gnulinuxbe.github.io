@@ -49,7 +49,8 @@
       "Bash(curl -s \"https://hosted.weblate.org/api/translations/antennapod/antennapod/be/?format=json\")",
       "Bash(curl -s -A Mozilla/5.0 -w '\\\\n%{http_code}' https://hosted.weblate.org/api/projects/antennapod/languages/)",
       "Bash(curl -s -A Mozilla/5.0 -w '\\\\n%{http_code}' https://translate.element.io/api/projects/element-android/languages/)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(node /Users/maks/Desktop/gnulinuxbe/scripts/generate-sitemap.mjs)"
     ],
     "additionalDirectories": [
       "/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]",
