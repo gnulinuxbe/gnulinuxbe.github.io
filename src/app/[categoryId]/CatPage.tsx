@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Item, AppEntry } from '@/types'
 import { getLinkStyle } from '@/lib/platforms'
+import { fetchProgress, getItemProgress, getAppProgress, avgPct, pctColor, type ProgressData } from '@/lib/progress'
 import Header from '@/components/Header'
 import MatrixRain from '@/components/MatrixRain'
 import dataJson from '../../../public/data.json'
@@ -37,7 +38,10 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
   const [search, setSearch] = useState('')
   const [fTag, setFTag] = useState(ALL)
   const [fDev, setFDev] = useState('')
+  const [progress, setProgress] = useState<ProgressData | null>(null)
   const searchRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => { fetchProgress().then(setProgress) }, [])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -173,8 +177,8 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
           {isAppStore && entries ? (
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(130px,1fr))',gap:10}}>
               {entries.map((entry) => {
-                if (entry.kind === 'app')  return <AppCard  key={`${entry.item.id}-${entry.app.id}`} item={entry.item} app={entry.app} catId={categoryId} onDevClick={setFDev}/>
-                return <ItemCard key={entry.item.id} item={entry.item} catId={categoryId}/>
+                if (entry.kind === 'app')  return <AppCard  key={`${entry.item.id}-${entry.app.id}`} item={entry.item} app={entry.app} catId={categoryId} onDevClick={setFDev} progress={progress}/>
+                return <ItemCard key={entry.item.id} item={entry.item} catId={categoryId} progress={progress}/>
               })}
               {entries.length === 0 && (
                 <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
@@ -182,7 +186,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
             </div>
           ) : (
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:10}}>
-              {filtered.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp}/>)}
+              {filtered.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp} progress={progress}/>)}
               {filtered.length === 0 && (
                 <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
               )}
@@ -195,30 +199,8 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
   )
 }
 
-// ── Group header (full-width row) ─────────────────────────────────────────────
-function GroupHeader({ item, catId }: { item: Item; catId: string }) {
-  return (
-    <div style={{
-      gridColumn: '1 / -1',
-      display: 'flex', alignItems: 'center', gap: 8,
-      padding: '14px 2px 6px',
-    }}>
-      {item.iconUrl && (
-        <img src={item.iconUrl} alt="" style={{ width:18, height:18, borderRadius:5, objectFit:'cover', flexShrink:0 }}/>
-      )}
-      <a href={`/${catId}/${item.id}`} style={{ fontSize:12, fontWeight:700, color:'var(--text)', textDecoration:'none', flexShrink:0 }}>
-        {item.name}
-      </a>
-      <span style={{ fontSize:10, color:'var(--t3)', flexShrink:0 }}>
-        {item.apps!.length} {item.apps!.length === 1 ? 'дадатак' : 'дадаткі'}
-      </span>
-      <div style={{ flex:1, height:1, background:'var(--bd)' }}/>
-    </div>
-  )
-}
-
 // ── App card (one per AppEntry) — App Store style ────────────────────────────
-function AppCard({ item, app, catId, onDevClick }: { item: Item; app: AppEntry; catId: string; onDevClick: (id: string) => void }) {
+function AppCard({ item, app, catId, onDevClick, progress }: { item: Item; app: AppEntry; catId: string; onDevClick: (id: string) => void; progress: ProgressData | null }) {
   const href = `/${catId}/${item.id}/${app.id}`
   const firstLink = app.platforms[0]?.links[0]
   const platNames = Array.from(new Set(app.platforms.map(p => p.name)))
@@ -229,9 +211,9 @@ function AppCard({ item, app, catId, onDevClick }: { item: Item; app: AppEntry; 
   return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
-      <div style={{padding:'16px 12px 12px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:8}}>
+      <div style={{padding:'12px 10px 10px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
         <a href={href} style={{textDecoration:'none',flexShrink:0}}>
-          <div style={{width:64,height:64,borderRadius:16,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+          <div style={{width:56,height:56,borderRadius:14,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
             {app.iconUrl
               ? <img src={app.iconUrl} alt={app.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
               : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{app.name.slice(0,2).toUpperCase()}</span>
@@ -255,6 +237,7 @@ function AppCard({ item, app, catId, onDevClick }: { item: Item; app: AppEntry; 
           ))}
           {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
         </div>
+        <PctBadge pct={progress ? avgPct(getAppProgress(app, progress)) : null}/>
         {firstLink && <CTA link={firstLink}/>}
       </div>
     </div>
@@ -276,7 +259,7 @@ function CTA({ link }: { link: { url: string; type: string; label: string } }) {
 }
 
 // ── Solo item card (no apps) ─────────────────────────────────────────────────
-function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matchedApp?: string }) {
+function ItemCard({ item, catId, matchedApp, progress }: { item: Item; catId: string; matchedApp?: string; progress: ProgressData | null }) {
   const href = matchedApp
     ? `/${catId}/${item.id}?app=${encodeURIComponent(matchedApp)}`
     : `/${catId}/${item.id}`
@@ -305,9 +288,9 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
   if (APP_STORE_CATS.includes(catId)) return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
       onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
-      <div style={{padding:'16px 12px 12px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:8}}>
+      <div style={{padding:'12px 10px 10px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
         <a href={href} style={{textDecoration:'none',flexShrink:0}}>
-          <div style={{width:64,height:64,borderRadius:16,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+          <div style={{width:56,height:56,borderRadius:14,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
             {item.iconUrl
               ? <img src={item.iconUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
               : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{item.name.slice(0,2).toUpperCase()}</span>
@@ -316,12 +299,10 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
         </a>
         <div style={{minWidth:0,width:'100%'}}>
           <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
-          {matchedApp
-            ? <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
-            : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
-          }
+          {matchedApp && <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>}
         </div>
         <PlatChips/>
+        <PctBadge pct={progress ? avgPct(getItemProgress(item, progress)) : null}/>
         {firstLink && <CTA link={firstLink}/>}
       </div>
     </div>
@@ -349,15 +330,37 @@ function ItemCard({ item, catId, matchedApp }: { item: Item; catId: string; matc
           </div>
           <div style={{flex:1,minWidth:0}}>
             <a href={href} style={{fontSize:11,fontWeight:600,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
-            {matchedApp
-              ? <span style={{fontSize:9,color:'var(--pink)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>
-              : item.category && <span style={{fontSize:9,color:'var(--t3)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.category}</span>
-            }
+            {matchedApp && <span style={{fontSize:9,color:'var(--pink)',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>}
           </div>
         </div>
+        <PctBadge pct={progress ? avgPct(getItemProgress(item, progress)) : null}/>
         <PlatChips/>
         {firstLink && <div style={{marginTop:8}}><CTA link={firstLink}/></div>}
       </div>
+    </div>
+  )
+}
+
+// ── Translation % badge ──────────────────────────────────────────────────────
+// Always renders a fixed-height slot so cards stay vertically aligned
+function PctBadge({ pct }: { pct: number | null }) {
+  return (
+    <div style={{ minHeight: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {pct !== null && (() => {
+        const color = pctColor(pct)
+        return (
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 4,
+            background: `${color}18`, border: `1px solid ${color}40`,
+            borderRadius: 5, padding: '2px 6px',
+          }}>
+            <div style={{ width: 28, height: 3, borderRadius: 2, background: `${color}30`, overflow: 'hidden', flexShrink: 0 }}>
+              <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 2 }}/>
+            </div>
+            <span style={{ fontSize: 9, fontWeight: 800, color, letterSpacing: .3 }}>{pct}%</span>
+          </div>
+        )
+      })()}
     </div>
   )
 }

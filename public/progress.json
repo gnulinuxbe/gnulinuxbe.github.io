@@ -1,0 +1,161 @@
+{
+  "updated": "2026-06-20T18:45:15.383453+00:00",
+  "language": "be",
+  "crowdin": {
+    "ente-photos-web": {
+      "pct": 12,
+      "pct_approved": 0,
+      "words_translated": 451,
+      "words_total": 3666
+    },
+    "bitwarden-web": {
+      "pct": 45,
+      "pct_approved": 0,
+      "words_translated": 10822,
+      "words_total": 23820
+    },
+    "bitwarden-desktop": {
+      "pct": 38,
+      "pct_approved": 0,
+      "words_translated": 3012,
+      "words_total": 7916
+    },
+    "joinmastodon": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 2369,
+      "words_total": 2369
+    },
+    "threema-android": {
+      "pct": 100,
+      "pct_approved": 95,
+      "words_translated": 11117,
+      "words_total": 11117
+    },
+    "ente-photos-app": {
+      "pct": 66,
+      "pct_approved": 0,
+      "words_translated": 5939,
+      "words_total": 8927
+    },
+    "mastodon": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 25943,
+      "words_total": 25943
+    },
+    "ente-authenticator-app": {
+      "pct": 98,
+      "pct_approved": 0,
+      "words_translated": 2573,
+      "words_total": 2621
+    },
+    "ente-locker": {
+      "_error": "be not in project"
+    },
+    "mastodon-for-android": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 4157,
+      "words_total": 4157
+    },
+    "bitwarden-browser": {
+      "pct": 38,
+      "pct_approved": 0,
+      "words_translated": 3928,
+      "words_total": 10130
+    },
+    "threema-ios": {
+      "pct": 45,
+      "pct_approved": 17,
+      "words_translated": 5155,
+      "words_total": 11375
+    },
+    "bitwarden-mobile": {
+      "pct": 29,
+      "pct_approved": 0,
+      "words_translated": 3186,
+      "words_total": 10760
+    },
+    "mastodon-for-ios": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 3941,
+      "words_total": 3941
+    },
+    "ublock": {
+      "pct": 97,
+      "pct_approved": 0,
+      "words_translated": 2457,
+      "words_total": 2529
+    }
+  },
+  "weblate": {
+    "antennapod": {
+      "pct": 2.5,
+      "words_translated": 21,
+      "words_total": 839
+    },
+    "fluffychat": {
+      "pct": 93.1,
+      "words_translated": 739,
+      "words_total": 794
+    },
+    "tor/tpo-web": {
+      "pct": 100.0,
+      "words_translated": 547,
+      "words_total": 547
+    },
+    "tor/community-portal": {
+      "pct": 13.1,
+      "words_translated": 431,
+      "words_total": 3287
+    },
+    "tor/new-support-portal": {
+      "pct": 48.8,
+      "words_translated": 1520,
+      "words_total": 3110
+    },
+    "tor": {
+      "pct": 48.6,
+      "words_translated": 4233,
+      "words_total": 8704
+    },
+    "tor/tor-vpn": {
+      "pct": 95.0,
+      "words_translated": 190,
+      "words_total": 200
+    },
+    "tor/tor-browser": {
+      "_error": "HTTP 404"
+    },
+    "tor/tails-gui": {
+      "pct": 100.0,
+      "words_translated": 730,
+      "words_total": 730
+    },
+    "element:element-android": {
+      "_error": "components list: HTTP 503"
+    },
+    "element:riot-ios": {
+      "_error": "components list: HTTP 503"
+    },
+    "pop-os": {
+      "pct": 76.0,
+      "words_translated": 978,
+      "words_total": 1287
+    },
+    "free-tube": {
+      "pct": 93.7,
+      "words_translated": 912,
+      "words_total": 973
+    }
+  },
+  "github": {
+    "duckduckgo": {
+      "pct": 100.0,
+      "words_translated": 3597,
+      "words_total": 3597
+    }
+  }
+}

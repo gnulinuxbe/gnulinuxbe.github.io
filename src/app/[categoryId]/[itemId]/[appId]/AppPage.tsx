@@ -1,8 +1,9 @@
 'use client'
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Platform, AppEntry } from '@/types'
 import { getLinkStyle, formatDate } from '@/lib/platforms'
+import { fetchProgress, getAppProgress, avgPct, pctColor, type ProgressData, type ItemProgressEntry } from '@/lib/progress'
 import Header from '@/components/Header'
 import dataJson from '../../../../../public/data.json'
 
@@ -84,6 +85,9 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
   const item = cat?.items.find(i => i.id === itemId)
   const app  = item?.apps?.find(a => a.id === appId)
 
+  const [progress, setProgress] = useState<ProgressData | null>(null)
+  useEffect(() => { fetchProgress().then(setProgress) }, [])
+
   if (!cat || !item || !app) return <Msg>Не знойдзена</Msg>
 
   const siblings = (item.apps ?? []).filter(a => a.id !== appId)
@@ -145,6 +149,41 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
             <PlatformLinks platforms={app.platforms}/>
           </div>
         )}
+
+        {/* Translation progress */}
+        {progress && (() => {
+          const entries = getAppProgress(app, progress)
+          if (!entries.length) return null
+          const pct = avgPct(entries)
+          if (pct === null) return null
+          const color = pctColor(pct)
+          return (
+            <div style={{ marginBottom:24, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
+              <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom: entries.length > 1 ? 12 : 8 }}>
+                <span style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', flex:1 }}>
+                  # прагрэс перакладу (be)
+                </span>
+                <span style={{ fontSize:13, fontWeight:800, color }}>{pct}%</span>
+              </div>
+              <div style={{ height:4, borderRadius:2, background:`${color}20`, overflow:'hidden' }}>
+                <div style={{ width:`${pct}%`, height:'100%', background:color, borderRadius:2 }}/>
+              </div>
+              {entries.length > 1 && (
+                <div style={{ marginTop:10, display:'flex', flexDirection:'column', gap:4 }}>
+                  {entries.map(e => (
+                    <div key={e.key} style={{ display:'flex', alignItems:'center', gap:8 }}>
+                      <span style={{ fontSize:10, color:'var(--t3)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{e.key}</span>
+                      <span style={{ fontSize:10, fontWeight:700, color:pctColor(e.pct), flexShrink:0 }}>{Math.round(e.pct)}%</span>
+                      <div style={{ width:60, height:3, borderRadius:2, background:`${pctColor(e.pct)}20`, overflow:'hidden', flexShrink:0 }}>
+                        <div style={{ width:`${e.pct}%`, height:'100%', background:pctColor(e.pct) }}/>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })()}
 
         {/* Screenshot */}
         {app.screenshotUrl && (

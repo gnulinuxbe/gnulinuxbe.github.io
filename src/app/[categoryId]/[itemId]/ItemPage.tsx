@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import type { SiteData, Platform, AppEntry } from '@/types'
 import { getLinkStyle, formatDate } from '@/lib/platforms'
+import { fetchProgress, getItemProgress, getAppProgress, avgPct, pctColor, type ProgressData, type ItemProgressEntry } from '@/lib/progress'
 import Header from '@/components/Header'
 import dataJson from '../../../../public/data.json'
 
@@ -93,9 +94,12 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId, itemId } = useParams() as { categoryId: string; itemId: string; appId?: string }
   const data = (initialData ?? STATIC_DATA) as SiteData
   const [appTab, setAppTab] = useState(0)
+  const [progress, setProgress] = useState<ProgressData | null>(null)
 
   const cat  = data.categories.find(c => c.id === categoryId)
   const item = cat?.items.find(i => i.id === itemId)
+
+  useEffect(() => { fetchProgress().then(setProgress) }, [])
 
   useEffect(() => {
     if (!item?.apps) return
@@ -122,7 +126,6 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
               <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center,rgba(255,45,107,.18) 0%,transparent 65%)' }}/>
               <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:8 }}>
                 <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5.5rem)', letterSpacing:5, color:'#eef0f8', textAlign:'center', padding:'0 16px' }}>{item.name}</span>
-                {item.category && <span style={{ fontSize:10, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#fff', background:'var(--pink)', padding:'3px 12px', borderRadius:4 }}>{item.category.toUpperCase()}</span>}
               </div>
             </div>
           )
@@ -147,7 +150,6 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
               <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
             </div>
             <div style={{ display:'flex', flexWrap:'wrap', gap:4, alignItems:'center' }}>
-              {item.category && <span style={{ fontSize:10, color:'var(--t2)', fontWeight:500 }}>{item.category}</span>}
               {item.tags.map(t => (
                 <span key={t} style={{ fontSize:9, fontWeight:600, background:'var(--bluea)', color:'var(--blue)', padding:'2px 7px', borderRadius:4 }}>{t}</span>
               ))}
@@ -220,6 +222,9 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
           </>
         )}
 
+        {/* ── Translation progress ── */}
+        <TranslationProgress item={item} progress={progress}/>
+
         {/* ── Screenshot ── */}
         {item.screenshotUrl && !isGrouped && (
           <div style={{ marginBottom:20 }}>
@@ -256,6 +261,96 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
         .md code{background:var(--bg3);color:var(--purp);padding:1px 6px;border-radius:4px;font-size:11px}
       `}</style>
     </>
+  )
+}
+
+const PLATFORM_LABEL: Record<string, string> = {
+  crowdin: 'Crowdin', weblate: 'Weblate', github: 'GitHub',
+}
+
+function ProgressBar({ entries, label }: { entries: ItemProgressEntry[]; label?: string }) {
+  const total = avgPct(entries)
+  if (total === null) return null
+  const color = pctColor(total)
+  return (
+    <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+      {/* Totals row */}
+      <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+        {label && (
+          <span style={{ fontSize:10, color:'var(--t2)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+            {label}
+          </span>
+        )}
+        <div style={{ ...(label ? { width:40, flexShrink:0 } : { flex:1 }), height: label ? 3 : 4, borderRadius:3, background:'var(--bg3)', overflow:'hidden' }}>
+          <div style={{ width:`${total}%`, height:'100%', background:color, borderRadius:3, transition:'width .5s ease' }}/>
+        </div>
+        {label && <span style={{ fontSize:10, fontWeight:800, color, flexShrink:0, minWidth:32, textAlign:'right' }}>{total}%</span>}
+      </div>
+      {/* Per-component detail (only if multiple) */}
+      {!label && entries.length > 1 && (
+        <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
+          {entries.map(e => (
+            <div key={e.key} style={{ display:'flex', alignItems:'center', gap:8 }}>
+              <span style={{ fontSize:9, fontWeight:700, color:'var(--t3)', background:'var(--bg3)', borderRadius:4, padding:'1px 6px', flexShrink:0, whiteSpace:'nowrap' }}>
+                {PLATFORM_LABEL[e.platform] ?? e.platform}
+              </span>
+              <span style={{ fontSize:10, color:'var(--t2)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                {e.key}
+              </span>
+              <div style={{ width:40, height:3, borderRadius:2, background:'var(--bg3)', overflow:'hidden', flexShrink:0 }}>
+                <div style={{ width:`${e.pct}%`, height:'100%', background:pctColor(e.pct), borderRadius:2 }}/>
+              </div>
+              <span style={{ fontSize:10, fontWeight:700, color:pctColor(e.pct), flexShrink:0, minWidth:32, textAlign:'right' }}>{e.pct}%</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function TranslationProgress({ item, progress }: { item: SiteData['categories'][0]['items'][0]; progress: ProgressData | null }) {
+  if (!progress) return null
+
+  const isGrouped = !!(item.apps && item.apps.length > 0)
+
+  // For grouped items: show per-app breakdown
+  if (isGrouped && item.apps) {
+    const appRows = item.apps
+      .map(app => ({ app, entries: getAppProgress(app, progress) }))
+      .filter(r => r.entries.length > 0)
+    if (!appRows.length) return null
+
+    return (
+      <div style={{ marginBottom:20, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
+        <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:12 }}>
+          # прагрэс перакладу (be)
+        </div>
+        <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+          {appRows.map(({ app, entries }) => (
+            <ProgressBar key={app.id} entries={entries} label={app.name}/>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  // For simple items: show component breakdown
+  const entries = getItemProgress(item, progress)
+  if (!entries.length) return null
+  const pct = avgPct(entries)
+  const color = pct !== null ? pctColor(pct) : 'var(--t3)'
+
+  return (
+    <div style={{ marginBottom:20, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:8 }}>
+        <span style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', flex:1 }}>
+          # прагрэс перакладу (be)
+        </span>
+        {pct !== null && <span style={{ fontSize:13, fontWeight:800, color }}>{pct}%</span>}
+      </div>
+      <ProgressBar entries={entries}/>
+    </div>
   )
 }
 

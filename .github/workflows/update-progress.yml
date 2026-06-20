@@ -1,0 +1,32 @@
+name: Update translation progress
+
+on:
+  schedule:
+    - cron: '0 6,18 * * *'   # twice a day: 06:00 and 18:00 UTC
+  workflow_dispatch:           # manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch translation stats
+        env:
+          CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
+          PROTON_CROWDIN_TOKEN: ${{ secrets.PROTON_CROWDIN_TOKEN }}
+          WEBLATE_TOKEN: ${{ secrets.WEBLATE_TOKEN }}
+          LOCALAZY_TOKEN: ${{ secrets.LOCALAZY_TOKEN }}
+          TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+        run: python3 scripts/fetch-progress.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/progress.json
+          git diff --staged --quiet || git commit -m "chore: update translation progress [skip ci]"
+          git push
