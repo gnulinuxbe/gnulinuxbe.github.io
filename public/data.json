@@ -949,6 +949,53 @@
               ]
             }
           ]
+        },
+        {
+          "id": "threema",
+          "name": "Threema",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781980654/THREEMA_x1xlcp.png",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781980501/unnamed_d9xmlv.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781980658/threemascr_p6k8wh.png",
+          "category": "peraklady",
+          "tags": [
+            "Сацыяльныя сеткі / месэнджэры",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-20",
+          "updatedAt": "2026-06-20",
+          "description": "Threema — гэта абаронены швейцарскі месенджар са скразным шыфраваннем, які робіць моцны акцэнт на максімальнай канфідэнцыяльнасці і бяспецы карыстальнікаў. Ён дазваляе абменьвацца паведамленнямі і званкамі цалкам ананімна, паколькі для стварэння ўліковага запісу не патрабуецца прывязваць нумар тэлефона або адрас электроннай пошты.\n\n**Каб атрымаць доступ напішыце на пошту support@threema.ch**",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/threema-android",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=ch.threema.app&hl=en-US",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/threema-ios",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/us/app/threema-the-secure-messenger/id578665578",
+                  "type": "download"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
