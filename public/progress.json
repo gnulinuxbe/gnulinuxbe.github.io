@@ -1,21 +1,12 @@
 {
-  "updated": "2026-06-21T09:49:12.306984+00:00",
+  "updated": "2026-06-21T19:29:52.223252+00:00",
   "language": "be",
   "crowdin": {
-    "mastodon-for-android": {
-      "pct": 100,
+    "ente-photos-app": {
+      "pct": 66,
       "pct_approved": 0,
-      "words_translated": 4157,
-      "words_total": 4157
-    },
-    "ente-locker": {
-      "_error": "be not in project"
-    },
-    "mastodon-for-ios": {
-      "pct": 100,
-      "pct_approved": 0,
-      "words_translated": 3941,
-      "words_total": 3941
+      "words_translated": 5939,
+      "words_total": 8927
     },
     "mastodon": {
       "pct": 100,
@@ -29,23 +20,11 @@
       "words_translated": 2369,
       "words_total": 2369
     },
-    "bitwarden-mobile": {
-      "pct": 29,
+    "mastodon-for-android": {
+      "pct": 100,
       "pct_approved": 0,
-      "words_translated": 3186,
-      "words_total": 10760
-    },
-    "ublock": {
-      "pct": 97,
-      "pct_approved": 0,
-      "words_translated": 2457,
-      "words_total": 2529
-    },
-    "bitwarden-web": {
-      "pct": 45,
-      "pct_approved": 0,
-      "words_translated": 10822,
-      "words_total": 23820
+      "words_translated": 4157,
+      "words_total": 4157
     },
     "ente-photos-web": {
       "pct": 12,
@@ -53,17 +32,44 @@
       "words_translated": 451,
       "words_total": 3666
     },
-    "ente-photos-app": {
-      "pct": 66,
+    "ente-locker": {
+      "_error": "be not in project"
+    },
+    "bitwarden-mobile": {
+      "pct": 29,
       "pct_approved": 0,
-      "words_translated": 5939,
-      "words_total": 8927
+      "words_translated": 3186,
+      "words_total": 10760
+    },
+    "mastodon-for-ios": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 3941,
+      "words_total": 3941
     },
     "threema-android": {
       "pct": 100,
       "pct_approved": 95,
       "words_translated": 11117,
       "words_total": 11117
+    },
+    "threema-ios": {
+      "pct": 45,
+      "pct_approved": 17,
+      "words_translated": 5155,
+      "words_total": 11375
+    },
+    "ente-authenticator-app": {
+      "pct": 98,
+      "pct_approved": 0,
+      "words_translated": 2573,
+      "words_total": 2621
+    },
+    "bitwarden-web": {
+      "pct": 45,
+      "pct_approved": 0,
+      "words_translated": 10822,
+      "words_total": 23820
     },
     "bitwarden-desktop": {
       "pct": 38,
@@ -77,17 +83,11 @@
       "words_translated": 3928,
       "words_total": 10130
     },
-    "threema-ios": {
-      "pct": 45,
-      "pct_approved": 17,
-      "words_translated": 5155,
-      "words_total": 11375
-    },
-    "ente-authenticator-app": {
-      "pct": 98,
+    "ublock": {
+      "pct": 97,
       "pct_approved": 0,
-      "words_translated": 2573,
-      "words_total": 2621
+      "words_translated": 2457,
+      "words_total": 2529
     }
   },
   "weblate": {
