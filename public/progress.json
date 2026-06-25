@@ -1,36 +1,18 @@
 {
-  "updated": "2026-06-24T19:46:06.580201+00:00",
+  "updated": "2026-06-25T09:00:57.772451+00:00",
   "language": "be",
   "crowdin": {
-    "ente-photos-web": {
-      "pct": 12,
+    "mastodon-for-android": {
+      "pct": 100,
       "pct_approved": 0,
-      "words_translated": 451,
-      "words_total": 3666
-    },
-    "ente-authenticator-app": {
-      "pct": 98,
-      "pct_approved": 0,
-      "words_translated": 2573,
-      "words_total": 2621
-    },
-    "ente-photos-app": {
-      "pct": 65,
-      "pct_approved": 0,
-      "words_translated": 5857,
-      "words_total": 8934
+      "words_translated": 4160,
+      "words_total": 4160
     },
     "bitwarden-mobile": {
       "pct": 29,
       "pct_approved": 0,
       "words_translated": 3186,
       "words_total": 10784
-    },
-    "bitwarden-browser": {
-      "pct": 38,
-      "pct_approved": 0,
-      "words_translated": 3928,
-      "words_total": 10169
     },
     "bitwarden-web": {
       "pct": 45,
@@ -44,12 +26,6 @@
       "words_translated": 3941,
       "words_total": 3941
     },
-    "threema-android": {
-      "pct": 99,
-      "pct_approved": 94,
-      "words_translated": 11100,
-      "words_total": 11164
-    },
     "bitwarden-desktop": {
       "pct": 37,
       "pct_approved": 0,
@@ -62,11 +38,20 @@
       "words_translated": 2369,
       "words_total": 2369
     },
-    "mastodon-for-android": {
-      "pct": 100,
+    "ente-locker": {
+      "_error": "be not in project"
+    },
+    "ente-photos-web": {
+      "pct": 12,
       "pct_approved": 0,
-      "words_translated": 4160,
-      "words_total": 4160
+      "words_translated": 451,
+      "words_total": 3666
+    },
+    "bitwarden-browser": {
+      "pct": 38,
+      "pct_approved": 0,
+      "words_translated": 3928,
+      "words_total": 10169
     },
     "threema-ios": {
       "pct": 45,
@@ -74,8 +59,23 @@
       "words_translated": 5155,
       "words_total": 11375
     },
-    "ente-locker": {
-      "_error": "be not in project"
+    "ente-authenticator-app": {
+      "pct": 98,
+      "pct_approved": 0,
+      "words_translated": 2573,
+      "words_total": 2621
+    },
+    "ublock": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 2529,
+      "words_total": 2529
+    },
+    "threema-android": {
+      "pct": 99,
+      "pct_approved": 94,
+      "words_translated": 11100,
+      "words_total": 11164
     },
     "mastodon": {
       "pct": 100,
@@ -83,11 +83,11 @@
       "words_translated": 25958,
       "words_total": 25958
     },
-    "ublock": {
-      "pct": 100,
+    "ente-photos-app": {
+      "pct": 64,
       "pct_approved": 0,
-      "words_translated": 2529,
-      "words_total": 2529
+      "words_translated": 5833,
+      "words_total": 9021
     }
   },
   "weblate": {
@@ -141,8 +141,8 @@
       "_error": "components list: HTTP 401"
     },
     "pop-os": {
-      "pct": 76.0,
-      "words_translated": 978,
+      "pct": 75.8,
+      "words_translated": 976,
       "words_total": 1287
     },
     "free-tube": {
