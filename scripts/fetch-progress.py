@@ -123,11 +123,18 @@ def collect_sources():
                     url = link["url"]
 
                     # ── Crowdin (any instance: be.crowdin.com, proton.crowdin.com, …) ──
-                    if "crowdin.com/project/" in url:
+                    if "crowdin.com/" in url:
+                        # Standard: /project/slug/
                         m = re.search(r"([\w-]+)\.crowdin\.com/project/([^/?\s#]+)", url)
                         if m:
                             instance, slug = m.group(1), m.group(2)
                             crowdin_instances.setdefault(instance, set()).add(slug)
+                        else:
+                            # Numeric UI URL: /u/projects/129/
+                            m2 = re.search(r"([\w-]+)\.crowdin\.com/u/projects/(\d+)/", url)
+                            if m2:
+                                instance, num_id = m2.group(1), m2.group(2)
+                                crowdin_instances.setdefault(instance, set()).add(f"__numid_{num_id}")
 
                     # ── hosted.weblate.org ───────────────────────────────────
                     elif "hosted.weblate.org/projects/" in url:
@@ -279,27 +286,44 @@ def fetch_crowdin(slugs, base_url, token, instance):
     print(f"  [crowdin/{instance}] Found {len(id_map)} projects", file=sys.stderr)
 
     for slug in slugs:
-        pid = id_map.get(slug)
-        if not pid:
-            print(f"  [crowdin/{instance}] {slug}: not found", file=sys.stderr)
-            results[slug] = {"_error": f"project not found on {instance}.crowdin.com"}
-            continue
+        # Numeric UI URL fallback: resolve __numid_129 → identifier + pid
+        if slug.startswith("__numid_"):
+            num_id = slug[len("__numid_"):]
+            proj = get(f"{base_url}/api/v2/projects/{num_id}", headers)
+            if "_error" in proj:
+                results[slug] = {"_error": f"project {num_id} not accessible"}
+                continue
+            identifier = proj["data"]["identifier"]
+            pid = proj["data"]["id"]
+        else:
+            identifier = slug
+            pid = id_map.get(slug)
+            if not pid:
+                print(f"  [crowdin/{instance}] {slug}: not found", file=sys.stderr)
+                results[slug] = {"_error": f"project not found on {instance}.crowdin.com"}
+                continue
 
         d = get(f"{base_url}/api/v2/projects/{pid}/languages/progress?limit=100", headers)
         found = False
         for item in d.get("data", []):
             p = item["data"]
             if p["languageId"] == LANG:
-                results[slug] = {
+                entry = {
                     "pct":              p["translationProgress"],
                     "pct_approved":     p["approvalProgress"],
                     "words_translated": p["words"]["translated"],
                     "words_total":      p["words"]["total"],
                 }
+                results[identifier] = entry
+                # Also store under numeric ID so /u/projects/123/ URLs resolve correctly
+                if slug.startswith("__numid_"):
+                    results[num_id] = entry
                 found = True
                 break
         if not found:
-            results[slug] = {"_error": f"{LANG} not in project"}
+            results[identifier] = {"_error": f"{LANG} not in project"}
+            if slug.startswith("__numid_"):
+                results[num_id] = {"_error": f"{LANG} not in project"}
         time.sleep(0.3)
 
     return results

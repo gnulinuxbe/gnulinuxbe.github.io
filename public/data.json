@@ -227,7 +227,11 @@
                 }
               ]
             }
-          ]
+          ],
+          "org": {
+            "name": "Ente",
+            "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781434825/unnamed_fqifjd.png"
+          }
         },
         {
           "id": "antennapod",
@@ -498,7 +502,11 @@
               ],
               "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1781557332/tailsos_vvv3yl.png"
             }
-          ]
+          ],
+          "org": {
+            "name": "Tor Project",
+            "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781277406/112233_otrqh1.png"
+          }
         },
         {
           "id": "ublock-origin",
@@ -848,7 +856,11 @@
                 }
               ]
             }
-          ]
+          ],
+          "org": {
+            "name": "Element.io",
+            "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/q_auto/f_auto/v1781543595/elementlogo_ejdrsc.png"
+          }
         },
         {
           "id": "gnome",
@@ -996,6 +1008,620 @@
               ]
             }
           ]
+        },
+        {
+          "id": "proton",
+          "name": "Proton",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782489932/protonbanner_yxrtqc.png",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782492913/unnamed_udo8h0.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782490312/protonmailscr_gdhhi9.png",
+          "category": "peraklady",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-26",
+          "updatedAt": "2026-06-26",
+          "description": "Proton — гэта швейцарская экасістэма абароненых інтэрнэт-сэрвісаў, якая аб'ядноўвае ў сабе прыватную пошту (Proton Mail), VPN, каляндар, воблачнае сховішча і менеджар пароляў.",
+          "platforms": [],
+          "apps": [
+            {
+              "id": "proton-mail",
+              "name": "Proton Mail",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782490228/unnamed_dzz5ov.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782490312/protonmailscr_gdhhi9.png",
+              "description": "Proton Mail — гэта абаронены паштовы сэрвіс са скразным шыфраваннем (E2EE), распрацаваны ў Швейцарыі. Ён гарантуе максімальную канфідэнцыяльнасць перапіскі, паколькі нават самі распрацоўшчыкі не маюць тэхнічнага доступу да змесціва вашых лістоў, а сам сэрвіс не збірае асабістыя даныя і не паказвае рэкламу.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/6e916f0970a3c156f6f26cdb78a59c62/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=ch.protonmail.android",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/6e916f0970a3c156f6f26cdb78a59c62/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-mail-encrypted-email/id979659905",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/6e916f0970a3c156f6f26cdb78a59c62/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/mail",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/6e916f0970a3c156f6f26cdb78a59c62/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/mail",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-calendar",
+              "name": "Proton Calendar",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782492957/unnamed_z9zzfy.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782493008/protoncalendarscr_rcgqbp.png",
+              "description": "Proton Calendar — гэта прыватны каляндар са скразным шыфраваннем, які з'яўляецца часткай абароненай экасістэмы Proton. Ён аўтаматычна шыфруе ўсе падзеі, іх назвы, удзельнікаў і апісанні прама на вашай прыладзе, гарантуючы, што ніхто, нават самі распрацоўшчыкі, не зможа атрымаць доступ да вашага асабістага раскладу.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/67e101fb32f621c0afc9184db4feea4f/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=me.proton.android.calendar",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/67e101fb32f621c0afc9184db4feea4f/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-calendar-secure-events/id1514709943",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/67e101fb32f621c0afc9184db4feea4f/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/calendar",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/67e101fb32f621c0afc9184db4feea4f/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://calendar.proton.me/?ref=pme_lp_b2c_calendar_submenu",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-drive",
+              "name": "Proton Drive",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782494846/unnamed_ulnsaw.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782494904/protondrivescr_yt31dj.png",
+              "description": "Proton Drive — гэта абароненае воблачнае сховішча са скразным шыфраваннем, якое ўваходзіць у прыватную экасістэму сэрвісаў Proton. Яно аўтаматычна шыфруе ўсе вашы файлы, дакументы і нават метаданыя (назвы файлаў, памеры) перад загрузкай на серверы, забяспечваючы бяспечнае захоўванне і абмен данымі без рызыкі старонняга доступу.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/b0a7eb279e5ce68aea21d476dde1e4e5/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=me.proton.android.drive",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/b0a7eb279e5ce68aea21d476dde1e4e5/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-drive-cloud-storage/id1509667851",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/b0a7eb279e5ce68aea21d476dde1e4e5/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/drive",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/project/b0a7eb279e5ce68aea21d476dde1e4e5/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/drive",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-vpn",
+              "name": "Proton VPN",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782498422/400x400bb-75_zupzvd.webp",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782498475/protonvpnscr_hqlpkn.png",
+              "description": "Proton VPN — гэта бяспечны VPN-сэрвіс з адкрытым зыходным кодам і строгай палітыкай адмовы ад рэгістрацыі даных (no-logs), які ўваходзіць у швейцарскую экасістэму прыватных прадуктаў Proton. Ён забяспечвае надзейную абарону інтэрнэт-трафіку, захаванне ананімнасці ў сетцы і эфектыўны абыход блакіровак, не ўтрымліваючы рэкламы і схаваных трэкераў нават у бясплатнай версіі.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/137/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=ch.protonvpn.android",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/137/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-vpn-fast-secure/id1437005085",
+                      "type": "download"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/137/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://protonvpn.com",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Пашырэнне",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/137/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://protonvpn.com",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-pass",
+              "name": "Proton Pass",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782498704/unnamed_w6l9n3.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782498767/protonpassscr_ujr9fv.png",
+              "description": "Proton Pass — гэта бяспечны менеджар пароляў з адкрытым зыходным кодам і скразным шыфраваннем (E2EE), які з'яўляецца часткай экасістэмы Proton. Ён не толькі надзейна захоўвае ўліковыя даныя, нататкі і банкаўскія карткі, але і дазваляе ствараць унікальныя псеўданімы электроннай пошты (аліясы) для абароны вашага асноўнага адраса ад спаму і адсочвання.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/139/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=proton.android.pass",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/139/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-pass-password-manager/id6443490629",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/139/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/pass",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/139/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/pass",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Пашырэнне",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/139/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/pass",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-wallet",
+              "name": "Proton Wallet",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499029/unnamed_ki5suz.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499065/protonwalletscr_cglvgc.png",
+              "description": "Proton Wallet — гэта абаронены некастодыяльны біткойн-кашалёк з адкрытым зыходным кодам, які з'яўляецца часткай прыватнай экасістэмы Proton. Ён выкарыстоўвае скразное шыфраванне і дазваляе бяспечна захоўваць, адпраўляць і атрымліваць крыптавалюту (нават проста па адрасе электроннай пошты), гарантуючы, што толькі вы маеце поўны кантроль над сваімі прыватнымі ключамі і фінансамі.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/141/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=me.proton.wallet.android",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/141/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-drive-cloud-storage/id1509667851",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/141/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/wallet",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-lumo",
+              "name": "Proton Lumo",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499350/unnamed_gg6er3.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499360/protonlumoscr_k6poly.png",
+              "description": "Proton Lumo — гэта набор агульных кампанентаў і элементаў карыстальніцкага інтэрфейсу (дызайн-сістэма), які выкарыстоўваецца для пабудовы ўсіх прадуктаў абароненай экасістэмы Proton.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/174/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=me.proton.android.lumo",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/174/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/lumo-ai-by-proton/id6746714949",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/174/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/lumo",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-authenticator",
+              "name": "Proton Authenticator",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499608/unnamed_edydsr.png",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499616/protonauthsct_hpbfkf.png",
+              "description": "Proton Authenticator — гэта прыватная праграма для двухфактарнай аўтэнтыфікацыі (2FA) з адкрытым зыходным кодам, распрацаваная стваральнікамі абароненай экасістэмы Proton. Яна дазваляе бяспечна генераваць і захоўваць аднаразовыя паролі (TOTP) лакальна на прыладзе ў аўтаномным рэжыме або сінхранізаваць іх паміж рознымі платформамі праз скразное шыфраванне (E2EE), прычым для выкарыстання нават не патрабуецца абавязкова ствараць уліковы запіс Proton.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/177/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=proton.android.authenticator",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/177/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-authenticator/id6741758667",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/177/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/authenticator",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "proton-meet",
+              "name": "Proton Meet",
+              "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499853/400x400bb-75_zd1vgr.webp",
+              "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782499835/protonmeetscr_ccoojm.png",
+              "description": "Proton Meet — гэта абаронены сэрвіс для відэаканферэнцый са скразным шыфраваннем (E2EE), які з'яўляецца часткай прыватнай экасістэмы Proton. Ён забяспечвае максімальную канфідэнцыяльнасць анлайн-сустрэч, гарантуючы, што ўсе вашы размовы і відэазванкі абаронены ад праслухоўвання, збору даных і доступу з боку старонніх асоб або саміх распрацоўшчыкаў.",
+              "platforms": [
+                {
+                  "name": "Android",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/179/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Google Play",
+                      "url": "https://play.google.com/store/apps/details?id=proton.android.meet",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/179/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "App Store",
+                      "url": "https://apps.apple.com/be/app/proton-meet-secure-meetings/id6745089447",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "PC",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/179/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/meet",
+                      "type": "website"
+                    }
+                  ]
+                },
+                {
+                  "name": "Вэб",
+                  "links": [
+                    {
+                      "label": "Crowdin",
+                      "url": "https://proton.crowdin.com/u/projects/179/l/be",
+                      "type": "translate"
+                    },
+                    {
+                      "label": "Сайт",
+                      "url": "https://proton.me/meet",
+                      "type": "website"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "org": {
+            "name": "Proton",
+            "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782492913/unnamed_udo8h0.png"
+          },
+          "note": "Запоўніце анкету: [airtable.com/appgf6ZC8yiBp9X5k/pagz2JJwHDnjahGvb/form](https://airtable.com/appgf6ZC8yiBp9X5k/pagz2JJwHDnjahGvb/form)\nУ выпадку ўхвалення заяўкі вы атрымаеце ліст са спасылкай для рэгістрацыі. Пасля гэтага ўвайдзіце ў створаны ўліковы запіс і пачніце перакладаць: [accounts.crowdin.com/proton/login](https://accounts.crowdin.com/proton/login)"
         }
       ]
     },

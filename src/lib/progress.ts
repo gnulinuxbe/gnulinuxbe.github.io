@@ -52,9 +52,12 @@ export function getProgressFromPlatforms(
       if (link.type !== 'translate') continue
       const url = link.url
 
-      // Crowdin
+      // Crowdin — /project/UUID/ format
       const cm = url.match(/crowdin\.com\/project\/([^/?#\s]+)/)
       if (cm) { add(cm[1], 'crowdin', data.crowdin); continue }
+      // Crowdin — /u/projects/123/ numeric format
+      const cnm = url.match(/crowdin\.com\/u\/projects\/(\d+)/)
+      if (cnm) { add(cnm[1], 'crowdin', data.crowdin); continue }
 
       // hosted.weblate.org
       const wm = url.match(/hosted\.weblate\.org\/projects\/([^/]+)\/([^/]+)/)
@@ -99,6 +102,9 @@ export function getAppProgress(app: AppEntry, data: ProgressData): ItemProgressE
 
 export function avgPct(entries: ItemProgressEntry[]): number | null {
   if (!entries.length) return null
+  // Single entry: use stored pct directly (matches platform's own display, e.g. Crowdin truncates to integer)
+  if (entries.length === 1) return Math.round(entries[0].pct)
+  // Multiple entries: weighted average by word count
   const totalWords = entries.reduce((s, e) => s + e.words_total, 0)
   if (totalWords === 0) {
     return Math.round(entries.reduce((s, e) => s + e.pct, 0) / entries.length)

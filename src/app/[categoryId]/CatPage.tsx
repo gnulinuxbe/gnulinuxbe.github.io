@@ -43,6 +43,12 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
 
   useEffect(() => { fetchProgress().then(setProgress) }, [])
 
+  // Read ?org= param from URL on mount
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get('org')
+    if (p) setFDev(p)
+  }, [])
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
@@ -66,7 +72,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
     const q = search.toLowerCase()
     return cat.items
       .filter(item => {
-        if (fDev && item.id !== fDev) return false
+        if (fDev && item.org?.name !== fDev) return false
         if (fTag !== ALL && !item.tags.includes(fTag)) return false
         if (q && !item.name.toLowerCase().includes(q)
               && !item.id.toLowerCase().includes(q)
@@ -157,16 +163,16 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
               {currentCards} з {totalCards} {isAppStore ? 'праграм' : 'праектаў'}
             </p>
             {fDev && (() => {
-              const devItem = cat.items.find(i => i.id === fDev)
-              return devItem ? (
+              const devOrg = cat.items.find(i => i.org?.name === fDev)?.org
+              return devOrg ? (
                 <button onClick={()=>setFDev('')} style={{
                   display:'inline-flex',alignItems:'center',gap:5,
                   background:'var(--pinka)',border:'1px solid var(--pinkb)',
                   color:'var(--pink)',fontSize:10,fontWeight:700,
                   padding:'3px 8px 3px 5px',borderRadius:99,cursor:'pointer',
                 }}>
-                  {devItem.iconUrl && <img src={devItem.iconUrl} alt="" style={{width:14,height:14,borderRadius:3,objectFit:'cover',flexShrink:0}}/>}
-                  {devItem.name}
+                  {devOrg.iconUrl && <img src={devOrg.iconUrl} alt="" style={{width:14,height:14,borderRadius:3,objectFit:'cover',flexShrink:0}}/>}
+                  {devOrg.name}
                   <span style={{opacity:.7}}>✕</span>
                 </button>
               ) : null
@@ -178,7 +184,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(130px,1fr))',gap:10}}>
               {entries.map((entry) => {
                 if (entry.kind === 'app')  return <AppCard  key={`${entry.item.id}-${entry.app.id}`} item={entry.item} app={entry.app} catId={categoryId} onDevClick={setFDev} progress={progress}/>
-                return <ItemCard key={entry.item.id} item={entry.item} catId={categoryId} progress={progress}/>
+                return <ItemCard key={entry.item.id} item={entry.item} catId={categoryId} progress={progress} onOrgClick={setFDev}/>
               })}
               {entries.length === 0 && (
                 <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
@@ -186,7 +192,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
             </div>
           ) : (
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:10}}>
-              {filtered.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp} progress={progress}/>)}
+              {filtered.map(({item, matchedApp}) => <ItemCard key={item.id} item={item} catId={categoryId} matchedApp={matchedApp} progress={progress} onOrgClick={setFDev}/>)}
               {filtered.length === 0 && (
                 <p style={{gridColumn:'1/-1',padding:48,textAlign:'center',color:'var(--t3)',fontSize:14}}>Нічога не знойдзена</p>
               )}
@@ -222,14 +228,12 @@ function AppCard({ item, app, catId, onDevClick, progress }: { item: Item; app: 
         </a>
         <div style={{minWidth:0,width:'100%'}}>
           <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{app.name}</a>
-          {/* Developer badge — clickable, filters by this dev */}
-          <button onClick={e=>{e.stopPropagation();onDevClick(item.id)}} style={{
-            display:'inline-flex',alignItems:'center',gap:3,marginTop:3,
-            background:'none',border:'none',cursor:'pointer',padding:'1px 0',
+          <a href={`/${catId}/${item.id}`} onClick={e=>e.stopPropagation()} style={{
+            display:'inline-flex',alignItems:'center',gap:3,marginTop:3,textDecoration:'none',padding:'1px 0',
           }}>
             {item.iconUrl && <img src={item.iconUrl} alt="" style={{width:11,height:11,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.7}}/>}
             <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
-          </button>
+          </a>
         </div>
         <div style={{display:'flex',gap:3,justifyContent:'center',flexWrap:'wrap',minHeight:16}}>
           {platNames.slice(0,3).map(n=>(
@@ -259,17 +263,18 @@ function CTA({ link }: { link: { url: string; type: string; label: string } }) {
 }
 
 // ── Solo item card (no apps) ─────────────────────────────────────────────────
-function ItemCard({ item, catId, matchedApp, progress }: { item: Item; catId: string; matchedApp?: string; progress: ProgressData | null }) {
+function ItemCard({ item, catId, matchedApp, progress, onOrgClick }: { item: Item; catId: string; matchedApp?: string; progress: ProgressData | null; onOrgClick?: (org: string) => void }) {
   const href = matchedApp
     ? `/${catId}/${item.id}?app=${encodeURIComponent(matchedApp)}`
     : `/${catId}/${item.id}`
 
-  const firstLink = item.apps
-    ? item.apps[0]?.platforms[0]?.links[0]
+  const hasApps = item.apps && item.apps.length > 0
+  const firstLink = hasApps
+    ? item.apps![0]?.platforms[0]?.links[0]
     : item.platforms[0]?.links?.[0]
 
-  const platNames = item.apps
-    ? Array.from(new Set(item.apps.flatMap(a => a.platforms.map(p => p.name))))
+  const platNames = hasApps
+    ? Array.from(new Set(item.apps!.flatMap(a => a.platforms.map(p => p.name))))
     : item.platforms.map(p => p.name)
 
   const hoverEnter = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.transform='translateY(-2px)' }
@@ -301,6 +306,15 @@ function ItemCard({ item, catId, matchedApp, progress }: { item: Item; catId: st
           <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
           {matchedApp && <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>}
         </div>
+        {item.org && (
+          <a href={`/${catId}?org=${encodeURIComponent(item.org.name)}`}
+            onClick={e=>{e.stopPropagation();e.preventDefault();onOrgClick?.(item.org!.name)}}
+            style={{display:'inline-flex',alignItems:'center',gap:4,textDecoration:'none',
+              padding:'0 2px',maxWidth:'100%',overflow:'hidden'}}>
+            {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{width:11,height:11,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.7}}/>}
+            <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.org.name}</span>
+          </a>
+        )}
         <PlatChips/>
         <PctBadge pct={progress ? avgPct(getItemProgress(item, progress)) : null}/>
         {firstLink && <CTA link={firstLink}/>}

@@ -39,6 +39,12 @@ export interface Item {
   description: string
   platforms: Platform[]
 
+  // Organisation/brand badge (shown below item name, clickable to filter by org)
+  org?: { name: string; iconUrl: string }
+
+  // Shared note shown on every child app page (write once, appears on all apps)
+  note?: string
+
   // GROUPED mode (optional): multiple apps, each with own description + platforms
   apps?: AppEntry[]
 }

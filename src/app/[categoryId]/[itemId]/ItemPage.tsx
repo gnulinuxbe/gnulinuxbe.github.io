@@ -150,6 +150,16 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
               <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
             </div>
             <div style={{ display:'flex', flexWrap:'wrap', gap:4, alignItems:'center' }}>
+              {item.org && (
+                <a href={`/${categoryId}?org=${encodeURIComponent(item.org.name)}`} style={{
+                  display:'inline-flex', alignItems:'center', gap:4, fontSize:9, fontWeight:700,
+                  background:'var(--bg3)', color:'var(--t2)', padding:'2px 8px', borderRadius:4,
+                  border:'1px solid var(--bd)', textDecoration:'none',
+                }}>
+                  {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{ width:11, height:11, borderRadius:2, objectFit:'cover' }}/>}
+                  {item.org.name}
+                </a>
+              )}
               {item.tags.map(t => (
                 <span key={t} style={{ fontSize:9, fontWeight:600, background:'var(--bluea)', color:'var(--blue)', padding:'2px 7px', borderRadius:4 }}>{t}</span>
               ))}
@@ -172,6 +182,7 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
                 dangerouslySetInnerHTML={{ __html: md(item.description) }}/>
             )}
             <PlatformLinks platforms={item.platforms}/>
+
           </>
         )}
 
@@ -215,15 +226,22 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
                       </div>
                     )}
                   </div>
-                  <span style={{ fontSize:16, color:'var(--t3)', flexShrink:0 }}>›</span>
+                  {(() => {
+                    const pct = progress ? avgPct(getAppProgress(app, progress)) : null
+                    if (pct === null) return <span style={{ fontSize:16, color:'var(--t3)', flexShrink:0 }}>›</span>
+                    const c = pctColor(pct)
+                    return (
+                      <span style={{ fontSize:12, fontWeight:700, color:c, flexShrink:0, minWidth:36, textAlign:'right' }}>{pct}%</span>
+                    )
+                  })()}
                 </a>
               ))}
             </div>
           </>
         )}
 
-        {/* ── Translation progress ── */}
-        <TranslationProgress item={item} progress={progress}/>
+        {/* ── Translation progress (only for simple items) ── */}
+        {!isGrouped && <TranslationProgress item={item} progress={progress}/>}
 
         {/* ── Screenshot ── */}
         {item.screenshotUrl && !isGrouped && (
@@ -233,6 +251,38 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
               style={{ width:'100%', borderRadius:12, border:'1px solid var(--bd)', display:'block' }}/>
           </div>
         )}
+
+        {/* ── Related org apps (minimal) ── */}
+        {item.org && (() => {
+          const related = cat.items.filter(i => i.id !== item.id && i.org?.name === item.org!.name)
+          if (!related.length) return null
+          return (
+            <div style={{ marginBottom:24 }}>
+              <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:10 }}>
+                # іншыя праграмы {item.org.name}
+              </div>
+              <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+                {related.map(rel => (
+                  <a key={rel.id} href={`/${categoryId}/${rel.id}`} style={{
+                    display:'flex', flexDirection:'column', alignItems:'center', gap:6,
+                    padding:'10px 12px', borderRadius:12, width:72,
+                    background:'var(--bg1)', border:'1px solid var(--bd)',
+                    textDecoration:'none', transition:'border-color .15s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
+                  >
+                    {rel.iconUrl
+                      ? <img src={rel.iconUrl} alt="" style={{ width:36, height:36, borderRadius:9, objectFit:'cover' }}/>
+                      : <div style={{ width:36, height:36, borderRadius:9, background:'var(--bg3)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:11, color:'var(--t3)' }}>{rel.name.slice(0,2).toUpperCase()}</div>
+                    }
+                    <span style={{ fontSize:9, fontWeight:600, color:'var(--t2)', textAlign:'center', lineHeight:1.3, wordBreak:'break-word' }}>{rel.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
 
         {/* Back + Copy */}
         <div style={{ display:'flex', gap:8, marginTop:24 }}>

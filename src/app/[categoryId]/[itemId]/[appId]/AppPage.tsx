@@ -143,6 +143,17 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
             dangerouslySetInnerHTML={{ __html: md(app.description) }}/>
         )}
 
+        {/* Shared note from parent item (write once, shown on all child apps) */}
+        {item.note && (
+          <div className="md" style={{
+            fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:20,
+            background:'var(--bg1)', border:'1px solid var(--bd)',
+            borderLeft:'3px solid var(--pink)', borderRadius:'0 10px 10px 0',
+            padding:'12px 16px',
+          }}
+            dangerouslySetInnerHTML={{ __html: md(item.note) }}/>
+        )}
+
         {/* Platform links */}
         {app.platforms.length > 0 && (
           <div style={{ marginBottom:24 }}>
