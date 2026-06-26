@@ -69,8 +69,14 @@ def weblate_project_stats(project, base="https://hosted.weblate.org"):
     total_tot = 0
     found_any = False
     for comp in components:
-        time.sleep(1.0)
+        time.sleep(0.5)
         t = get(f"{base}/api/translations/{project}/{comp}/{LANG}/", h)
+        if "_error" in t:
+            # 401/403 means we have no access — no point iterating all components
+            err = t["_error"]
+            if "401" in err or "403" in err:
+                return {"_error": f"no access ({err})"}
+            continue
         if "translated_percent" in t:
             total_tr  += t.get("translated", 0)
             total_tot += t.get("total", 0)
@@ -86,7 +92,7 @@ def weblate_project_stats(project, base="https://hosted.weblate.org"):
 
 def weblate_component_stats(project, component, base="https://hosted.weblate.org"):
     h = weblate_headers()
-    time.sleep(1.0)
+    time.sleep(0.5)
     d = get(f"{base}/api/translations/{project}/{component}/{LANG}/", h)
     if "translated_percent" in d:
         return {
