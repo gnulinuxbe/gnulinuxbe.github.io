@@ -125,7 +125,11 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('scripts/fetch-progress.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
-      "Bash(python3 -c \"import json; d=json.load\\(open\\('public/progress.json'\\)\\); print\\('updated:', d['updated']\\)\")"
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('public/progress.json'\\)\\); print\\('updated:', d['updated']\\)\")",
+      "Bash(git rebase *)",
+      "Bash(git fetch *)",
+      "Bash(git merge *)",
+      "Bash(git commit *)"
     ],
     "additionalDirectories": [
       "/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]",

@@ -1,0 +1,2 @@
+# Auto-resolve conflicts in generated files by keeping local version
+public/progress.json merge=ours

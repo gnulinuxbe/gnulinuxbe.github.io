@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gnulinuxbe.github.io/</loc>
-    <lastmod>2026-06-16T12:45:11.386Z</lastmod>
+    <lastmod>2026-06-27T20:58:25.272Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://gnulinuxbe.github.io/peraklady/</loc>
-    <lastmod>2026-06-16T12:45:11.386Z</lastmod>
+    <lastmod>2026-06-27T20:58:25.272Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -163,8 +163,128 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/threema/</loc>
+    <lastmod>2026-06-20T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-mail/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-calendar/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-drive/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-vpn/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-pass/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-wallet/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-lumo/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-authenticator/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/proton/proton-meet/</loc>
+    <lastmod>2026-06-26T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/graysky/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Wire/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/GSConnect/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Poedit/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Anytype/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Be-My-Eyes/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Crowdin/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Ajenti/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gnulinuxbe.github.io/peraklady/Gitlab/</loc>
+    <lastmod>2026-06-27T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://gnulinuxbe.github.io/slouniki/</loc>
-    <lastmod>2026-06-16T12:45:11.386Z</lastmod>
+    <lastmod>2026-06-27T20:58:25.272Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -218,7 +338,7 @@
   </url>
   <url>
     <loc>https://gnulinuxbe.github.io/github-projects/</loc>
-    <lastmod>2026-06-16T12:45:11.386Z</lastmod>
+    <lastmod>2026-06-27T20:58:25.272Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
