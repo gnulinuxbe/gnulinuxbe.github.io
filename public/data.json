@@ -1622,6 +1622,398 @@
             "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782492913/unnamed_udo8h0.png"
           },
           "note": "Запоўніце анкету: [airtable.com/appgf6ZC8yiBp9X5k/pagz2JJwHDnjahGvb/form](https://airtable.com/appgf6ZC8yiBp9X5k/pagz2JJwHDnjahGvb/form)\nУ выпадку ўхвалення заяўкі вы атрымаеце ліст са спасылкай для рэгістрацыі. Пасля гэтага ўвайдзіце ў створаны ўліковы запіс і пачніце перакладаць: [accounts.crowdin.com/proton/login](https://accounts.crowdin.com/proton/login)"
+        },
+        {
+          "id": "graysky",
+          "name": "Graysky",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590429/%D0%A1%D0%B0%D1%86%D1%8B%D1%8F%D0%BB%D1%8C%D0%BD%D1%8B%D1%8F_%D1%81%D0%B5%D1%82%D0%BA%D1%96_ah7ela.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590429/unnamed_galcw2.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590430/graysky_bdfnu4.webp",
+          "category": "peraklady",
+          "tags": [
+            "Сацыяльныя сеткі / месэнджэры",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Graysky — гэта папулярны альтэрнатыўны кліент з адкрытым зыходным кодам для дэцэнтралізаванай сацыяльнай сеткі Bluesky. Ён прапануе больш багаты на функцыі і гнуткі карыстальніцкі інтэрфейс для мабільных прылад, забяспечваючы зручны доступ да экасістэмы AT Protocol з пашыранымі магчымасцямі, якіх можа не хапаць у афіцыйным дадатку.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/graysky/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=dev.mozzius.graysky",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/graysky/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/be/app/graysky-a-bluesky-client/id6448234181",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Wire",
+          "name": "Wire",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590920/%D0%BC%D0%B5%D1%81%D1%8D%D0%BD%D0%B4%D0%B6%D1%8D%D1%80%D1%8B_cjbgco.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590923/unnamed_rqvjdm.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782590920/wire_ciz8eh.webp",
+          "category": "peraklady",
+          "tags": [
+            "Сацыяльныя сеткі / месэнджэры",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Wire — гэта абароненая платформа для сумеснай працы і месенджар з адкрытым зыходным кодам, які выкарыстоўвае надзейнае скразное шыфраванне (E2EE) для ўсіх тыпаў камунікацыі. Ён забяспечвае максімальную канфідэнцыяльнасць як для прыватных асоб, так і для карпаратыўнага сектара, прапаноўваючы бяспечны абмен паведамленнямі, файламі і правядзенне відэаканферэнцый.",
+          "platforms": [
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/wire-ios/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/be/app/wire-secure-messenger/id930944768",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=com.wire",
+                  "type": "download"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GSConnect",
+          "name": "GSConnect",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591164/GSConnect_e3zzwa.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591163/c06ad43dcf494c825d1c63f6bac4ba91_GSConnect__Gnome_s_KDEConnect__c3bsob.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591163/GSConnect1_rroqys.webp",
+          "category": "peraklady",
+          "tags": [
+            "астатняе"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "GSConnect — гэта папулярнае пашырэнне для асяроддзя працоўнага стала GNOME, якое выступае ў якасці поўнай альтэрнатыўнай рэалізацыі пратакола KDE Connect. Яно дазваляе бясшвоўна і бяспечна інтэграваць ваш камп'ютар з мабільнымі прыладамі (напрыклад, на базе Android), забяспечваючы сінхранізацыю апавяшчэнняў, хуткі абмен файламі, адпраўку SMS і аддаленае кіраванне сістэмай без неабходнасці ўсталёўваць дадатковыя кампаненты KDE.",
+          "platforms": [
+            {
+              "name": "Linux",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/gsconnect/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://extensions.gnome.org/extension/1319/gsconnect/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Poedit",
+          "name": "Poedit",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591356/Poedit_aurjbc.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591355/poedit-logo-2EB847F9FA-seeklogo.com-3714393031_qlahjo.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591356/Poedit1_fqk3vr.webp",
+          "category": "peraklady",
+          "tags": [
+            "астатняе",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Poedit — гэта папулярны і зручны кросплатформавы рэдактар для лакалізацыі праграм і вэб-сайтаў (у тым ліку на базе WordPress), які працуе з файламі перакладу ў фармаце gettext (.po). Ён значна спрашчае працэс працы для распрацоўшчыкаў і перакладчыкаў, прапаноўваючы інтуітыўна зразумелы графічны інтэрфейс, убудаваную памяць перакладаў і сродкі для праверкі сінтаксісу на памылкі.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/poedit/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://poedit.com/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Anytype",
+          "name": "Anytype",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591576/Anytype1_anctgd.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591577/CTA-12-4244979108_tkfgaz.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591577/Anytype_sag9eh.webp",
+          "category": "peraklady",
+          "tags": [
+            "астатняе",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Anytype — гэта прыватная лакальна-арыентаваная (local-first) база ведаў і шматфункцыянальная праграма для нататак, якая часта разглядаецца як бяспечная альтэрнатыва Notion. Яна дазваляе ствараць дакументы, гнуткія базы даных і кіраваць задачамі, выкарыстоўваючы скразное шыфраванне (E2EE) і захоўваючы ўсю інфармацыю непасрэдна на вашай прыладзе для поўнай канфідэнцыяльнасці і незалежнасці ад цэнтралізаваных воблачных сервераў.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/anytype-mobile/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=io.anytype.app",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/anytype-mobile/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/be/app/anytype-the-everything-app/id6449487029",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/anytype-desktop/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://anytype.io/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Be-My-Eyes",
+          "name": "Be My Eyes",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591938/Be_My_Eyes1_xjbw9g.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591938/unnamed_bjrd3p.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782591938/Be_My_Eyes_bqbpib.webp",
+          "category": "peraklady",
+          "tags": [
+            "астатняе",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Be My Eyes — гэта бясплатны мабільны дадатак, створаны для дапамогі невідушчым і людзям са слабым зрокам. Ён злучае карыстальнікаў са зрачымі валанцёрамі з усяго свету праз жывыя відэазванкі, каб дапамагчы ў вырашэнні паўсядзённых задач (напрыклад, прачытаць этыкетку або знайсці згубленую рэч). Акрамя таго, сэрвіс выкарыстоўвае перадавыя інструменты штучнага інтэлекту для дэталёвага апісання фатаграфій і навакольнага асяроддзя без неабходнасці звяртацца да жывога памочніка.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/be-my-eyes-android/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=com.bemyeyes.bemyeyes",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/bemyeyes/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/be/app/be-my-eyes/id905177575",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Пашырэнне",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/be-my-eyes-server/be",
+                  "type": "translate"
+                }
+              ]
+            },
+            {
+              "name": "Вэб",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/be-my-eyes-web/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://www.bemyeyes.com/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Crowdin",
+          "name": "Crowdin",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592450/%D0%86%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B_%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%B0%D1%86%D0%BE%D1%83%D0%BA%D1%96_qdsb7u.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592437/6575c087bbf8d02c1d72b67e_512_wpbiam.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592438/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B8_yra0ar.webp",
+          "category": "peraklady",
+          "tags": [
+            "crowdin",
+            "інструменты распрацоўкі"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Crowdin — гэта папулярная воблачная платформа для кіравання лакалізацыяй і сумеснай працы над перакладамі. Яна шырока выкарыстоўваецца распрацоўшчыкамі, кампаніямі і супольнасцямі (у тым ліку для праектаў з адкрытым зыходным кодам) для перакладу праграм, вэб-сайтаў і гульняў. Платформа забяспечвае зручнае асяроддзе як для прафесіяналаў, так і для валанцёраў, прапаноўваючы аўтаматычную інтэграцыю з сістэмамі кантролю версій (напрыклад, GitHub) і карысныя інструменты накшталт памяці перакладаў і гласарыяў.",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "UI",
+                  "url": "https://translate.crowdin.com/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/crowdin/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Crowdin Developer",
+                  "url": "https://be.crowdin.com/project/crowdin-developer/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Crowdin Support",
+                  "url": "https://be.crowdin.com/project/crowdin-support/be",
+                  "type": "translate"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Ajenti",
+          "name": "Ajenti",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592635/%D0%86%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B_%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%B0%D1%86%D0%BE%D1%83%D0%BA%D1%96_zaitsw.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592634/300440862_390364046545102_4098386668827514594_n_syubmh.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592635/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B8_oiz49o.webp",
+          "category": "peraklady",
+          "tags": [
+            "інструменты распрацоўкі",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "Ajenti — гэта сучасная і лёгкая вэб-панэль кіравання серверамі з адкрытым зыходным кодам, прызначаная для сістэм на базе Linux. Яна прапануе зручны і пашыральны графічны інтэрфейс для штодзённага адміністравання, дазваляючы лёгка кіраваць файламі, службамі, канфігурацыямі, сеткай і ўбудаваным тэрміналам прама з браўзера. Гэты інструмент часта выкарыстоўваецца як больш зручная і хуткая альтэрнатыва класічным панэлям накшталт Webmin.",
+          "platforms": [
+            {
+              "name": "Вэб",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/ajenti/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Github",
+                  "url": "https://github.com/ajenti/ajenti",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Gitlab",
+          "name": "Gitlab",
+          "bannerUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592937/%D0%86%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B_%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%B0%D1%86%D0%BE%D1%83%D0%BA%D1%96_ndqybn.webp",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782593040/img_remote_gitlab-280482322_fgdfzu.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782592937/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B8_ozbw4s.webp",
+          "category": "peraklady",
+          "tags": [
+            "інструменты распрацоўкі",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-27",
+          "updatedAt": "2026-06-27",
+          "description": "GitLab — гэта комплексная вэб-платформа для кіравання рэпазіторыямі кода на базе Git і сумеснай распрацоўкі праграмнага забеспячэння. Яна прапануе поўны набор інструментаў для ўсяго жыццёвага цыкла DevOps, уключаючы адсочванне задач, вядзенне дакументацыі і магутныя ўбудаваныя сродкі для бесперапыннай інтэграцыі і разгортвання (CI/CD), якія дазваляюць камандам аўтаматызаваць працэсы тэсціравання і рэлізу прадуктаў. Платформа мае версію з адкрытым зыходным кодам (Community Edition), якую можна бясплатна разгарнуць на ўласных серверах для поўнага кантролю над працоўным асяроддзем і данымі.",
+          "platforms": [
+            {
+              "name": "Вэб",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/gitlab-ee/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://about.gitlab.com/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
