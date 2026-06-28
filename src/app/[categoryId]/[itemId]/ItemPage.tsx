@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
-import type { SiteData, Platform, AppEntry } from '@/types'
+import type { SiteData, Platform } from '@/types'
 import { getLinkStyle, formatDate } from '@/lib/platforms'
 import { fetchProgress, getItemProgress, getAppProgress, avgPct, pctColor, type ProgressData, type ItemProgressEntry } from '@/lib/progress'
 import Header from '@/components/Header'
@@ -29,15 +29,12 @@ function il(t: string) {
       '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
 }
 
-// ── Platform tabs + links (shared component) ──────────────────────────────────
 function PlatformLinks({ platforms }: { platforms: Platform[] }) {
   const [tab, setTab] = useState(0)
   if (!platforms.length) return null
   const plat = platforms[tab] ?? platforms[0]
-
   return (
     <div>
-      {/* Platform tabs */}
       {platforms.length > 1 && (
         <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:10 }}>
           {platforms.map((p, i) => (
@@ -46,39 +43,28 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
               border: `1px solid ${i===tab ? 'var(--bd2)' : 'var(--bd)'}`,
               background: i===tab ? 'var(--bg3)' : 'var(--bg2)',
               color: i===tab ? 'var(--text)' : 'var(--t2)',
-              cursor:'pointer', transition:'all .15s', whiteSpace:'nowrap',
+              cursor:'pointer', transition:'all .15s', whiteSpace:'nowrap', flex:1,
             }}>{p.name}</button>
           ))}
         </div>
       )}
-
-      {/* Links for active platform */}
       {plat.links.length > 0 && (
         <div style={{ border:'1px solid var(--bd)', borderRadius:10, overflow:'hidden' }}>
           {plat.links.map((link, i) => {
             const ls = getLinkStyle(link.type)
             return (
               <a key={i} href={link.url} target="_blank" rel="noreferrer" style={{
-                display:'flex', alignItems:'center', gap:12,
-                padding:'11px 14px',
+                display:'flex', alignItems:'center', gap:12, padding:'11px 14px',
                 borderBottom: i < plat.links.length-1 ? '1px solid var(--bd)' : 'none',
                 textDecoration:'none', background:'transparent', transition:'background .15s',
               }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background='var(--bg2)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background='transparent'}
               >
-                {/* Type pill */}
-                <div style={{
-                  padding:'4px 11px', borderRadius:6, flexShrink:0,
-                  background: ls.bg, border:`1px solid ${ls.color}40`,
-                  fontSize:10, fontWeight:700, color: ls.color, whiteSpace:'nowrap',
-                }}>{ls.label}</div>
-                {/* Label + url */}
+                <div style={{ padding:'4px 11px', borderRadius:6, flexShrink:0, background:ls.bg, border:`1px solid ${ls.color}40`, fontSize:10, fontWeight:700, color:ls.color, whiteSpace:'nowrap' }}>{ls.label}</div>
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ fontSize:12, fontWeight:600, color:'var(--text)', marginBottom:1 }}>{link.label}</div>
-                  <div style={{ fontSize:10, color:'var(--t3)', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
-                    {link.url.replace(/^https?:\/\//, '')}
-                  </div>
+                  <div style={{ fontSize:10, color:'var(--t3)', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{link.url.replace(/^https?:\/\//, '')}</div>
                 </div>
                 <span style={{ fontSize:16, color:'var(--t3)', flexShrink:0 }}>›</span>
               </a>
@@ -90,10 +76,27 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
   )
 }
 
+function SLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display:'flex', alignItems:'center', gap:7, marginBottom:14 }}>
+      <div style={{ width:2, height:11, background:'var(--pink)', borderRadius:1, flexShrink:0 }}/>
+      <div style={{ fontSize:10, fontWeight:800, color:'var(--t2)', letterSpacing:1.2, textTransform:'uppercase' }}>{children}</div>
+    </div>
+  )
+}
+
+function NavBtn({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:600, color:'var(--t3)', background:'var(--bg2)', border:'1px solid var(--bd)', padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s' }}
+      onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
+      onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
+    >{children}</a>
+  )
+}
+
 export default function ItemPage({ initialData }: { initialData?: SiteData }) {
-  const { categoryId, itemId } = useParams() as { categoryId: string; itemId: string; appId?: string }
+  const { categoryId, itemId } = useParams() as { categoryId: string; itemId: string }
   const data = (initialData ?? STATIC_DATA) as SiteData
-  const [appTab, setAppTab] = useState(0)
   const [progress, setProgress] = useState<ProgressData | null>(null)
 
   const cat  = data.categories.find(c => c.id === categoryId)
@@ -101,182 +104,240 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
 
   useEffect(() => { fetchProgress().then(setProgress) }, [])
 
-  useEffect(() => {
-    if (!item?.apps) return
-    const app = new URLSearchParams(window.location.search).get('app')
-    if (!app) return
-    const idx = item.apps.findIndex(a => a.name.toLowerCase() === app.toLowerCase())
-    if (idx >= 0) setAppTab(idx)
-  }, [item])
-
   if (!item || !cat) return <Msg>Не знойдзена</Msg>
 
   const isGrouped = !!(item.apps && item.apps.length > 0)
-  const activeApp: AppEntry | null = isGrouped ? (item.apps![appTab] ?? null) : null
+
+  const simpleEntries: ItemProgressEntry[] = !isGrouped && progress ? getItemProgress(item, progress) : []
+  const simplePct = simpleEntries.length ? avgPct(simpleEntries) : null
+  const simpleColor = simplePct !== null ? pctColor(simplePct) : 'rgba(255,255,255,.3)'
+
+  const appCount = item.apps?.length ?? 0
+  const appCountLabel = appCount === 1 ? 'праграма' : appCount < 5 ? 'праграмы' : 'праграм'
 
   return (
     <>
       <Header cats={data.categories} activeId={categoryId} crumb={item.name}/>
-      {/* ── Banner ── */}
-      <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)', borderRadius:'0 0 12px 12px' }}>
-        {item.bannerUrl
-          ? <img src={item.bannerUrl} alt={item.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center center', display:'block' }}/>
-          : (
-            <div style={{ width:'100%', height:'100%', position:'relative' }}>
-              <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center,rgba(255,45,107,.18) 0%,transparent 65%)' }}/>
-              <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:8 }}>
-                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5.5rem)', letterSpacing:5, color:'#eef0f8', textAlign:'center', padding:'0 16px' }}>{item.name}</span>
+
+      {/* ── HERO ── */}
+      {isGrouped ? (
+        /* Developer brand — centered */
+        <div style={{ position:'relative', overflow:'hidden', textAlign:'center' }}>
+          {item.iconUrl ? (
+            <>
+              <img src={item.iconUrl} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', filter:'blur(60px) brightness(.22) saturate(3)', transform:'scale(1.5)', zIndex:0 }}/>
+              <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.45)', zIndex:1 }}/>
+            </>
+          ) : item.bannerUrl ? (
+            <>
+              <img src={item.bannerUrl} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', filter:'blur(32px) brightness(.2) saturate(1.5)', transform:'scale(1.2)', zIndex:0 }}/>
+              <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.4)', zIndex:1 }}/>
+            </>
+          ) : (
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#0e0e16 0%,#1a1030 100%)', zIndex:0 }}/>
+          )}
+          <div style={{ position:'relative', zIndex:2, padding:'56px 20px 50px', display:'inline-flex', flexDirection:'column', alignItems:'center' }}>
+            {item.iconUrl
+              ? <img src={item.iconUrl} alt="" style={{ width:88, height:88, borderRadius:22, objectFit:'cover', marginBottom:16, boxShadow:'0 16px 48px rgba(0,0,0,.8)', border:'1.5px solid rgba(255,255,255,.12)' }}/>
+              : <div style={{ width:88, height:88, borderRadius:22, background:'rgba(255,255,255,.07)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:26, fontWeight:800, color:'rgba(255,255,255,.4)', marginBottom:16, fontFamily:'var(--fd)' }}>{item.name.slice(0,2).toUpperCase()}</div>
+            }
+            <h1 style={{ fontSize:32, fontWeight:800, color:'#fff', margin:'0 0 7px', letterSpacing:-.5 }}>{item.name}</h1>
+            <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{appCount} {appCountLabel}</div>
+            {item.tags.length > 0 && (
+              <div style={{ display:'flex', gap:5, flexWrap:'wrap', justifyContent:'center', marginTop:12 }}>
+                {item.tags.map(t => (
+                  <span key={t} style={{ fontSize:10, fontWeight:600, color:'rgba(255,255,255,.35)', background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.1)', padding:'2px 8px', borderRadius:5 }}>{t}</span>
+                ))}
+              </div>
+            )}
+</div>
+        </div>
+      ) : (
+        /* Single app — left-aligned with % */
+        <div style={{ position:'relative', overflow:'hidden' }}>
+          {item.iconUrl ? (
+            <>
+              <img src={item.iconUrl} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', filter:'blur(60px) brightness(.22) saturate(3)', transform:'scale(1.5)', zIndex:0 }}/>
+              <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.42)', zIndex:1 }}/>
+            </>
+          ) : item.bannerUrl ? (
+            <>
+              <img src={item.bannerUrl} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', filter:'blur(28px) brightness(.25) saturate(1.6)', transform:'scale(1.2)', zIndex:0 }}/>
+              <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.4)', zIndex:1 }}/>
+            </>
+          ) : (
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#0e0e16 0%,#1c1030 60%,#200820 100%)', zIndex:0 }}/>
+          )}
+          <div className="hero-row" style={{ position:'relative', zIndex:2, maxWidth:900, margin:'0 auto', padding:'52px 20px 44px', display:'flex', alignItems:'center', gap:24 }}>
+            {item.iconUrl
+              ? <img className="hero-icon" src={item.iconUrl} alt="" style={{ width:96, height:96, borderRadius:24, objectFit:'cover', flexShrink:0, boxShadow:'0 16px 48px rgba(0,0,0,.7)', border:'1.5px solid rgba(255,255,255,.1)' }}/>
+              : <div className="hero-icon" style={{ width:96, height:96, borderRadius:24, background:'rgba(255,255,255,.07)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:28, fontWeight:800, color:'rgba(255,255,255,.4)', fontFamily:'var(--fd)' }}>{item.name.slice(0,2).toUpperCase()}</div>
+            }
+            <div className="hero-info" style={{ flex:1, minWidth:0 }}>
+              <h1 className="hero-title" style={{ fontSize:30, fontWeight:800, color:'#fff', margin:'0 0 8px', lineHeight:1.2, letterSpacing:-.5 }}>{item.name}</h1>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:5, alignItems:'center' }}>
+                {item.org && (
+                  <a href={`/${categoryId}?org=${encodeURIComponent(item.org.name)}`} style={{ display:'inline-flex', alignItems:'center', gap:4, fontSize:10, fontWeight:700, color:'rgba(255,255,255,.5)', background:'rgba(255,255,255,.07)', border:'1px solid rgba(255,255,255,.12)', padding:'2px 8px', borderRadius:5, textDecoration:'none' }}>
+                    {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{ width:12, height:12, borderRadius:2, objectFit:'cover' }}/>}
+                    {item.org.name}
+                  </a>
+                )}
+                {item.tags.map(t => (
+                  <span key={t} style={{ fontSize:10, fontWeight:600, color:'rgba(255,255,255,.35)', background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.1)', padding:'2px 8px', borderRadius:5 }}>{t}</span>
+                ))}
+                {item.updatedAt && <span style={{ fontSize:9, color:'rgba(255,255,255,.25)' }}>↻ {formatDate(item.updatedAt)}</span>}
               </div>
             </div>
-          )
-        }
-        <div className="banner-fade"/>
-      </div>
-
-      {/* ── Content ── */}
-      <div style={{ maxWidth:760, margin:'0 auto', padding:'0 16px 80px' }}>
-
-        {/* ── Icon + title ── */}
-        <div style={{ display:'flex', alignItems:'center', gap:14, padding:'18px 0 16px', flexWrap:'wrap' }}>
-          {item.iconUrl && (
-            <img src={item.iconUrl} alt="" style={{
-              width:56, height:56, borderRadius:14, objectFit:'cover', flexShrink:0,
-              background:'var(--bg2)', border:'1px solid var(--bd)',
-            }}/>
-          )}
-          <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:5 }}>
-              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:13, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
-              <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{item.name}</h1>
-            </div>
-            <div style={{ display:'flex', flexWrap:'wrap', gap:4, alignItems:'center' }}>
-              {item.org && (
-                <a href={`/${categoryId}?org=${encodeURIComponent(item.org.name)}`} style={{
-                  display:'inline-flex', alignItems:'center', gap:4, fontSize:9, fontWeight:700,
-                  background:'var(--bg3)', color:'var(--t2)', padding:'2px 8px', borderRadius:4,
-                  border:'1px solid var(--bd)', textDecoration:'none',
-                }}>
-                  {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{ width:11, height:11, borderRadius:2, objectFit:'cover' }}/>}
-                  {item.org.name}
-                </a>
-              )}
-              {item.tags.map(t => (
-                <span key={t} style={{ fontSize:9, fontWeight:600, background:'var(--bluea)', color:'var(--blue)', padding:'2px 7px', borderRadius:4 }}>{t}</span>
-              ))}
-              {item.updatedAt && (
-                <span style={{ fontSize:9, color:'var(--t3)', marginLeft:'auto', whiteSpace:'nowrap' }}>
-                  ↻ {formatDate(item.updatedAt)}
-                </span>
+            <div style={{ textAlign:'center', flexShrink:0, padding:'0 4px' }}>
+              {simplePct !== null ? (
+                <>
+                  <div className="hero-pct" style={{ fontSize:48, fontWeight:900, color:simpleColor, lineHeight:1, letterSpacing:-3, fontVariantNumeric:'tabular-nums' }}>{simplePct}<span className="hero-pct-sup" style={{ fontSize:24, letterSpacing:0 }}>%</span></div>
+                  <div style={{ fontSize:8, fontWeight:800, color:'rgba(255,255,255,.25)', textTransform:'uppercase', letterSpacing:2, marginTop:6 }}>ПЕРАКЛАД BE</div>
+                  <div style={{ width:64, height:3, background:'rgba(255,255,255,.08)', borderRadius:2, margin:'8px auto 0', overflow:'hidden' }}>
+                    <div style={{ width:`${simplePct}%`, height:'100%', background:simpleColor }}/>
+                  </div>
+                </>
+              ) : (
+                <div style={{ fontSize:11, fontWeight:600, color:'rgba(255,255,255,.25)', padding:'8px 14px', background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:8, whiteSpace:'nowrap' }}>
+                  Даных няма
+                </div>
               )}
             </div>
           </div>
         </div>
+      )}
 
-        <div style={{ height:1, background:'var(--bd)', marginBottom:20 }}/>
+      {/* ── CONTENT ── */}
+      <div style={{ maxWidth: isGrouped ? 1000 : 900, margin:'0 auto', padding:'32px 16px 80px' }}>
 
-        {/* ── SIMPLE MODE: description + platform links ── */}
-        {!isGrouped && (
-          <>
-            {item.description && (
-              <div className="md" style={{ fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:16 }}
-                dangerouslySetInnerHTML={{ __html: md(item.description) }}/>
-            )}
-            <PlatformLinks platforms={item.platforms}/>
-
-          </>
+        {/* Description: grouped → before grid; simple → after 2-col */}
+        {isGrouped && item.description && (
+          <div className="md" style={{ fontSize:14, color:'var(--t2)', lineHeight:1.9, marginBottom:28 }}
+            dangerouslySetInnerHTML={{ __html: md(item.description) }}/>
         )}
 
-        {/* ── GROUPED MODE: family overview ── */}
+        {/* ── GROUPED: app cards grid ── */}
         {isGrouped && item.apps && (
-          <>
-            {item.description && (
-              <div className="md" style={{ fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:20 }}
-                dangerouslySetInnerHTML={{ __html: md(item.description) }}/>
-            )}
-            <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:10 }}>
-              # праграмы
-            </div>
-            <div style={{ display:'flex', flexDirection:'column', gap:6, marginBottom:24 }}>
-              {item.apps.map(app => (
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))', gap:12, marginBottom:36 }}>
+            {item.apps.map(app => {
+              const appEntries = progress ? getAppProgress(app, progress) : []
+              const appPct = appEntries.length ? avgPct(appEntries) : null
+              const appColor = appPct !== null ? pctColor(appPct) : 'var(--t3)'
+              const appPlats = Array.from(new Set(app.platforms.map(p => p.name)))
+              return (
                 <a key={app.id} href={`/${categoryId}/${item.id}/${app.id}`} style={{
-                  display:'flex', alignItems:'center', gap:12,
-                  padding:'12px 14px', borderRadius:12,
+                  display:'flex', flexDirection:'column', padding:'16px', borderRadius:16,
                   background:'var(--bg1)', border:'1px solid var(--bd)',
-                  textDecoration:'none', transition:'border-color .15s',
+                  textDecoration:'none', transition:'border-color .15s, background .15s, box-shadow .15s',
+                  boxShadow:'0 2px 8px rgba(0,0,0,.1)',
                 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
+                onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.background='var(--bg2)'; el.style.boxShadow='0 6px 24px rgba(0,0,0,.18)' }}
+                onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--bd)'; el.style.background='var(--bg1)'; el.style.boxShadow='0 2px 8px rgba(0,0,0,.1)' }}
                 >
-                  {app.iconUrl
-                    ? <img src={app.iconUrl} alt="" style={{ width:40, height:40, borderRadius:10, objectFit:'cover', flexShrink:0 }}/>
-                    : <div style={{ width:40, height:40, borderRadius:10, background:'var(--bg3)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:13, color:'var(--t3)', fontFamily:'var(--fd)' }}>{app.name.slice(0,2).toUpperCase()}</div>
-                  }
-                  <div style={{ flex:1, minWidth:0 }}>
-                    <div style={{ fontSize:13, fontWeight:700, color:'var(--text)', marginBottom:2 }}>{app.name}</div>
-                    {app.description && (
-                      <div style={{ fontSize:11, color:'var(--t3)', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
-                        {app.description.replace(/[#*[\]`]/g, '').slice(0, 100)}
-                      </div>
-                    )}
-                    {app.platforms.length > 0 && (
-                      <div style={{ display:'flex', gap:4, marginTop:5, flexWrap:'wrap' }}>
-                        {Array.from(new Set(app.platforms.map(p => p.name))).map(n => (
-                          <span key={n} style={{ fontSize:9, fontWeight:700, background:'var(--pinkc)', color:'var(--pink)', padding:'1px 6px', borderRadius:4 }}>{n}</span>
+                  {/* Top section grows to fill card height → progress always aligns at bottom */}
+                  <div style={{ flex:1, display:'flex', alignItems:'flex-start', gap:14, marginBottom:14 }}>
+                    {app.iconUrl
+                      ? <img src={app.iconUrl} alt="" style={{ width:52, height:52, borderRadius:13, objectFit:'cover', flexShrink:0, border:'1px solid var(--bd)', boxShadow:'0 4px 12px rgba(0,0,0,.2)' }}/>
+                      : <div style={{ width:52, height:52, borderRadius:13, background:'var(--bg3)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:15, color:'var(--t3)', fontFamily:'var(--fd)' }}>{app.name.slice(0,2).toUpperCase()}</div>
+                    }
+                    <div style={{ flex:1, minWidth:0, paddingTop:2 }}>
+                      <div style={{ fontSize:14, fontWeight:700, color:'var(--text)', marginBottom:6, lineHeight:1.3 }}>{app.name}</div>
+                      <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+                        {appPlats.map(n => (
+                          <span key={n} style={{ fontSize:9, fontWeight:700, background:'var(--pinkc)', color:'var(--pink)', padding:'2px 7px', borderRadius:4 }}>{n}</span>
                         ))}
                       </div>
-                    )}
+                    </div>
                   </div>
-                  {(() => {
-                    const pct = progress ? avgPct(getAppProgress(app, progress)) : null
-                    if (pct === null) return <span style={{ fontSize:16, color:'var(--t3)', flexShrink:0 }}>›</span>
-                    const c = pctColor(pct)
-                    return (
-                      <span style={{ fontSize:12, fontWeight:700, color:c, flexShrink:0, minWidth:36, textAlign:'right' }}>{pct}%</span>
-                    )
-                  })()}
+                  {/* Progress — always at bottom of card */}
+                  {appPct !== null ? (
+                    <div>
+                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:6 }}>
+                        <span style={{ fontSize:9, fontWeight:700, color:'var(--t3)', textTransform:'uppercase', letterSpacing:1 }}>Пераклад</span>
+                        <span style={{ fontSize:15, fontWeight:800, color:appColor }}>{appPct}%</span>
+                      </div>
+                      <div style={{ height:4, borderRadius:2, background:`${appColor}18`, overflow:'hidden' }}>
+                        <div style={{ width:`${appPct}%`, height:'100%', background:appColor, borderRadius:2, transition:'width .4s' }}/>
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{ fontSize:10, color:'var(--t3)' }}>Даных няма</div>
+                  )}
                 </a>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* ── Translation progress (only for simple items) ── */}
-        {!isGrouped && <TranslationProgress item={item} progress={progress}/>}
-
-        {/* ── Screenshot ── */}
-        {item.screenshotUrl && !isGrouped && (
-          <div style={{ marginBottom:20 }}>
-            <div style={{ fontSize:10, fontWeight:600, color:'var(--t3)', marginBottom:8 }}># скрыншот</div>
-            <img src={item.screenshotUrl} alt="Скрыншот"
-              style={{ width:'100%', borderRadius:12, border:'1px solid var(--bd)', display:'block' }}/>
+              )
+            })}
           </div>
         )}
 
-        {/* ── Related org apps (minimal) ── */}
-        {item.org && (() => {
+        {/* ── SIMPLE: 2-col (screenshot left + sidebar right) ── */}
+        {!isGrouped && (
+          <div style={{ marginBottom:28 }}>
+            <div style={{ display:'flex', gap:24, alignItems:'flex-start', marginBottom:28, flexWrap:'wrap' }}>
+
+              {/* Screenshot */}
+              {item.screenshotUrl && (
+                <div style={{ flex:1, minWidth:220 }}>
+                  <img src={item.screenshotUrl} alt="" style={{ width:'100%', display:'block', borderRadius:14, border:'1px solid var(--bd)', boxShadow:'0 12px 40px rgba(0,0,0,.35)', maxHeight:500, objectFit:'contain', background:'var(--bg1)' }}/>
+                </div>
+              )}
+
+              {/* Sidebar: links + components */}
+              <div className="ap-sidebar" style={{ width: item.screenshotUrl ? 280 : '100%', flexShrink:0, display:'flex', flexDirection:'column', gap:16 }}>
+                {item.platforms.length > 0 && (
+                  <div>
+                    <SLabel>Перакласці</SLabel>
+                    <PlatformLinks platforms={item.platforms}/>
+                  </div>
+                )}
+                {simpleEntries.length > 1 && simplePct !== null && (
+                  <div>
+                    <SLabel>Кампаненты</SLabel>
+                    <div style={{ background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'10px 14px', display:'flex', flexDirection:'column', gap:8 }}>
+                      {simpleEntries.map((e: ItemProgressEntry) => (
+                        <div key={e.key} style={{ display:'flex', alignItems:'center', gap:8 }}>
+                          <span style={{ fontSize:10, color:'var(--t3)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{e.key}</span>
+                          <span style={{ fontSize:11, fontWeight:700, color:pctColor(e.pct), flexShrink:0 }}>{Math.round(e.pct)}%</span>
+                          <div style={{ width:40, height:3, borderRadius:2, background:`${pctColor(e.pct)}20`, overflow:'hidden', flexShrink:0 }}>
+                            <div style={{ width:`${e.pct}%`, height:'100%', background:pctColor(e.pct) }}/>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Description after 2-col */}
+            {item.description && (
+              <div className="md" style={{ fontSize:14, color:'var(--t2)', lineHeight:1.9, marginBottom:24 }}
+                dangerouslySetInnerHTML={{ __html: md(item.description) }}/>
+            )}
+          </div>
+        )}
+
+        {/* Related org items (simple only) */}
+        {!isGrouped && item.org && (() => {
           const related = cat.items.filter(i => i.id !== item.id && i.org?.name === item.org!.name)
           if (!related.length) return null
           return (
-            <div style={{ marginBottom:24 }}>
-              <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:10 }}>
-                # іншыя праграмы {item.org.name}
-              </div>
-              <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+            <div style={{ marginBottom:24, borderTop:'1px solid var(--bd)', paddingTop:22 }}>
+              <SLabel>Іншыя праграмы {item.org.name}</SLabel>
+              <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
                 {related.map(rel => (
                   <a key={rel.id} href={`/${categoryId}/${rel.id}`} style={{
-                    display:'flex', flexDirection:'column', alignItems:'center', gap:6,
-                    padding:'10px 12px', borderRadius:12, width:72,
-                    background:'var(--bg1)', border:'1px solid var(--bd)',
+                    display:'flex', alignItems:'center', gap:8, padding:'8px 12px 8px 8px',
+                    borderRadius:10, background:'var(--bg1)', border:'1px solid var(--bd)',
                     textDecoration:'none', transition:'border-color .15s',
                   }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
                   >
                     {rel.iconUrl
-                      ? <img src={rel.iconUrl} alt="" style={{ width:36, height:36, borderRadius:9, objectFit:'cover' }}/>
-                      : <div style={{ width:36, height:36, borderRadius:9, background:'var(--bg3)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:11, color:'var(--t3)' }}>{rel.name.slice(0,2).toUpperCase()}</div>
+                      ? <img src={rel.iconUrl} alt="" style={{ width:28, height:28, borderRadius:7, objectFit:'cover' }}/>
+                      : <div style={{ width:28, height:28, borderRadius:7, background:'var(--bg3)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:10, color:'var(--t3)' }}>{rel.name.slice(0,2).toUpperCase()}</div>
                     }
-                    <span style={{ fontSize:9, fontWeight:600, color:'var(--t2)', textAlign:'center', lineHeight:1.3, wordBreak:'break-word' }}>{rel.name}</span>
+                    <span style={{ fontSize:12, fontWeight:600, color:'var(--text)' }}>{rel.name}</span>
                   </a>
                 ))}
               </div>
@@ -284,17 +345,9 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
           )
         })()}
 
-        {/* Back + Copy */}
-        <div style={{ display:'flex', gap:8, marginTop:24 }}>
-          <a href={`/${categoryId}`} style={{
-            display:'inline-flex', alignItems:'center', gap:6,
-            fontSize:11, fontWeight:600, color:'var(--t3)',
-            background:'var(--bg2)', border:'1px solid var(--bd)',
-            padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s',
-          }}
-          onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
-          onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
-          >cd ../{categoryId}</a>
+        {/* Nav */}
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+          <NavBtn href={`/${categoryId}`}>cd ../{categoryId}</NavBtn>
           <CopyLink/>
         </div>
       </div>
@@ -309,98 +362,16 @@ export default function ItemPage({ initialData }: { initialData?: SiteData }) {
         .md a{color:var(--pink);text-decoration:underline;text-underline-offset:2px}
         .md strong{color:var(--text);font-weight:700}
         .md code{background:var(--bg3);color:var(--purp);padding:1px 6px;border-radius:4px;font-size:11px}
+        @media(max-width:640px){.ap-sidebar{width:100%!important}}
+        @media(max-width:520px){
+          .hero-row{padding:28px 16px 24px!important;gap:12px!important}
+          .hero-icon{width:68px!important;height:68px!important;border-radius:17px!important;flex-shrink:0}
+          .hero-title{font-size:20px!important}
+          .hero-pct{font-size:32px!important;letter-spacing:-2px!important}
+          .hero-pct-sup{font-size:16px!important}
+        }
       `}</style>
     </>
-  )
-}
-
-const PLATFORM_LABEL: Record<string, string> = {
-  crowdin: 'Crowdin', weblate: 'Weblate', github: 'GitHub',
-}
-
-function ProgressBar({ entries, label }: { entries: ItemProgressEntry[]; label?: string }) {
-  const total = avgPct(entries)
-  if (total === null) return null
-  const color = pctColor(total)
-  return (
-    <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-      {/* Totals row */}
-      <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-        {label && (
-          <span style={{ fontSize:10, color:'var(--t2)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
-            {label}
-          </span>
-        )}
-        <div style={{ ...(label ? { width:40, flexShrink:0 } : { flex:1 }), height: label ? 3 : 4, borderRadius:3, background:'var(--bg3)', overflow:'hidden' }}>
-          <div style={{ width:`${total}%`, height:'100%', background:color, borderRadius:3, transition:'width .5s ease' }}/>
-        </div>
-        {label && <span style={{ fontSize:10, fontWeight:800, color, flexShrink:0, minWidth:32, textAlign:'right' }}>{total}%</span>}
-      </div>
-      {/* Per-component detail (only if multiple) */}
-      {!label && entries.length > 1 && (
-        <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
-          {entries.map(e => (
-            <div key={e.key} style={{ display:'flex', alignItems:'center', gap:8 }}>
-              <span style={{ fontSize:9, fontWeight:700, color:'var(--t3)', background:'var(--bg3)', borderRadius:4, padding:'1px 6px', flexShrink:0, whiteSpace:'nowrap' }}>
-                {PLATFORM_LABEL[e.platform] ?? e.platform}
-              </span>
-              <span style={{ fontSize:10, color:'var(--t2)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
-                {e.key}
-              </span>
-              <div style={{ width:40, height:3, borderRadius:2, background:'var(--bg3)', overflow:'hidden', flexShrink:0 }}>
-                <div style={{ width:`${e.pct}%`, height:'100%', background:pctColor(e.pct), borderRadius:2 }}/>
-              </div>
-              <span style={{ fontSize:10, fontWeight:700, color:pctColor(e.pct), flexShrink:0, minWidth:32, textAlign:'right' }}>{e.pct}%</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
-function TranslationProgress({ item, progress }: { item: SiteData['categories'][0]['items'][0]; progress: ProgressData | null }) {
-  if (!progress) return null
-
-  const isGrouped = !!(item.apps && item.apps.length > 0)
-
-  // For grouped items: show per-app breakdown
-  if (isGrouped && item.apps) {
-    const appRows = item.apps
-      .map(app => ({ app, entries: getAppProgress(app, progress) }))
-      .filter(r => r.entries.length > 0)
-    if (!appRows.length) return null
-
-    return (
-      <div style={{ marginBottom:20, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
-        <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:12 }}>
-          # прагрэс перакладу (be)
-        </div>
-        <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-          {appRows.map(({ app, entries }) => (
-            <ProgressBar key={app.id} entries={entries} label={app.name}/>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  // For simple items: show component breakdown
-  const entries = getItemProgress(item, progress)
-  if (!entries.length) return null
-  const pct = avgPct(entries)
-  const color = pct !== null ? pctColor(pct) : 'var(--t3)'
-
-  return (
-    <div style={{ marginBottom:20, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
-      <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:8 }}>
-        <span style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', flex:1 }}>
-          # прагрэс перакладу (be)
-        </span>
-        {pct !== null && <span style={{ fontSize:13, fontWeight:800, color }}>{pct}%</span>}
-      </div>
-      <ProgressBar entries={entries}/>
-    </div>
   )
 }
 
@@ -413,25 +384,9 @@ function CopyLink() {
     })
   }, [])
   return (
-    <button onClick={copy} style={{
-      display:'inline-flex', alignItems:'center', gap:6,
-      fontSize:11, fontWeight:600, color: copied ? 'var(--green)' : 'var(--t3)',
-      background:'var(--bg2)', border:`1px solid ${copied ? 'rgba(34,197,94,.3)' : 'var(--bd)'}`,
-      padding:'7px 14px', borderRadius:8, cursor:'pointer', transition:'all .15s',
-    }}>
+    <button onClick={copy} style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:600, color: copied ? 'var(--green)' : 'var(--t3)', background:'var(--bg2)', border:`1px solid ${copied ? 'rgba(34,197,94,.3)' : 'var(--bd)'}`, padding:'7px 14px', borderRadius:8, cursor:'pointer', transition:'all .15s' }}>
       {copied ? '✓ скапіявана' : '⎘ спасылка'}
     </button>
-  )
-}
-
-function Spinner() {
-  return (
-    <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:6, height:'100vh' }}>
-      {[0,.2,.4].map((d,i) => (
-        <span key={i} style={{ width:6, height:6, borderRadius:'50%', background:'var(--pink)', animation:`sp 1.2s ${d}s ease-in-out infinite`, display:'block' }}/>
-      ))}
-      <style>{`@keyframes sp{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}`}</style>
-    </div>
   )
 }
 

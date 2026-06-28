@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
-import type { SiteData, Platform, AppEntry } from '@/types'
-import { getLinkStyle, formatDate } from '@/lib/platforms'
+import type { SiteData, Platform } from '@/types'
+import { getLinkStyle } from '@/lib/platforms'
 import { fetchProgress, getAppProgress, avgPct, pctColor, type ProgressData, type ItemProgressEntry } from '@/lib/progress'
 import Header from '@/components/Header'
 import dataJson from '../../../../../public/data.json'
@@ -43,7 +43,7 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
               border: `1px solid ${i===tab ? 'var(--bd2)' : 'var(--bd)'}`,
               background: i===tab ? 'var(--bg3)' : 'var(--bg2)',
               color: i===tab ? 'var(--text)' : 'var(--t2)',
-              cursor:'pointer', transition:'all .15s', whiteSpace:'nowrap',
+              cursor:'pointer', transition:'all .15s', whiteSpace:'nowrap', flex:1,
             }}>{p.name}</button>
           ))}
         </div>
@@ -54,8 +54,7 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
             const ls = getLinkStyle(link.type)
             return (
               <a key={i} href={link.url} target="_blank" rel="noreferrer" style={{
-                display:'flex', alignItems:'center', gap:12,
-                padding:'11px 14px',
+                display:'flex', alignItems:'center', gap:12, padding:'11px 14px',
                 borderBottom: i < plat.links.length-1 ? '1px solid var(--bd)' : 'none',
                 textDecoration:'none', background:'transparent', transition:'background .15s',
               }}
@@ -77,6 +76,24 @@ function PlatformLinks({ platforms }: { platforms: Platform[] }) {
   )
 }
 
+function SLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display:'flex', alignItems:'center', gap:7, marginBottom:14 }}>
+      <div style={{ width:2, height:11, background:'var(--pink)', borderRadius:1, flexShrink:0 }}/>
+      <div style={{ fontSize:10, fontWeight:800, color:'var(--t2)', letterSpacing:1.2, textTransform:'uppercase' }}>{children}</div>
+    </div>
+  )
+}
+
+function NavBtn({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:600, color:'var(--t3)', background:'var(--bg2)', border:'1px solid var(--bd)', padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s' }}
+      onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
+      onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
+    >{children}</a>
+  )
+}
+
 export default function AppPage({ initialData }: { initialData?: SiteData }) {
   const { categoryId, itemId, appId } = useParams() as { categoryId: string; itemId: string; appId: string }
   const data = (initialData ?? STATIC_DATA) as SiteData
@@ -91,167 +108,177 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
   if (!cat || !item || !app) return <Msg>Не знойдзена</Msg>
 
   const siblings = (item.apps ?? []).filter(a => a.id !== appId)
+  const entries = progress ? getAppProgress(app, progress) : []
+  const pct = entries.length ? avgPct(entries) : null
+  const color = pct !== null ? pctColor(pct) : 'rgba(255,255,255,.3)'
+  const platNames = Array.from(new Set(app.platforms.map(p => p.name)))
 
   return (
     <>
       <Header cats={data.categories} activeId={categoryId} crumb={app.name}/>
 
-      {/* Banner */}
-      <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)', borderRadius:'0 0 12px 12px' }}>
-        {item.bannerUrl
-          ? <img src={item.bannerUrl} alt={app.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center', display:'block' }}/>
-          : (
-            <div style={{ width:'100%', height:'100%', position:'relative' }}>
-              <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center,rgba(255,45,107,.18) 0%,transparent 65%)' }}/>
-              <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <span style={{ fontFamily:'var(--fd)', fontSize:'clamp(2rem,7vw,5rem)', letterSpacing:5, color:'#eef0f8' }}>{app.name}</span>
-              </div>
-            </div>
-          )
-        }
-        <div className="banner-fade"/>
-      </div>
+      {/* ── HERO ── */}
+      <div style={{ position:'relative', overflow:'hidden' }}>
+        {app.iconUrl ? (
+          <>
+            <img src={app.iconUrl} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', filter:'blur(60px) brightness(.22) saturate(3)', transform:'scale(1.5)', zIndex:0 }}/>
+            <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.42)', zIndex:1 }}/>
+          </>
+        ) : (
+          <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#0e0e16 0%,#1c1030 60%,#200820 100%)', zIndex:0 }}/>
+        )}
 
-      <div style={{ maxWidth:760, margin:'0 auto', padding:'0 16px 80px' }}>
+        <div className="hero-row" style={{ position:'relative', zIndex:2, maxWidth:900, margin:'0 auto', padding:'52px 20px 44px', display:'flex', alignItems:'center', gap:24 }}>
+          {/* Icon */}
+          {app.iconUrl
+            ? <img className="hero-icon" src={app.iconUrl} alt="" style={{ width:96, height:96, borderRadius:24, objectFit:'cover', flexShrink:0, boxShadow:'0 16px 48px rgba(0,0,0,.7)', border:'1.5px solid rgba(255,255,255,.1)' }}/>
+            : <div className="hero-icon" style={{ width:96, height:96, borderRadius:24, background:'rgba(255,255,255,.07)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:28, fontWeight:800, color:'rgba(255,255,255,.4)', fontFamily:'var(--fd)' }}>{app.name.slice(0,2).toUpperCase()}</div>
+          }
 
-        {/* Icon + title + developer badge */}
-        <div style={{ display:'flex', alignItems:'center', gap:14, padding:'18px 0 16px', flexWrap:'wrap' }}>
-          {app.iconUrl && (
-            <img src={app.iconUrl} alt="" style={{
-              width:56, height:56, borderRadius:14, objectFit:'cover', flexShrink:0,
-              background:'var(--bg2)', border:'1px solid var(--bd)',
-            }}/>
-          )}
-          <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:5, marginBottom:5 }}>
-              <span style={{ color:'var(--pink)', fontWeight:700, fontSize:13, flexShrink:0, fontFamily:'monospace' }}>$ man</span>
-              <h1 style={{ fontSize:16, fontWeight:700, color:'var(--text)', letterSpacing:-.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', fontFamily:'monospace' }}>{app.name}</h1>
-            </div>
-            <a href={`/${categoryId}/${item.id}`} style={{ display:'inline-flex', alignItems:'center', gap:5, textDecoration:'none' }}>
-              {item.iconUrl && <img src={item.iconUrl} alt="" style={{ width:13, height:13, borderRadius:3, objectFit:'cover', flexShrink:0 }}/>}
-              <span style={{ fontSize:10, fontWeight:600, color:'var(--t3)' }}>by</span>
-              <span style={{ fontSize:10, fontWeight:700, color:'var(--pink)' }}>{item.name}</span>
+          {/* Info */}
+          <div className="hero-info" style={{ flex:1, minWidth:0 }}>
+            <h1 className="hero-title" style={{ fontSize:30, fontWeight:800, color:'#fff', margin:'0 0 7px', lineHeight:1.2, letterSpacing:-.5 }}>{app.name}</h1>
+            <a href={`/${categoryId}/${item.id}`} style={{ display:'inline-flex', alignItems:'center', gap:6, textDecoration:'none', marginBottom:12 }}>
+              {item.iconUrl && <img src={item.iconUrl} alt="" style={{ width:15, height:15, borderRadius:4, objectFit:'cover' }}/>}
+              <span style={{ fontSize:12, color:'rgba(255,255,255,.4)' }}>ад</span>
+              <span style={{ fontSize:12, fontWeight:700, color:'rgba(255,255,255,.8)', borderBottom:'1px solid rgba(255,255,255,.2)' }}>{item.name}</span>
             </a>
+            {platNames.length > 0 && (
+              <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
+                {platNames.map(n => (
+                  <span key={n} style={{ fontSize:10, fontWeight:600, color:'rgba(255,255,255,.4)', background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.1)', padding:'2px 9px', borderRadius:5 }}>{n}</span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Progress — always shown, "Даных няма" when no data */}
+          <div style={{ textAlign:'center', flexShrink:0, padding:'0 4px' }}>
+            {pct !== null ? (
+              <>
+                <div className="hero-pct" style={{ fontSize:48, fontWeight:900, color, lineHeight:1, letterSpacing:-3, fontVariantNumeric:'tabular-nums' }}>{pct}<span className="hero-pct-sup" style={{ fontSize:24, letterSpacing:0 }}>%</span></div>
+                <div style={{ fontSize:8, fontWeight:800, color:'rgba(255,255,255,.25)', textTransform:'uppercase', letterSpacing:2, marginTop:6 }}>ПЕРАКЛАД BE</div>
+                <div style={{ width:64, height:3, background:'rgba(255,255,255,.08)', borderRadius:2, margin:'8px auto 0', overflow:'hidden' }}>
+                  <div style={{ width:`${pct}%`, height:'100%', background:color, borderRadius:2 }}/>
+                </div>
+              </>
+            ) : (
+              <div style={{ fontSize:11, fontWeight:600, color:'rgba(255,255,255,.25)', padding:'8px 14px', background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:8, whiteSpace:'nowrap' }}>
+                Даных няма
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        <div style={{ height:1, background:'var(--bd)', marginBottom:20 }}/>
+      {/* ── CONTENT ── */}
+      <div style={{ maxWidth:900, margin:'0 auto', padding:'36px 16px 80px' }}>
 
-        {/* Description */}
-        {app.description && (
-          <div className="md" style={{ fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:20 }}
-            dangerouslySetInnerHTML={{ __html: md(app.description) }}/>
-        )}
+        {/* Main 2-col: screenshot (left) + action sidebar (right) */}
+        <div style={{ display:'flex', gap:24, alignItems:'flex-start', marginBottom:28, flexWrap:'wrap' }}>
 
-        {/* Shared note from parent item (write once, shown on all child apps) */}
-        {item.note && (
-          <div className="md" style={{
-            fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:20,
-            background:'var(--bg1)', border:'1px solid var(--bd)',
-            borderLeft:'3px solid var(--pink)', borderRadius:'0 10px 10px 0',
-            padding:'12px 16px',
-          }}
-            dangerouslySetInnerHTML={{ __html: md(item.note) }}/>
-        )}
+          {/* Screenshot */}
+          {app.screenshotUrl && (
+            <div style={{ flex:1, minWidth:220 }}>
+              <img src={app.screenshotUrl} alt="" style={{ width:'100%', display:'block', borderRadius:14, border:'1px solid var(--bd)', boxShadow:'0 12px 40px rgba(0,0,0,.35)', maxHeight:500, objectFit:'contain', background:'var(--bg1)' }}/>
+            </div>
+          )}
 
-        {/* Platform links */}
-        {app.platforms.length > 0 && (
-          <div style={{ marginBottom:24 }}>
-            <PlatformLinks platforms={app.platforms}/>
-          </div>
-        )}
+          {/* Action sidebar */}
+          <div className="ap-sidebar" style={{ width: app.screenshotUrl ? 280 : '100%', flexShrink:0, display:'flex', flexDirection:'column', gap:16 }}>
 
-        {/* Translation progress */}
-        {progress && (() => {
-          const entries = getAppProgress(app, progress)
-          if (!entries.length) return null
-          const pct = avgPct(entries)
-          if (pct === null) return null
-          const color = pctColor(pct)
-          return (
-            <div style={{ marginBottom:24, background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'14px 16px' }}>
-              <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom: entries.length > 1 ? 12 : 8 }}>
-                <span style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', flex:1 }}>
-                  # прагрэс перакладу (be)
-                </span>
-                <span style={{ fontSize:13, fontWeight:800, color }}>{pct}%</span>
+            {/* Platform links */}
+            {app.platforms.length > 0 && (
+              <div>
+                <SLabel>Перакласці</SLabel>
+                <PlatformLinks platforms={app.platforms}/>
               </div>
-              <div style={{ height:4, borderRadius:2, background:`${color}20`, overflow:'hidden' }}>
-                <div style={{ width:`${pct}%`, height:'100%', background:color, borderRadius:2 }}/>
-              </div>
-              {entries.length > 1 && (
-                <div style={{ marginTop:10, display:'flex', flexDirection:'column', gap:4 }}>
-                  {entries.map(e => (
+            )}
+
+            {/* Multi-source progress detail */}
+            {entries.length > 1 && pct !== null && (
+              <div>
+                <SLabel>Кампаненты</SLabel>
+                <div style={{ background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12, padding:'10px 14px', display:'flex', flexDirection:'column', gap:8 }}>
+                  {entries.map((e: ItemProgressEntry) => (
                     <div key={e.key} style={{ display:'flex', alignItems:'center', gap:8 }}>
                       <span style={{ fontSize:10, color:'var(--t3)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{e.key}</span>
-                      <span style={{ fontSize:10, fontWeight:700, color:pctColor(e.pct), flexShrink:0 }}>{Math.round(e.pct)}%</span>
-                      <div style={{ width:60, height:3, borderRadius:2, background:`${pctColor(e.pct)}20`, overflow:'hidden', flexShrink:0 }}>
+                      <span style={{ fontSize:11, fontWeight:700, color:pctColor(e.pct), flexShrink:0 }}>{Math.round(e.pct)}%</span>
+                      <div style={{ width:40, height:3, borderRadius:2, background:`${pctColor(e.pct)}20`, overflow:'hidden', flexShrink:0 }}>
                         <div style={{ width:`${e.pct}%`, height:'100%', background:pctColor(e.pct) }}/>
                       </div>
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
-          )
-        })()}
-
-        {/* Screenshot */}
-        {app.screenshotUrl && (
-          <div style={{ marginBottom:24 }}>
-            <div style={{ fontSize:10, fontWeight:600, color:'var(--t3)', marginBottom:8 }}># скрыншот</div>
-            <img src={app.screenshotUrl} alt="Скрыншот" style={{ width:'100%', borderRadius:12, border:'1px solid var(--bd)', display:'block' }}/>
+              </div>
+            )}
           </div>
+        </div>
+
+        {/* Description — full width below */}
+        {app.description && (
+          <div className="md" style={{ fontSize:14, color:'var(--t2)', lineHeight:1.9, marginBottom:24 }}
+            dangerouslySetInnerHTML={{ __html: md(app.description) }}/>
         )}
 
-        {/* Sibling apps */}
+        {/* Shared note */}
+        {item.note && (
+          <div className="md" style={{ fontSize:13, color:'var(--t2)', lineHeight:1.75, marginBottom:24, background:'var(--bg1)', border:'1px solid var(--bd)', borderLeft:'3px solid var(--pink)', borderRadius:'0 10px 10px 0', padding:'12px 16px' }}
+            dangerouslySetInnerHTML={{ __html: md(item.note) }}/>
+        )}
+
+        {/* Siblings with developer card header */}
         {siblings.length > 0 && (
-          <div style={{ marginBottom:24 }}>
-            <div style={{ fontSize:10, fontWeight:800, color:'var(--t3)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:10 }}>
-              # іншыя праграмы ад {item.name}
-            </div>
+          <div style={{ marginBottom:28, borderTop:'1px solid var(--bd)', paddingTop:22, marginTop:8 }}>
+            <a href={`/${categoryId}/${item.id}`} style={{
+              display:'flex', alignItems:'center', gap:12, padding:'12px 14px', marginBottom:14,
+              background:'var(--bg1)', border:'1px solid var(--bd)', borderRadius:12,
+              textDecoration:'none', transition:'border-color .15s',
+            }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
+            >
+              {item.iconUrl
+                ? <img src={item.iconUrl} alt="" style={{ width:38, height:38, borderRadius:10, objectFit:'cover', flexShrink:0 }}/>
+                : <div style={{ width:38, height:38, borderRadius:10, background:'var(--bg3)', flexShrink:0 }}/>
+              }
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontSize:9, fontWeight:700, color:'var(--t3)', textTransform:'uppercase', letterSpacing:1, marginBottom:2 }}>Іншыя праграмы распрацоўшчыка</div>
+                <div style={{ fontSize:13, fontWeight:700, color:'var(--text)' }}>{item.name}</div>
+              </div>
+              <span style={{ fontSize:18, color:'var(--t3)', flexShrink:0 }}>›</span>
+            </a>
             <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-              {siblings.map(sib => (
-                <a key={sib.id} href={`/${categoryId}/${item.id}/${sib.id}`} style={{
-                  display:'flex', alignItems:'center', gap:7,
-                  padding:'6px 10px 6px 6px', borderRadius:8,
-                  background:'var(--bg1)', border:'1px solid var(--bd)',
-                  textDecoration:'none', transition:'border-color .15s',
-                }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
-                >
-                  {sib.iconUrl
-                    ? <img src={sib.iconUrl} alt="" style={{ width:24, height:24, borderRadius:6, objectFit:'cover', flexShrink:0 }}/>
-                    : <div style={{ width:24, height:24, borderRadius:6, background:'var(--bg3)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:9, color:'var(--t3)', fontFamily:'var(--fd)' }}>{sib.name.slice(0,2).toUpperCase()}</div>
-                  }
-                  <span style={{ fontSize:11, fontWeight:600, color:'var(--text)', whiteSpace:'nowrap' }}>{sib.name}</span>
-                </a>
-              ))}
+              {siblings.map(sib => {
+                const sibPct = progress ? avgPct(getAppProgress(sib, progress)) : null
+                return (
+                  <a key={sib.id} href={`/${categoryId}/${item.id}/${sib.id}`} style={{
+                    display:'flex', alignItems:'center', gap:9, padding:'8px 12px 8px 8px',
+                    borderRadius:10, background:'var(--bg1)', border:'1px solid var(--bd)',
+                    textDecoration:'none', transition:'border-color .15s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor='var(--pinkb)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor='var(--bd)'}
+                  >
+                    {sib.iconUrl
+                      ? <img src={sib.iconUrl} alt="" style={{ width:28, height:28, borderRadius:7, objectFit:'cover', flexShrink:0 }}/>
+                      : <div style={{ width:28, height:28, borderRadius:7, background:'var(--bg3)', flexShrink:0 }}/>
+                    }
+                    <span style={{ fontSize:12, fontWeight:600, color:'var(--text)' }}>{sib.name}</span>
+                    {sibPct !== null && (
+                      <span style={{ fontSize:11, fontWeight:700, color:pctColor(sibPct) }}>{sibPct}%</span>
+                    )}
+                  </a>
+                )
+              })}
             </div>
           </div>
         )}
 
-        {/* Back buttons */}
-        <div style={{ display:'flex', gap:8, marginTop:8, flexWrap:'wrap' }}>
-          <a href={`/${categoryId}/${item.id}`} style={{
-            display:'inline-flex', alignItems:'center', gap:6,
-            fontSize:11, fontWeight:600, color:'var(--t3)',
-            background:'var(--bg2)', border:'1px solid var(--bd)',
-            padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s',
-          }}
-          onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
-          onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
-          >← {item.name}</a>
-          <a href={`/${categoryId}`} style={{
-            display:'inline-flex', alignItems:'center', gap:6,
-            fontSize:11, fontWeight:600, color:'var(--t3)',
-            background:'var(--bg2)', border:'1px solid var(--bd)',
-            padding:'7px 14px', borderRadius:8, textDecoration:'none', transition:'all .15s',
-          }}
-          onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--text)'; el.style.borderColor='var(--bd2)' }}
-          onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.color='var(--t3)'; el.style.borderColor='var(--bd)' }}
-          >cd ../{categoryId}</a>
+        {/* Nav */}
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+          <NavBtn href={`/${categoryId}/${item.id}`}>← {item.name}</NavBtn>
+          <NavBtn href={`/${categoryId}`}>cd ../{categoryId}</NavBtn>
           <CopyLink/>
         </div>
       </div>
@@ -266,6 +293,14 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
         .md a{color:var(--pink);text-decoration:underline;text-underline-offset:2px}
         .md strong{color:var(--text);font-weight:700}
         .md code{background:var(--bg3);color:var(--purp);padding:1px 6px;border-radius:4px;font-size:11px}
+        @media(max-width:640px){.ap-sidebar{width:100%!important}}
+        @media(max-width:520px){
+          .hero-row{padding:28px 16px 24px!important;gap:12px!important}
+          .hero-icon{width:68px!important;height:68px!important;border-radius:17px!important;flex-shrink:0}
+          .hero-title{font-size:20px!important}
+          .hero-pct{font-size:32px!important;letter-spacing:-2px!important}
+          .hero-pct-sup{font-size:16px!important}
+        }
       `}</style>
     </>
   )
@@ -280,12 +315,7 @@ function CopyLink() {
     })
   }, [])
   return (
-    <button onClick={copy} style={{
-      display:'inline-flex', alignItems:'center', gap:6,
-      fontSize:11, fontWeight:600, color: copied ? 'var(--green)' : 'var(--t3)',
-      background:'var(--bg2)', border:`1px solid ${copied ? 'rgba(34,197,94,.3)' : 'var(--bd)'}`,
-      padding:'7px 14px', borderRadius:8, cursor:'pointer', transition:'all .15s',
-    }}>
+    <button onClick={copy} style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:11, fontWeight:600, color: copied ? 'var(--green)' : 'var(--t3)', background:'var(--bg2)', border:`1px solid ${copied ? 'rgba(34,197,94,.3)' : 'var(--bd)'}`, padding:'7px 14px', borderRadius:8, cursor:'pointer', transition:'all .15s' }}>
       {copied ? '✓ скапіявана' : '⎘ спасылка'}
     </button>
   )

@@ -106,39 +106,76 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
     : cat.items.length
   const currentCards = isAppStore ? (entries?.length ?? 0) : filtered.length
 
+  const avgAll = useMemo(() => {
+    if (!progress) return null
+    const pcts: number[] = []
+    for (const item of cat.items) {
+      if (item.apps?.length) {
+        for (const app of item.apps) {
+          const p = avgPct(getAppProgress(app, progress))
+          if (p !== null) pcts.push(p)
+        }
+      } else {
+        const p = avgPct(getItemProgress(item, progress))
+        if (p !== null) pcts.push(p)
+      }
+    }
+    return pcts.length ? Math.round(pcts.reduce((a, b) => a + b, 0) / pcts.length) : null
+  }, [progress, cat])
+
   return (
     <>
-      <MatrixRain opacity={0.12}/>
+      <MatrixRain opacity={0.06}/>
       <Header cats={data.categories} activeId={categoryId}/>
       <main style={{position:'relative',zIndex:1}}>
-        {/* Category banner */}
-        <div style={{maxWidth:1400,margin:'0 auto',position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)',borderRadius:'0 0 12px 12px'}}>
-          {cat.bannerUrl
-            ? <img src={cat.bannerUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-            : <div style={{width:'100%',height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:7,padding:'0 20px',textAlign:'center',position:'relative'}}>
-                <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at center,rgba(255,45,107,.1) 0%,transparent 65%)'}}/>
-                <span style={{fontFamily:'var(--fd)',fontSize:'clamp(1.8rem,5vw,4.5rem)',letterSpacing:4,color:'var(--t2)',position:'relative'}}>{cat.name}</span>
-                <span style={{fontSize:'clamp(7px,.8vw,10px)',fontWeight:800,letterSpacing:'2.5px',textTransform:'uppercase',color:'var(--t3)',background:'var(--bg3)',padding:'3px 12px',borderRadius:4,position:'relative',whiteSpace:'nowrap'}}>{cat.sub}</span>
+        {/* Compact blurred hero */}
+        <div style={{position:'relative',overflow:'hidden'}}>
+          {cat.bannerUrl ? (
+            <>
+              <img src={cat.bannerUrl} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',filter:'blur(60px) brightness(.3) saturate(1.8)',transform:'scale(1.1)',zIndex:0}}/>
+              <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,.48)',zIndex:1}}/>
+            </>
+          ) : (
+            <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg,#0e0e16 0%,#1c1030 60%,#200820 100%)',zIndex:0}}/>
+          )}
+          <div className="cat-hero-inner" style={{position:'relative',zIndex:2,maxWidth:1280,margin:'0 auto',padding:'44px 20px 40px',display:'flex',alignItems:'center',gap:32,flexWrap:'wrap'}}>
+            {/* Left: name + subtitle + CTA */}
+            <div style={{flex:1,minWidth:200}}>
+              {cat.sub && <div style={{fontSize:10,fontWeight:700,color:'rgba(255,255,255,.3)',textTransform:'uppercase',letterSpacing:2.5,marginBottom:10}}>{cat.sub}</div>}
+              <h1 className="cat-hero-title" style={{fontSize:'clamp(26px,4vw,40px)',fontWeight:900,color:'#fff',margin:'0 0 20px',letterSpacing:-1,fontFamily:'var(--fd)',lineHeight:1.05}}>{cat.name}</h1>
+              {cat.contributeUrl && (
+                <a href={cat.contributeUrl} target="_blank" rel="noreferrer" style={{
+                  display:'inline-flex',alignItems:'center',gap:6,
+                  background:'var(--pink)',color:'#fff',border:'none',
+                  fontSize:11,fontWeight:800,padding:'9px 22px',borderRadius:99,
+                  textDecoration:'none',letterSpacing:.5,textTransform:'uppercase',
+                }}>+ Прапанаваць</a>
+              )}
+            </div>
+            {/* Right: stats */}
+            <div className="cat-hero-stats" style={{display:'flex',gap:24,alignItems:'center',flexShrink:0}}>
+              <div style={{textAlign:'center'}}>
+                <div className="cat-hero-num" style={{fontSize:40,fontWeight:900,color:'#fff',lineHeight:1,letterSpacing:-2}}>{totalCards}</div>
+                <div style={{fontSize:8,fontWeight:700,color:'rgba(255,255,255,.3)',textTransform:'uppercase',letterSpacing:1.5,marginTop:5}}>{isAppStore ? 'праграм' : 'праектаў'}</div>
               </div>
-          }
+              {avgAll !== null && (
+                <>
+                  <div style={{width:1,height:36,background:'rgba(255,255,255,.1)',flexShrink:0}}/>
+                  <div style={{textAlign:'center'}}>
+                    <div className="cat-hero-num" style={{fontSize:40,fontWeight:900,color:pctColor(avgAll),lineHeight:1,letterSpacing:-2}}>{avgAll}<span style={{fontSize:20,letterSpacing:0}}>%</span></div>
+                    <div style={{fontSize:8,fontWeight:700,color:'rgba(255,255,255,.3)',textTransform:'uppercase',letterSpacing:1.5,marginTop:5}}>пераклад</div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
 
         <div style={{maxWidth:1280,margin:'0 auto',padding:'0 16px 80px'}}>
-          {/* Head */}
-          <div style={{display:'flex',alignItems:'center',gap:10,padding:'14px 0 16px',flexWrap:'wrap'}}>
-            <div style={{display:'flex',alignItems:'center',gap:6,flex:1,minWidth:0}}>
-              <span style={{color:'var(--pink)',fontWeight:700,fontSize:18,flexShrink:0}}>~/</span>
-              <span style={{fontSize:'clamp(13px,3vw,18px)',fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                {categoryId}
-              </span>
-            </div>
-            {cat.contributeUrl && (
-              <a href={cat.contributeUrl} target="_blank" rel="noreferrer" style={{
-                background:'var(--pinka)',border:'1px solid var(--pinkb)',color:'var(--pink)',
-                fontSize:11,fontWeight:700,padding:'6px 14px',borderRadius:'var(--r)',
-                letterSpacing:.5,textTransform:'uppercase',whiteSpace:'nowrap',
-              }}>+ Прапанаваць</a>
-            )}
+          {/* Head breadcrumb */}
+          <div style={{display:'flex',alignItems:'center',gap:6,padding:'14px 0 16px'}}>
+            <span style={{color:'var(--pink)',fontWeight:700,fontSize:18,flexShrink:0}}>~/</span>
+            <span style={{fontSize:'clamp(13px,3vw,18px)',fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{categoryId}</span>
           </div>
 
           {/* Filter bar */}
@@ -200,24 +237,32 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
           )}
         </div>
       </main>
-      <style>{`input:focus{border-color:var(--pinkb)!important}`}</style>
+      <style>{`
+        input:focus{border-color:var(--pinkb)!important}
+        @media(max-width:540px){
+          .cat-hero-inner{padding:28px 16px 24px!important;gap:16px!important;flex-wrap:nowrap!important;align-items:flex-start!important}
+          .cat-hero-title{font-size:26px!important;margin-bottom:14px!important}
+          .cat-hero-stats{flex-direction:column!important;gap:8px!important;align-items:flex-end!important}
+          .cat-hero-num{font-size:26px!important}
+        }
+      `}</style>
     </>
   )
 }
 
 // ── App card (one per AppEntry) — App Store style ────────────────────────────
-function AppCard({ item, app, catId, progress }: { item: Item; app: AppEntry; catId: string; onDevClick?: (id: string) => void; progress: ProgressData | null }) {
+function AppCard({ item, app, catId, progress }: { item: Item; app: AppEntry; catId: string; onDevClick?: (d: string) => void; progress: ProgressData | null }) {
   const href = `/${catId}/${item.id}/${app.id}`
-  const firstLink = app.platforms[0]?.links[0]
   const platNames = Array.from(new Set(app.platforms.map(p => p.name)))
-
-  const hoverEnter = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--pinkb)'; el.style.transform='translateY(-2px)' }
-  const hoverLeave = (e: React.MouseEvent) => { const el=e.currentTarget as HTMLElement; el.style.borderColor='var(--bd)'; el.style.transform='none' }
+  const pct = progress ? avgPct(getAppProgress(app, progress)) : null
+  const color = pct !== null ? pctColor(pct) : 'var(--t3)'
 
   return (
     <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
-      onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
-      <div style={{padding:'12px 10px 10px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
+      onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--pinkb)';el.style.transform='translateY(-2px)'}}
+      onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.borderColor='var(--bd)';el.style.transform='none'}}>
+      {/* Top: grows to fill, pushes progress to bottom */}
+      <div style={{padding:'14px 10px 0',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
         <a href={href} style={{textDecoration:'none',flexShrink:0}}>
           <div style={{width:56,height:56,borderRadius:14,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
             {app.iconUrl
@@ -228,21 +273,33 @@ function AppCard({ item, app, catId, progress }: { item: Item; app: AppEntry; ca
         </a>
         <div style={{minWidth:0,width:'100%'}}>
           <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{app.name}</a>
-          <a href={`/${catId}/${item.id}`} onClick={e=>e.stopPropagation()} style={{
-            display:'inline-flex',alignItems:'center',gap:3,marginTop:3,textDecoration:'none',padding:'1px 0',
-          }}>
-            {item.iconUrl && <img src={item.iconUrl} alt="" style={{width:11,height:11,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.7}}/>}
+          <a href={`/${catId}/${item.id}`} onClick={e=>e.stopPropagation()} style={{display:'inline-flex',alignItems:'center',gap:3,marginTop:2,textDecoration:'none'}}>
+            {item.iconUrl && <img src={item.iconUrl} alt="" style={{width:10,height:10,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.6}}/>}
             <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</span>
           </a>
         </div>
-        <div style={{display:'flex',gap:3,justifyContent:'center',flexWrap:'wrap',minHeight:16}}>
+        <div style={{display:'flex',gap:3,justifyContent:'center',flexWrap:'wrap',minHeight:14}}>
           {platNames.slice(0,3).map(n=>(
             <span key={n} style={{fontSize:8,fontWeight:700,background:'var(--pinkc)',color:'var(--pink)',padding:'1px 5px',borderRadius:3,whiteSpace:'nowrap'}}>{n}</span>
           ))}
-          {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg4)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
+          {platNames.length > 3 && <span style={{fontSize:8,fontWeight:700,background:'var(--bg3)',color:'var(--t3)',padding:'1px 5px',borderRadius:3}}>+{platNames.length-3}</span>}
         </div>
-        <PctBadge pct={progress ? avgPct(getAppProgress(app, progress)) : null}/>
-        {firstLink && <CTA link={firstLink}/>}
+      </div>
+      {/* Progress — always at bottom */}
+      <div style={{padding:'10px 10px 12px'}}>
+        {pct !== null ? (
+          <>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:4}}>
+              <span style={{fontSize:8,fontWeight:700,color:'var(--t3)',textTransform:'uppercase',letterSpacing:.8}}>Пераклад</span>
+              <span style={{fontSize:13,fontWeight:800,color}}>{pct}%</span>
+            </div>
+            <div style={{height:3,borderRadius:2,background:`${color}18`,overflow:'hidden'}}>
+              <div style={{width:`${pct}%`,height:'100%',background:color,borderRadius:2}}/>
+            </div>
+          </>
+        ) : (
+          <div style={{fontSize:9,color:'var(--t3)',textAlign:'center',height:22,display:'flex',alignItems:'center',justifyContent:'center'}}>Даных няма</div>
+        )}
       </div>
     </div>
   )
@@ -290,37 +347,55 @@ function ItemCard({ item, catId, matchedApp, progress, onOrgClick }: { item: Ite
   )
 
   /* ── App Store style (peraklady solo) ── */
-  if (APP_STORE_CATS.includes(catId)) return (
-    <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
-      onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
-      <div style={{padding:'12px 10px 10px',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
-        <a href={href} style={{textDecoration:'none',flexShrink:0}}>
-          <div style={{width:56,height:56,borderRadius:14,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
-            {item.iconUrl
-              ? <img src={item.iconUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-              : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{item.name.slice(0,2).toUpperCase()}</span>
-            }
-          </div>
-        </a>
-        <div style={{minWidth:0,width:'100%'}}>
-          <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
-          {matchedApp && <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>}
-        </div>
-        {item.org && (
-          <a href={`/${catId}?org=${encodeURIComponent(item.org.name)}`}
-            onClick={e=>{e.stopPropagation();e.preventDefault();onOrgClick?.(item.org!.name)}}
-            style={{display:'inline-flex',alignItems:'center',gap:4,textDecoration:'none',
-              padding:'0 2px',maxWidth:'100%',overflow:'hidden'}}>
-            {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{width:11,height:11,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.7}}/>}
-            <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.org.name}</span>
+  if (APP_STORE_CATS.includes(catId)) {
+    const pct = progress ? avgPct(getItemProgress(item, progress)) : null
+    const color = pct !== null ? pctColor(pct) : 'var(--t3)'
+    return (
+      <div style={{background:'var(--bg1)',border:'1px solid var(--bd)',borderRadius:14,overflow:'hidden',transition:'border-color .2s,transform .2s',display:'flex',flexDirection:'column'}}
+        onMouseEnter={hoverEnter} onMouseLeave={hoverLeave}>
+        {/* Top: grows to fill */}
+        <div style={{padding:'14px 10px 0',flex:1,display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',gap:6}}>
+          <a href={href} style={{textDecoration:'none',flexShrink:0}}>
+            <div style={{width:56,height:56,borderRadius:14,overflow:'hidden',background:'var(--bg3)',border:'1px solid var(--bd)'}}>
+              {item.iconUrl
+                ? <img src={item.iconUrl} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+                : <span style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',fontFamily:'var(--fd)',fontSize:'1.4rem',color:'var(--t3)'}}>{item.name.slice(0,2).toUpperCase()}</span>
+              }
+            </div>
           </a>
-        )}
-        <PlatChips/>
-        <PctBadge pct={progress ? avgPct(getItemProgress(item, progress)) : null}/>
-        {firstLink && <CTA link={firstLink}/>}
+          <div style={{minWidth:0,width:'100%'}}>
+            <a href={href} style={{fontSize:12,fontWeight:700,color:'var(--text)',textDecoration:'none',display:'block',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.name}</a>
+            {matchedApp && <span style={{fontSize:9,color:'var(--pink)',display:'block',marginTop:2,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>↳ {matchedApp}</span>}
+          </div>
+          {item.org && (
+            <a href={`/${catId}?org=${encodeURIComponent(item.org.name)}`}
+              onClick={e=>{e.stopPropagation();e.preventDefault();onOrgClick?.(item.org!.name)}}
+              style={{display:'inline-flex',alignItems:'center',gap:4,textDecoration:'none',maxWidth:'100%',overflow:'hidden'}}>
+              {item.org.iconUrl && <img src={item.org.iconUrl} alt="" style={{width:10,height:10,borderRadius:2,objectFit:'cover',flexShrink:0,opacity:.6}}/>}
+              <span style={{fontSize:9,color:'var(--t3)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.org.name}</span>
+            </a>
+          )}
+          <PlatChips/>
+        </div>
+        {/* Progress — always at bottom */}
+        <div style={{padding:'10px 10px 12px'}}>
+          {pct !== null ? (
+            <>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:4}}>
+                <span style={{fontSize:8,fontWeight:700,color:'var(--t3)',textTransform:'uppercase',letterSpacing:.8}}>Пераклад</span>
+                <span style={{fontSize:13,fontWeight:800,color}}>{pct}%</span>
+              </div>
+              <div style={{height:3,borderRadius:2,background:`${color}18`,overflow:'hidden'}}>
+                <div style={{width:`${pct}%`,height:'100%',background:color,borderRadius:2}}/>
+              </div>
+            </>
+          ) : (
+            <div style={{fontSize:9,color:'var(--t3)',textAlign:'center',height:22,display:'flex',alignItems:'center',justifyContent:'center'}}>Даных няма</div>
+          )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   /* ── Banner style (slouniki, github-projects, …) ── */
   return (
