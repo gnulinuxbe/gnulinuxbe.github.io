@@ -97,7 +97,7 @@ export default function AppPage({ initialData }: { initialData?: SiteData }) {
       <Header cats={data.categories} activeId={categoryId} crumb={app.name}/>
 
       {/* Banner */}
-      <div style={{ position:'relative', width:'100%', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)' }}>
+      <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', height:'clamp(160px,22vw,260px)', overflow:'hidden', background:'var(--banner-area)', borderRadius:'0 0 12px 12px' }}>
         {item.bannerUrl
           ? <img src={item.bannerUrl} alt={app.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center', display:'block' }}/>
           : (

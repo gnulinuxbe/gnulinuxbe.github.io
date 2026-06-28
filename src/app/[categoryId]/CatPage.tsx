@@ -112,7 +112,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
       <Header cats={data.categories} activeId={categoryId}/>
       <main style={{position:'relative',zIndex:1}}>
         {/* Category banner */}
-        <div style={{position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)'}}>
+        <div style={{maxWidth:1400,margin:'0 auto',position:'relative',height:'clamp(110px,16vw,220px)',overflow:'hidden',background:'var(--bg2)',borderRadius:'0 0 12px 12px'}}>
           {cat.bannerUrl
             ? <img src={cat.bannerUrl} alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
             : <div style={{width:'100%',height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:7,padding:'0 20px',textAlign:'center',position:'relative'}}>
@@ -206,7 +206,7 @@ export default function CatPage({ initialData }: { initialData?: SiteData }) {
 }
 
 // ── App card (one per AppEntry) — App Store style ────────────────────────────
-function AppCard({ item, app, catId, onDevClick, progress }: { item: Item; app: AppEntry; catId: string; onDevClick: (id: string) => void; progress: ProgressData | null }) {
+function AppCard({ item, app, catId, progress }: { item: Item; app: AppEntry; catId: string; onDevClick?: (id: string) => void; progress: ProgressData | null }) {
   const href = `/${catId}/${item.id}/${app.id}`
   const firstLink = app.platforms[0]?.links[0]
   const platNames = Array.from(new Set(app.platforms.map(p => p.name)))
