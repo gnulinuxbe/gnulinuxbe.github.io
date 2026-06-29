@@ -129,7 +129,9 @@
       "Bash(git rebase *)",
       "Bash(git fetch *)",
       "Bash(git merge *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git commit -m 'chore: auto-resolve progress.json merge conflicts with local version *)",
+      "Bash(git commit -m 'fix: cap banner max-width on large monitors \\(1400px list, 1200px item/app\\) *)"
     ],
     "additionalDirectories": [
       "/Users/maks/Desktop/gnulinuxbe/src/app/[categoryId]/[itemId]",

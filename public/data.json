@@ -2014,6 +2014,487 @@
               ]
             }
           ]
+        },
+        {
+          "id": "openproject",
+          "name": "OpenProject",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782747931/openproject-logo-centered-color-86c2838b_rtwkww.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782747928/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D0%B0_%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B8_fsjsul.webp",
+          "category": "peraklady",
+          "tags": [
+            "інструменты распрацоўкі",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "OpenProject — гэта магутная сістэма кіравання праектамі з адкрытым зыходным кодам, прызначаная для эфектыўнай каманднай працы на ўсіх этапах жыццёвага цыкла праекта. Яна прапануе шырокі набор класічных і гнуткіх інструментаў, уключаючы дыяграмы Ганта, Agile-дошкі (Scrum і Kanban), адсочванне часу і задач, а таксама ўбудаваную вікі для дакументацыі. Гэтая платформа часта выкарыстоўваецца як бяспечная альтэрнатыва камерцыйным рашэнням накшталт Jira, паколькі яе можна разгарнуць на ўласных серверах для захавання поўнага кантролю над карпаратыўнымі данымі і прыватнасцю.",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/openproject/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://www.openproject.org/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tabby",
+          "name": "Tabby",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782748652/Frame_11212583_vtlads.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782748113/Tabby_j8ynwo.webp",
+          "category": "peraklady",
+          "tags": [
+            "інструменты распрацоўкі",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Tabby (раней вядомы як Terminus) — гэта сучасны кросплатформавы эмулятар тэрмінала з адкрытым зыходным кодам. Ён прапануе гнутка наладжвальны інтэрфейс з укладкамі і ўбудаваны кліент для SSH і паслядоўных злучэнняў (serial). Праграма працуе на Linux, macOS і Windows, максімальна зручна інтэгруецца з рознымі абалонкамі (напрыклад, Bash, Zsh, PowerShell) і дазваляе значна пашыраць свае магчымасці дзякуючы багатай экасістэме плагінаў і тэм афармлення.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/tabby/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://tabby.sh/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ethereum",
+          "name": "Ethereum.org",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782748397/tXQbWfpf_400x400_uvmcyv.jpg",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782748412/Ethereum1_xwmvdp.webp",
+          "category": "peraklady",
+          "tags": [
+            "крыптавалюта",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Ethereum.org — гэта афіцыйны вэб-сайт і галоўны адукацыйны партал, прысвечаны блокчэйн-экасістэме Ethereum. Гэты рэсурс з адкрытым зыходным кодам цалкам кіруецца супольнасцю і выступае ў якасці цэнтральнага хаба як для пачаткоўцаў, так і для вопытных распрацоўшчыкаў. Ён прапануе вычарпальную дакументацыю, кіраўніцтвы па стварэнні дэцэнтралізаваных праграм (dApps) і смарт-кантрактаў, інфармацыю пра выбар кашалькоў і стэйкінг, а таксама ўсе неабходныя матэрыялы для бяспечнага пагружэння ў тэхналогіі Web3.",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/ethereum-org/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://ethereum.org/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "AdGuard",
+          "name": "AdGuard",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749236/400x400bb-75_wxmaqn.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782748771/AdGuard1_xthl6e.webp",
+          "category": "peraklady",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "AdGuard — гэта папулярны комплекс праграм і сэрвісаў для блакіроўкі рэкламы і абароны прыватнасці ў інтэрнэце. Ён прапануе пашырэнні для розных браўзераў, паўнавартасныя праграмы для ПК і мабільных прылад, а таксама рашэнні на ўзроўні сеткі (напрыклад, AdGuard DNS і лакальны сервер AdGuard Home з адкрытым зыходным кодам). Сэрвіс эфектыўна хавае банеры, усплывальныя вокны і відэарэкламу, а таксама надзейна блакуе сістэмы сачэння (трэкеры) і фішынгавыя сайты, забяспечваючы больш хуткі, бяспечны і камфортны вэб-сёрфінг.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adguard-applications/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=com.adguard.android.contentblocker&hl=en-US",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adguard-applications/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "App Store",
+                  "url": "https://apps.apple.com/us/app-bundle/adguard-ad-blocker-vpn/id1893320718",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adguard-applications/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://adguard.com/be/welcome.html",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "Пашырэнне",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adguard-applications/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://adguard.com/be/welcome.html",
+                  "type": "website"
+                }
+              ]
+            },
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adguard-websites/be",
+                  "type": "translate"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "AdBlock",
+          "name": "AdBlock",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749398/1935204_uwxb72.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749397/AdBlock1_hx8npx.webp",
+          "category": "peraklady",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "AdBlock — гэта адно з самых вядомых і папулярных пашырэнняў для браўзераў, прызначанае для блакіроўкі інтэрнэт-рэкламы. Яно эфектыўна хавае банеры, усплывальныя вокны і назойлівую відэарэкламу (у тым ліку на YouTube), значна паляпшаючы знешні выгляд вэб-старонак і паскараючы іх загрузку. Акрамя таго, інструмент дапамагае абараніць вашу прыватнасць у сеціве, блакуючы староннія сістэмы адсочвання (трэкеры) і прадухіляючы загрузку шкоднасных элементаў.",
+          "platforms": [
+            {
+              "name": "Пашырэнне",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/adblock/be#",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://getadblock.com/en/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "OpenVPN",
+          "name": "OpenVPN for Android",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749557/unnamed_xh3jct.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749561/OpenVPN_for_Android1_vjsqm1.webp",
+          "category": "peraklady",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "OpenVPN for Android — гэта бясплатны і цалкам адкрыты кліент для падлучэння да віртуальных прыватных сетак (VPN) па папулярным аднайменным пратаколе на мабільных прыладах. У адрозненне ад афіцыйнага дадатку (OpenVPN Connect), гэтая версія ствараецца незалежным распрацоўшчыкам (Arne Schwabe), прапануе значна больш пашыраных налад для дасведчаных карыстальнікаў і не патрабуе root-правоў. Праграма выкарыстоўвае стандартны Android VPN API, дазваляючы лёгка імпартаваць файлы канфігурацыі і забяспечваць надзейна зашыфраваны доступ да сеціва.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/ics-openvpn/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en-US",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Keepass2Android",
+          "name": "Keepass2Android",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749687/unnamed_r5htu1.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749695/Keepass2Android1_m7twiw.webp",
+          "category": "peraklady",
+          "tags": [
+            "Бяспека/канфідэнцыяльнасць",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Keepass2Android — гэта папулярны бясплатны менеджар пароляў з адкрытым зыходным кодам для прылад на базе Android. Ён цалкам сумяшчальны з базамі даных класічнай праграмы KeePass для ПК (фармат .kdbx) і прапануе зручную інтэграцыю з рознымі хмарнымі сховішчамі (напрыклад, Nextcloud, Google Drive, Dropbox або ўласнымі серверамі па WebDAV) для лёгкай сінхранізацыі паміж вашымі прыладамі. Дадатак забяспечвае максімальную бяспеку дзякуючы надзейнаму лакальнаму шыфраванню і шчыльна інтэгруецца ў сістэму праз функцыю аўтазапаўнення або ўласную абароненую клавіятуру, што дазваляе хутка і бяспечна ўводзіць уліковыя даныя ў браўзерах і іншых праграмах.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/keepass2android/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en-US",
+                  "type": "download"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RetroArch",
+          "name": "Retro Arch",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749884/canvas-2132306185_zmexku.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782749887/Retro_Arch1_kuzkmb.webp",
+          "category": "peraklady",
+          "tags": [
+            "эмулятары",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "RetroArch — гэта папулярны кросплатформавы франтэнд (абалонка) з адкрытым зыходным кодам для эмулятараў, гульнявых рухавікоў і медыяплэераў. Ён дазваляе запускаць класічныя гульні з мноства розных рэтра-кансоляў (напрыклад, NES, SNES, Sega, PlayStation і іншых) у межах адной зручнай праграмы, выкарыстоўваючы спецыяльныя зменныя ўбудовы — так званыя «ядры» з экасістэмы libretro. Праграма забяспечвае ўніфікаваны інтэрфейс для кіравання ўсімі эмулятарамі і прапануе багаты набор пашыраных функцый, сярод якіх візуальныя шэйдары (для імітацыі старых кінескопных экранаў), сеткавая гульня (netplay), хуткае захаванне, перамотка гульнявога працэсу назад і падтрымка сістэмы анлайн-дасягненняў для старых гульняў (RetroAchievements).",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/retroarch/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://www.retroarch.com/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ubuntu",
+          "name": "Ubuntu",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750238/Frame_11212583_aiw3eu.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750075/Ubuntu1_aeye7u.webp",
+          "category": "peraklady",
+          "tags": [
+            "дыстрыбутывы",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Ubuntu — гэта адзін з самых папулярных і зручных дыстрыбутываў аперацыйнай сістэмы Linux з адкрытым зыходным кодам, які грунтуецца на архітэктуры Debian. Ён распрацоўваецца кампаніяй Canonical пры актыўным удзеле супольнасці і шырока выкарыстоўваецца як на хатніх персанальных камп'ютарах, так і на магутнасных карпаратыўных серверах. Сістэма вызначаецца сваёй даступнасцю для пачаткоўцаў, маючы гатовы да працы графічны інтэрфейс (па змаўчанні выкарыстоўваецца GNOME), велізарны рэпазіторый праграмнага забеспячэння і высокую стабільнасць, якую забяспечваюць рэгулярныя выпускі версій з доўгатэрміновай падтрымкай (LTS - Long Term Support).",
+          "platforms": [
+            {
+              "name": "Linux",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/ubuntu-translations/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://ubuntu.com/",
+                  "type": "website"
+                },
+                {
+                  "label": "Telegram",
+                  "url": "https://t.me/ubuntu_peraklad",
+                  "type": "chat"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "iina",
+          "name": "iina",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750531/Frame_11212583_w7cgfw.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750474/iina1_ui3qiv.webp",
+          "category": "peraklady",
+          "tags": [
+            "Медыя",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "IINA — гэта сучасны і папулярны медыяплэер з адкрытым зыходным кодам, распрацаваны выключна для аперацыйнай сістэмы macOS. Ён пабудаваны на базе магутнага кросплатформавага рухавіка mpv, што дазваляе яму без праблем прайграваць практычна ўсе існыя фарматы відэа і аўдыя. Праграма вызначаецца тым, што ідэальна інтэгруецца ў экасістэму Apple, прапаноўваючы элегантны інтэрфейс і поўную падтрымку натыўных функцый Mac, такіх як цёмная тэма (Dark Mode), рэжым «карцінка ў карцінцы» (Picture-in-Picture), кіраванне жэстамі праз трэкпад і падтрымка Touch Bar.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/iina/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://iina.io/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "OBS-Studio",
+          "name": "OBS Studio",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750690/1280px-OBS_Studio_Logo.svg-3427455157_tijfdy.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750634/OBS_Studio1_tbtfua.webp",
+          "category": "peraklady",
+          "tags": [
+            "Медыя",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "OBS Studio (Open Broadcaster Software) — гэта магутная, бясплатная і кросплатформавая праграма з адкрытым зыходным кодам, прызначаная для запісу відэа і правядзення прамых трансляцый (стрымінгу). Яна дазваляе захопліваць малюнак і гук у рэальным часе з розных крыніц (экрана працоўнага стала, вэб-камер, мікрафонаў, асобных вокнаў праграм або карт захопу), камбінаваць іх у складаныя сцэны і плаўна пераключацца паміж імі падчас эфіру. Праграма з'яўляецца галіновым стандартам для стрымераў і стваральнікаў кантэнту дзякуючы багатым магчымасцям для наладкі кадавання і ўбудаванай падтрымцы трансляцый на папулярныя платформы, такія як Twitch, YouTube, а таксама на ўласныя RTMP-серверы.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/obs-studio/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://obsproject.com/download",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Factorio-Mods",
+          "name": "Factorio Mods",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750783/WDelHQq-2149800966_rla0oi.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750785/1_guafqg.webp",
+          "category": "peraklady",
+          "tags": [
+            "Гульні",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Factorio Mods — гэта створаныя супольнасцю дапаўненні і мадыфікацыі для папулярнай гульні пра будаўніцтва і аўтаматызацыю фабрык Factorio. Гульня вызначаецца надзвычай магутнай і зручнай афіцыйнай падтрымкай мадынгу дзякуючы ўласнаму інтэграванаму парталу (Factorio Mod Portal), што дазваляе гульцам шукаць, спампоўваць і абнаўляць моды непасрэдна ў самім кліенце гульні. Мадыфікацыі ствараюцца на мове праграмавання Lua і могуць змяняць гульнявы працэс практычна бязмежна: ад невялікіх паляпшэнняў інтэрфейсу і «якасці жыцця» (QoL) да каласальных праектаў-перапрацовак (напрыклад, Space Exploration, Krastorio 2 або Bob's/Angel's), якія цалкам змяняюць вытворчыя ланцужкі, дадаюць новыя рэсурсы, тэхналогіі і нават дазваляюць падарожнічаць на іншыя планеты.",
+          "platforms": [
+            {
+              "name": "PC",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/factorio-mods-localization/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Github",
+                  "url": "https://github.com/dima74/factorio-mods-localization",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Buckwheat",
+          "name": "Грэчка (Buckwheat)",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750987/unnamed__1_r4evtq.webp",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1782750985/%D0%93%D1%80%D1%8D%D1%87%D0%BA%D0%B01_v8huwd.webp",
+          "category": "peraklady",
+          "tags": [
+            "фінансы",
+            "crowdin"
+          ],
+          "createdAt": "2026-06-29",
+          "updatedAt": "2026-06-29",
+          "description": "Buckwheat (Грэчка) — гэта мінімалістычная і зручная праграма для кіравання асабістым бюджэтам на прыладах Android (даступная ў Google Play і альтэрнатыўным каталогу F-Droid праз рэпазіторый IzzyOnDroid). Яна дапамагае разумна планаваць фінансы, прапаноўваючы вельмі просты і наглядны падыход да ўліку: дадатак аўтаматычна разлічвае ваш бяспечны штодзённы ліміт, дзялячы даступны бюджэт на колькасць дзён, што засталіся да канца абранага перыяду (напрыклад, да наступнага заробку або да канца адпачынку). Праграма цалкам бясплатная, працуе без рэкламы, захоўвае ўсе фінансавыя даныя лакальна на прыладзе дзеля вашай прыватнасці, а таксама прапануе карысныя віджэты для галоўнага экрана і дэталёвую аналітыку вашых выдаткаў.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Crowdin",
+                  "url": "https://be.crowdin.com/project/buckwheat/be",
+                  "type": "translate"
+                },
+                {
+                  "label": "Google Play",
+                  "url": "https://play.google.com/store/apps/details?id=com.danilkinkin.buckwheat&hl=en-US",
+                  "type": "website"
+                },
+                {
+                  "label": "Github",
+                  "url": "https://github.com/danilkinkin/buckwheat",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
