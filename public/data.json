@@ -2495,6 +2495,53 @@
               ]
             }
           ]
+        },
+        {
+          "id": "newpipe",
+          "name": "NewPipe",
+          "bannerUrl": "",
+          "iconUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1784723347/images_m0nhz5.png",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1784723442/1a041ea9-a9ec-4587-a7d2-c91cfeee3e34.png",
+          "category": "peraklady",
+          "tags": [
+            "weblate",
+            "Медыя"
+          ],
+          "createdAt": "2026-07-22",
+          "updatedAt": "2026-07-22",
+          "description": "NewPipe не выкарыстоўвае ніякіх бібліятэк Google framework або YouTube API. Ён толькі аналізуе вэб-сайт, каб атрымаць неабходную інфармацыю. Такім чынам, гэта дадатак можна выкарыстоўваць на прыладах без усталяваных сэрвісаў Google. Акрамя таго, вам не патрэбны ўліковы запіс YouTube, каб выкарыстоўваць NewPipe, бо гэта FLOSS.",
+          "platforms": [
+            {
+              "name": "Android",
+              "links": [
+                {
+                  "label": "Weblate",
+                  "url": "https://hosted.weblate.org/projects/newpipe/-/be/",
+                  "type": "translate"
+                },
+                {
+                  "label": "Сайт",
+                  "url": "https://newpipe.net/#download",
+                  "type": "download"
+                },
+                {
+                  "label": "F-droid",
+                  "url": "https://f-droid.org/packages/org.schabi.newpipe/",
+                  "type": "download"
+                }
+              ]
+            },
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://newpipe.net/",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2867,6 +2914,42 @@
                 {
                   "label": "Mastodon",
                   "url": "https://vkl.world/@375gnu",
+                  "type": "website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "spell-by-reservation",
+          "name": "Пакет праверкі беларускай арфаграфіі",
+          "bannerUrl": "",
+          "iconUrl": "",
+          "screenshotUrl": "https://res.cloudinary.com/dqsltzvlh/image/upload/v1784722925/443e57c4-d2db-4e46-8cd6-d22fc41a16c4.png",
+          "category": "github-projects",
+          "tags": [
+            "Github"
+          ],
+          "createdAt": "2026-07-22",
+          "updatedAt": "2026-07-22",
+          "description": "",
+          "platforms": [
+            {
+              "name": "Сайт",
+              "links": [
+                {
+                  "label": "Сайт",
+                  "url": "https://spell.by-reservation.com/",
+                  "type": "website"
+                },
+                {
+                  "label": "vkl.world",
+                  "url": "https://vkl.world/@rzr",
+                  "type": "website"
+                },
+                {
+                  "label": "Telegram",
+                  "url": "https://t.me/by_reservation",
                   "type": "website"
                 }
               ]
