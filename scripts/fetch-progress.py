@@ -110,6 +110,7 @@ def collect_sources():
     crowdin_instances = {}   # {"be": {"slug1", ...}, "proton": {...}, ...}
     weblate_sources = {}
     github_slugs = set()
+    gnome_found = set()
 
     for cat in data["categories"]:
         for item in cat["items"]:
@@ -177,7 +178,11 @@ def collect_sources():
                                     "project": proj, "component": comp,
                                 })
 
-    return crowdin_instances, weblate_sources, github_slugs
+                    # ── l10n.gnome.org ──────────────────────────────────────
+                    elif "l10n.gnome.org" in url:
+                        gnome_found.add("l10n.gnome.org")
+
+    return crowdin_instances, weblate_sources, github_slugs, gnome_found
 
 # ── GitHub .po files ─────────────────────────────────────────────────────────
 def get_raw(url):
@@ -348,14 +353,48 @@ def fetch_weblate(sources):
 
     return results
 
+# ── l10n.gnome.org (Damned Lies — HTML scrape, no API) ───────────────────────
+def fetch_gnome(sources):
+    if not sources:
+        return {}
+    results = {}
+    try:
+        req = urllib.request.Request(
+            "https://l10n.gnome.org/teams/be/",
+            headers={"User-Agent": "gnulinuxbe-progress/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=20) as r:
+            html = r.read().decode("utf-8", errors="replace")
+        versions = re.findall(r'/languages/be/(gnome-\d+)/ui/', html)
+        if not versions:
+            raise ValueError("no gnome-XX versions found")
+        latest = sorted(set(versions), key=lambda v: int(v.split('-')[1]), reverse=True)[0]
+        m = re.search(
+            rf'href="/languages/be/{latest}/ui/"[^>]*>.*?<b>\s*(\d+)%</b>',
+            html, re.DOTALL,
+        )
+        if not m:
+            raise ValueError(f"no percentage for {latest}")
+        pct = int(m.group(1))
+        entry = {"pct": float(pct), "version": latest}
+        for key in sources:
+            results[key] = entry
+        print(f"  [gnome] {latest}: {pct}%", file=sys.stderr)
+    except Exception as e:
+        for key in sources:
+            results[key] = {"_error": str(e)}
+        print(f"  [gnome] err: {e}", file=sys.stderr)
+    return results
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     print("Collecting links from data.json ...", file=sys.stderr)
-    crowdin_instances, weblate_sources, github_slugs = collect_sources()
+    crowdin_instances, weblate_sources, github_slugs, gnome_found = collect_sources()
     total_crowdin = sum(len(s) for s in crowdin_instances.values())
     print(f"  Crowdin : {total_crowdin} projects across {list(crowdin_instances.keys())}", file=sys.stderr)
     print(f"  Weblate : {len(weblate_sources)} sources", file=sys.stderr)
     print(f"  GitHub  : {len(github_slugs)} repos", file=sys.stderr)
+    print(f"  GNOME   : {len(gnome_found)} sources", file=sys.stderr)
 
     print("\nFetching Crowdin ...", file=sys.stderr)
     crowdin = {}
@@ -370,12 +409,16 @@ def main():
     print("\nFetching GitHub .po files ...", file=sys.stderr)
     github = fetch_github(github_slugs)
 
+    print("\nFetching GNOME (l10n.gnome.org) ...", file=sys.stderr)
+    gnome = fetch_gnome(gnome_found)
+
     progress = {
         "updated":  datetime.now(timezone.utc).isoformat(),
         "language": LANG,
         "crowdin":  crowdin,
         "weblate":  weblate,
         "github":   github,
+        "gnome":    gnome,
     }
 
     out = BASE / "public" / "progress.json"
@@ -394,6 +437,9 @@ def main():
     for slug, s in github.items():
         pct = s.get("pct")
         rows.append((pct if pct is not None else -1, slug, pct, "github", s.get("_error", "")))
+    for key, s in gnome.items():
+        pct = s.get("pct")
+        rows.append((pct if pct is not None else -1, key, pct, "gnome", s.get("_error", "")))
 
     rows.sort(key=lambda x: (-x[0], x[1]))
     print(f"\n{'Project':<32} {'%':>6}  Platform")
