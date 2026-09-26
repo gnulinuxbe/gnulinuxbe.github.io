@@ -1,69 +1,24 @@
 {
-  "updated": "2026-09-26T10:49:59.060928+00:00",
+  "updated": "2026-09-26T20:40:44.130644+00:00",
   "language": "be",
   "crowdin": {
-    "mastodon": {
-      "pct": 99,
+    "ics-openvpn": {
+      "pct": 85,
+      "pct_approved": 85,
+      "words_translated": 4820,
+      "words_total": 5621
+    },
+    "crowdin": {
+      "pct": 60,
+      "pct_approved": 4,
+      "words_translated": 70651,
+      "words_total": 116128
+    },
+    "tabby": {
+      "pct": 21,
       "pct_approved": 0,
-      "words_translated": 26975,
-      "words_total": 27203
-    },
-    "ente-locker": {
-      "_error": "be not in project"
-    },
-    "bitwarden-desktop": {
-      "pct": 99,
-      "pct_approved": 0,
-      "words_translated": 10927,
-      "words_total": 10994
-    },
-    "anytype-mobile": {
-      "pct": 52,
-      "pct_approved": 0,
-      "words_translated": 5825,
-      "words_total": 11195
-    },
-    "poedit": {
-      "pct": 97,
-      "pct_approved": 0,
-      "words_translated": 5326,
-      "words_total": 5441
-    },
-    "ubuntu-translations": {
-      "pct": 20,
-      "pct_approved": 9,
-      "words_translated": 503328,
-      "words_total": 2501304
-    },
-    "openproject": {
-      "pct": 1,
-      "pct_approved": 0,
-      "words_translated": 690,
-      "words_total": 66216
-    },
-    "crowdin-developer": {
-      "pct": 18,
-      "pct_approved": 0,
-      "words_translated": 8984,
-      "words_total": 48699
-    },
-    "gitlab-ee": {
-      "pct": 1,
-      "pct_approved": 0,
-      "words_translated": 2620,
-      "words_total": 238461
-    },
-    "bitwarden-mobile": {
-      "pct": 96,
-      "pct_approved": 0,
-      "words_translated": 10929,
-      "words_total": 11308
-    },
-    "be-my-eyes-web": {
-      "pct": 15,
-      "pct_approved": 0,
-      "words_translated": 1077,
-      "words_total": 6976
+      "words_translated": 423,
+      "words_total": 1986
     },
     "bitwarden-web": {
       "pct": 35,
@@ -71,11 +26,98 @@
       "words_translated": 10605,
       "words_total": 30182
     },
-    "ente-photos-web": {
-      "pct": 9,
+    "threema-ios": {
+      "pct": 42,
+      "pct_approved": 16,
+      "words_translated": 5132,
+      "words_total": 12099
+    },
+    "mastodon": {
+      "pct": 99,
       "pct_approved": 0,
-      "words_translated": 443,
-      "words_total": 4818
+      "words_translated": 26975,
+      "words_total": 27203
+    },
+    "ente-photos-app": {
+      "pct": 48,
+      "pct_approved": 0,
+      "words_translated": 5311,
+      "words_total": 10850
+    },
+    "openproject": {
+      "pct": 1,
+      "pct_approved": 0,
+      "words_translated": 690,
+      "words_total": 66216
+    },
+    "adblock": {
+      "_error": "project not found on be.crowdin.com"
+    },
+    "be-my-eyes-android": {
+      "pct": 68,
+      "pct_approved": 0,
+      "words_translated": 3621,
+      "words_total": 5305
+    },
+    "gsconnect": {
+      "pct": 78,
+      "pct_approved": 0,
+      "words_translated": 725,
+      "words_total": 920
+    },
+    "anytype-mobile": {
+      "pct": 52,
+      "pct_approved": 0,
+      "words_translated": 5825,
+      "words_total": 11195
+    },
+    "bemyeyes": {
+      "pct": 47,
+      "pct_approved": 0,
+      "words_translated": 2483,
+      "words_total": 5236
+    },
+    "keepass2android": {
+      "pct": 66,
+      "pct_approved": 0,
+      "words_translated": 7123,
+      "words_total": 10786
+    },
+    "adguard-websites": {
+      "pct": 72,
+      "pct_approved": 61,
+      "words_translated": 103277,
+      "words_total": 142779
+    },
+    "be-my-eyes-server": {
+      "pct": 51,
+      "pct_approved": 0,
+      "words_translated": 1374,
+      "words_total": 2666
+    },
+    "joinmastodon": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 2382,
+      "words_total": 2382
+    },
+    "buckwheat": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 741,
+      "words_total": 741
+    },
+    "retroarch": {
+      "pct": 76,
+      "pct_approved": 0,
+      "words_translated": 39470,
+      "words_total": 51452
+    },
+    "bitwarden-desktop": {
+      "pct": 99,
+      "pct_approved": 0,
+      "words_translated": 10927,
+      "words_total": 10994
     },
     "graysky": {
       "pct": 99,
@@ -83,7 +125,58 @@
       "words_translated": 3990,
       "words_total": 4025
     },
+    "ubuntu-translations": {
+      "pct": 20,
+      "pct_approved": 9,
+      "words_translated": 503328,
+      "words_total": 2501304
+    },
+    "ublock": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 2547,
+      "words_total": 2547
+    },
     "ethereum-org": {
+      "_error": "be not in project"
+    },
+    "bitwarden-mobile": {
+      "pct": 96,
+      "pct_approved": 0,
+      "words_translated": 10929,
+      "words_total": 11308
+    },
+    "threema-android": {
+      "pct": 99,
+      "pct_approved": 93,
+      "words_translated": 11121,
+      "words_total": 11199
+    },
+    "mastodon-for-ios": {
+      "pct": 98,
+      "pct_approved": 0,
+      "words_translated": 4025,
+      "words_total": 4100
+    },
+    "wire-ios": {
+      "pct": 2,
+      "pct_approved": 0,
+      "words_translated": 344,
+      "words_total": 13734
+    },
+    "anytype-desktop": {
+      "pct": 29,
+      "pct_approved": 0,
+      "words_translated": 3901,
+      "words_total": 13083
+    },
+    "bitwarden-browser": {
+      "pct": 99,
+      "pct_approved": 0,
+      "words_translated": 13251,
+      "words_total": 13299
+    },
+    "ente-locker": {
       "_error": "be not in project"
     },
     "iina": {
@@ -92,113 +185,11 @@
       "words_translated": 874,
       "words_total": 6239
     },
-    "joinmastodon": {
-      "pct": 100,
-      "pct_approved": 0,
-      "words_translated": 2382,
-      "words_total": 2382
-    },
-    "anytype-desktop": {
-      "pct": 29,
-      "pct_approved": 0,
-      "words_translated": 3901,
-      "words_total": 13083
-    },
-    "buckwheat": {
-      "pct": 100,
-      "pct_approved": 0,
-      "words_translated": 741,
-      "words_total": 741
-    },
-    "ente-photos-app": {
-      "pct": 48,
-      "pct_approved": 0,
-      "words_translated": 5311,
-      "words_total": 10850
-    },
-    "gsconnect": {
-      "pct": 78,
-      "pct_approved": 0,
-      "words_translated": 725,
-      "words_total": 920
-    },
-    "ics-openvpn": {
-      "pct": 85,
-      "pct_approved": 85,
-      "words_translated": 4820,
-      "words_total": 5621
-    },
-    "bemyeyes": {
-      "pct": 47,
-      "pct_approved": 0,
-      "words_translated": 2483,
-      "words_total": 5236
-    },
-    "retroarch": {
-      "pct": 76,
-      "pct_approved": 0,
-      "words_translated": 39470,
-      "words_total": 51338
-    },
-    "keepass2android": {
-      "pct": 66,
-      "pct_approved": 0,
-      "words_translated": 7123,
-      "words_total": 10786
-    },
-    "adguard-applications": {
-      "pct": 94,
-      "pct_approved": 85,
-      "words_translated": 105978,
-      "words_total": 111602
-    },
     "obs-studio": {
       "pct": 100,
       "pct_approved": 0,
       "words_translated": 11793,
       "words_total": 11793
-    },
-    "ublock": {
-      "pct": 100,
-      "pct_approved": 0,
-      "words_translated": 2547,
-      "words_total": 2547
-    },
-    "threema-android": {
-      "pct": 99,
-      "pct_approved": 93,
-      "words_translated": 11121,
-      "words_total": 11199
-    },
-    "threema-ios": {
-      "pct": 42,
-      "pct_approved": 16,
-      "words_translated": 5132,
-      "words_total": 12099
-    },
-    "bitwarden-browser": {
-      "pct": 99,
-      "pct_approved": 0,
-      "words_translated": 13251,
-      "words_total": 13299
-    },
-    "crowdin-support": {
-      "pct": 3,
-      "pct_approved": 0,
-      "words_translated": 7819,
-      "words_total": 242046
-    },
-    "tabby": {
-      "pct": 21,
-      "pct_approved": 0,
-      "words_translated": 423,
-      "words_total": 1986
-    },
-    "adguard-websites": {
-      "pct": 72,
-      "pct_approved": 61,
-      "words_translated": 103277,
-      "words_total": 142779
     },
     "factorio-mods-localization": {
       "pct": 0,
@@ -206,26 +197,56 @@
       "words_translated": 137,
       "words_total": 161331
     },
-    "be-my-eyes-server": {
-      "pct": 51,
+    "poedit": {
+      "pct": 97,
       "pct_approved": 0,
-      "words_translated": 1374,
-      "words_total": 2666
+      "words_translated": 5326,
+      "words_total": 5441
     },
-    "wire-ios": {
-      "pct": 2,
-      "pct_approved": 0,
-      "words_translated": 344,
-      "words_total": 13734
+    "adguard-applications": {
+      "pct": 94,
+      "pct_approved": 85,
+      "words_translated": 105978,
+      "words_total": 111602
     },
-    "be-my-eyes-android": {
-      "pct": 68,
+    "crowdin-support": {
+      "pct": 3,
       "pct_approved": 0,
-      "words_translated": 3621,
-      "words_total": 5305
+      "words_translated": 7819,
+      "words_total": 242046
+    },
+    "crowdin-developer": {
+      "pct": 18,
+      "pct_approved": 0,
+      "words_translated": 8984,
+      "words_total": 48699
+    },
+    "mastodon-for-android": {
+      "pct": 100,
+      "pct_approved": 0,
+      "words_translated": 4160,
+      "words_total": 4160
+    },
+    "ente-photos-web": {
+      "pct": 9,
+      "pct_approved": 0,
+      "words_translated": 443,
+      "words_total": 4818
+    },
+    "be-my-eyes-web": {
+      "pct": 15,
+      "pct_approved": 0,
+      "words_translated": 1077,
+      "words_total": 6976
     },
     "ente-authenticator-app": {
       "_error": "be not in project"
+    },
+    "gitlab-ee": {
+      "pct": 1,
+      "pct_approved": 0,
+      "words_translated": 2620,
+      "words_total": 238577
     },
     "ajenti": {
       "pct": 6,
@@ -233,26 +254,35 @@
       "words_translated": 222,
       "words_total": 3494
     },
-    "mastodon-for-ios": {
-      "pct": 98,
+    "67e101fb32f621c0afc9184db4feea4f": {
+      "pct": 99,
+      "pct_approved": 76,
+      "words_translated": 6118,
+      "words_total": 6136
+    },
+    "c290de2c6929014f56d4566b375dd069": {
+      "pct": 91,
       "pct_approved": 0,
-      "words_translated": 4025,
-      "words_total": 4100
+      "words_translated": 2260,
+      "words_total": 2476
     },
-    "adblock": {
-      "_error": "project not found on be.crowdin.com"
+    "179": {
+      "pct": 91,
+      "pct_approved": 0,
+      "words_translated": 2260,
+      "words_total": 2476
     },
-    "crowdin": {
-      "pct": 60,
-      "pct_approved": 4,
-      "words_translated": 70651,
-      "words_total": 116128
-    },
-    "mastodon-for-android": {
+    "96b5ac3b28f54c22746b9cbd5bdec41d": {
       "pct": 100,
-      "pct_approved": 0,
-      "words_translated": 4160,
-      "words_total": 4160
+      "pct_approved": 87,
+      "words_translated": 13262,
+      "words_total": 13262
+    },
+    "139": {
+      "pct": 100,
+      "pct_approved": 87,
+      "words_translated": 13262,
+      "words_total": 13262
     },
     "5497308f103caf8cc1ab1881795df705": {
       "pct": 99,
@@ -266,11 +296,35 @@
       "words_translated": 21590,
       "words_total": 21629
     },
-    "67e101fb32f621c0afc9184db4feea4f": {
+    "9bf94ed2910e35c659efeb3013fdca67": {
       "pct": 99,
-      "pct_approved": 76,
-      "words_translated": 6118,
-      "words_total": 6136
+      "pct_approved": 85,
+      "words_translated": 2157,
+      "words_total": 2164
+    },
+    "177": {
+      "pct": 99,
+      "pct_approved": 85,
+      "words_translated": 2157,
+      "words_total": 2164
+    },
+    "b0a7eb279e5ce68aea21d476dde1e4e5": {
+      "pct": 71,
+      "pct_approved": 34,
+      "words_translated": 15142,
+      "words_total": 21223
+    },
+    "718adb48526b0614b56979845834ab48": {
+      "pct": 100,
+      "pct_approved": 98,
+      "words_translated": 3671,
+      "words_total": 3671
+    },
+    "141": {
+      "pct": 100,
+      "pct_approved": 98,
+      "words_translated": 3671,
+      "words_total": 3671
     },
     "6e916f0970a3c156f6f26cdb78a59c62": {
       "pct": 100,
@@ -289,60 +343,6 @@
       "pct_approved": 19,
       "words_translated": 2532,
       "words_total": 2571
-    },
-    "9bf94ed2910e35c659efeb3013fdca67": {
-      "pct": 99,
-      "pct_approved": 85,
-      "words_translated": 2157,
-      "words_total": 2164
-    },
-    "177": {
-      "pct": 99,
-      "pct_approved": 85,
-      "words_translated": 2157,
-      "words_total": 2164
-    },
-    "718adb48526b0614b56979845834ab48": {
-      "pct": 100,
-      "pct_approved": 98,
-      "words_translated": 3671,
-      "words_total": 3671
-    },
-    "141": {
-      "pct": 100,
-      "pct_approved": 98,
-      "words_translated": 3671,
-      "words_total": 3671
-    },
-    "c290de2c6929014f56d4566b375dd069": {
-      "pct": 91,
-      "pct_approved": 0,
-      "words_translated": 2260,
-      "words_total": 2476
-    },
-    "179": {
-      "pct": 91,
-      "pct_approved": 0,
-      "words_translated": 2260,
-      "words_total": 2476
-    },
-    "b0a7eb279e5ce68aea21d476dde1e4e5": {
-      "pct": 71,
-      "pct_approved": 34,
-      "words_translated": 15142,
-      "words_total": 21223
-    },
-    "96b5ac3b28f54c22746b9cbd5bdec41d": {
-      "pct": 100,
-      "pct_approved": 87,
-      "words_translated": 13262,
-      "words_total": 13262
-    },
-    "139": {
-      "pct": 100,
-      "pct_approved": 87,
-      "words_translated": 13262,
-      "words_total": 13262
     }
   },
   "weblate": {
